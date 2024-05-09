@@ -11,7 +11,8 @@ const config: Config = withMT({
   theme: {
     extend: {
       fontFamily: {
-        "AnonymousPro": ['Anonymous Pro', 'monospace']
+        "FiraSans": ["Fira Sans", "sans-serif"],
+        "Archivo": ["Archivo", "sans-serif"],
       },
       screens: {
         "1140>=": { "min": "9.375em", "max": "71.25em" },
