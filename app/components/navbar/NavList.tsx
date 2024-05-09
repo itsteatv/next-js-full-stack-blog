@@ -23,7 +23,7 @@ const NavList = () => {
         as="li"
         variant="small"
         color="blue-gray"
-        className={`p-1 font-medium duration-150 hover:text-gray-500 text-[#d6d6d6] font-AnonymousPro ${isActive(
+        className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
           "/blog"
         )}`}
       >
@@ -35,7 +35,7 @@ const NavList = () => {
         as="li"
         variant="small"
         color="blue-gray"
-        className={`p-1 font-medium duration-150 hover:text-gray-500 text-[#d6d6d6] font-AnonymousPro ${isActive(
+        className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
           "/contact"
         )}`}
       >
@@ -47,7 +47,7 @@ const NavList = () => {
         as="li"
         variant="small"
         color="blue-gray"
-        className={`p-1 font-medium duration-150 hover:text-gray-500 text-[#d6d6d6] font-AnonymousPro ${isActive(
+        className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
           "/about"
         )}`}
       >
@@ -60,7 +60,7 @@ const NavList = () => {
           as="li"
           variant="small"
           color="blue-gray"
-          className={`p-1 font-medium duration-150 hover:text-gray-500 text-[#d6d6d6] font-AnonymousPro ${isActive(
+          className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
             "/admin"
           )}`}
         >
@@ -70,12 +70,20 @@ const NavList = () => {
         </Typography>
       )}
       {!session && (
-        <Button variant="text" className="font-bold duration-300" color="green">
+        <Button
+          variant="text"
+          className="font-Archivo duration-300"
+          color="green"
+        >
           Login
         </Button>
       )}
       {session && isAdmin && (
-        <Button variant="text" className="font-bold duration-300" color="red">
+        <Button
+          variant="text"
+          className="font-Archivo duration-300"
+          color="red"
+        >
           Logout
         </Button>
       )}
