@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import {
   Navbar as MTNavbar,
   Collapse,
-  Typography,
   IconButton,
 } from "@material-tailwind/react";
 
@@ -27,18 +26,16 @@ const Navbar = () => {
   }, []);
 
   return (
-    <MTNavbar className="bg-[#141414] mx-auto max-w-full rounded-none mt-0 px-6 py-3 border-none">
+    <MTNavbar className="bg-transparent mx-auto max-w-full rounded-none mt-0 px-6 py-3 border-none">
       <div className="flex items-center justify-between text-[#d6d6d6]">
-        <Typography
-          as="a"
-          href="#"
-          variant="h6"
-          className="mr-4 cursor-pointer py-1.5 font-AnonymousPro"
-        >
-          <Link href="/" className="flex items-center transition-colors">
+        <div className="mr-4 cursor-pointer py-1.5">
+          <Link
+            href="/"
+            className="flex font-normal font-Archivo items-center transition-colors"
+          >
             Home
           </Link>
-        </Typography>
+        </div>
         <div className="hidden lg:block">
           <NavList />
         </div>
