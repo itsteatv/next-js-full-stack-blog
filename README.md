@@ -17,8 +17,12 @@ to work properly:
 
 # Images
 
+`Home Page`
+
 ![HomePage](public/images/HomePage.png)
 
 -
+
+`About Page`
 
 ![AboutPage](public/images/AboutPage.png)
