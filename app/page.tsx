@@ -1,8 +1,7 @@
-"use client";
-
-import { Button, Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import girlIllustration from "@/public/girlIllustration.svg";
+import Button from "./components/button/Button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -23,14 +22,15 @@ export default function Home() {
               We look forward to sharing our knowledge and experiences with you!
             </p>
           </div>
-          <Button
-            ripple={true}
-            variant="outlined"
-            size="sm"
-            className="text-white border-white font-Archivo rounded-full w-28 mt-6 font-extralight"
-          >
-            Explore
-          </Button>
+          <Link href="/blog">
+            <Button
+              ripple={true}
+              variant="outlined"
+              size="sm"
+              className="text-white border-white font-Archivo rounded-full w-28 mt-6 font-extralight"
+              content="Explore"
+            />
+          </Link>
         </div>
       </div>
       <div className="mt-16 1180>=:mt-28 lg:mr-28 lg:w-[30rem] 930>=:w-[25rem] 930>=:mt-[5.5rem] 768<=:hidden">
