@@ -7,6 +7,7 @@ interface ButtonProps {
   ripple?: boolean;
   content: string;
   color?: color;
+  type: "button" | "reset" | "submit";
 }
 
 import { Button as MaterialButton } from "@material-tailwind/react";
@@ -19,6 +20,7 @@ const Button = ({
   className,
   variant,
   size,
+  type,
 }: ButtonProps) => {
   return (
     <MaterialButton
@@ -27,6 +29,7 @@ const Button = ({
       variant={variant}
       size={size}
       color={color}
+      type={type}
     >
       {content}
     </MaterialButton>
