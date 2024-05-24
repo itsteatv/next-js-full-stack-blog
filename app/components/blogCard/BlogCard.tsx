@@ -13,7 +13,7 @@ import Button from "../button/Button";
 
 const BlogCard = () => {
   return (
-    <Card className="max-w-[24rem] overflow-hidden">
+    <Card className="max-w-[24rem] overflow-hidden bg-transparent">
       <CardHeader
         floated={false}
         shadow={false}
@@ -28,13 +28,12 @@ const BlogCard = () => {
         />
       </CardHeader>
       <CardBody>
-        <Typography variant="h5" color="blue-gray" className="font-Archivo">
+        <Typography variant="h5" className="text-white font-Archivo">
           UI/UX Review Check
         </Typography>
         <Typography
           variant="paragraph"
-          color="gray"
-          className="mt-3 font-light font-FiraSans"
+          className="mt-3 font-light font-FiraSans text-white"
         >
           Because it&apos;s about motivating the doers. Because I&apos;m here to
           follow my dreams and inspire others.
@@ -48,10 +47,10 @@ const BlogCard = () => {
             ripple={true}
             size="sm"
             variant="outlined"
-            className="hover:bg-black hover:text-white duration-300 font-Archivo"
+            className="hover:bg-black hover:text-white duration-300 font-Archivo text-white border-white"
           />
         </div>
-        <Typography variant="small" className="font-light font-FiraSans">
+        <Typography variant="small" className="font-light font-FiraSans text-white">
           January 10
         </Typography>
       </CardFooter>
