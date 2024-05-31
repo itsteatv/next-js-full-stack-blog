@@ -10,6 +10,7 @@ import {
 
 import Image from "next/image";
 import Button from "../button/Button";
+import Link from "next/link";
 
 const BlogCard = () => {
   return (
@@ -41,16 +42,21 @@ const BlogCard = () => {
       </CardBody>
       <CardFooter className="flex items-center justify-between">
         <div className="flex items-center -space-x-3">
-          <Button
-            content="Read more"
-            type="button"
-            ripple={true}
-            size="sm"
-            variant="outlined"
-            className="hover:bg-black hover:text-white duration-300 font-Archivo text-white border-white"
-          />
+          <Link href="/blog/posts">
+            <Button
+              content="Read more"
+              type="button"
+              ripple={true}
+              size="sm"
+              variant="outlined"
+              className="hover:bg-black hover:text-white duration-300 font-Archivo text-white border-white"
+            />
+          </Link>
         </div>
-        <Typography variant="small" className="font-light font-FiraSans text-white">
+        <Typography
+          variant="small"
+          className="font-light font-FiraSans text-white"
+        >
           January 10
         </Typography>
       </CardFooter>
