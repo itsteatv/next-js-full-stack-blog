@@ -15,6 +15,8 @@ const config: Config = withMT({
         sclamp: "clamp(1.25rem, -1.25rem + 5.208333333333333vw, 5rem)",
         tclamp: "clamp(0.5rem, -0.07692307692307687rem + 6.41025641025641vw, 3rem)",
         foclamp: "clamp(0.5rem, 0.38461538461538464rem + 1.282051282051282vw, 1rem)",
+        ficlamp: "clamp(1rem, 0.5625rem + 3.8889vw, 1.875rem)",
+        siclamp: "clamp(0.75rem, 0.625rem + 1.1111vw, 1rem)",
       },
       fontFamily: {
         "FiraSans": ["Fira Sans", "sans-serif"],
