@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import { Providers } from "@/providers/MaterialTailwindProvider";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <Providers>
         <body className={inter.className}>
           <NextTopLoader showSpinner={false} color="#fff" />
+          <Toaster />
           <Navbar />
           {children}
         </body>
