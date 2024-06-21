@@ -1,5 +1,6 @@
 "use client";
 
+import { forwardRef } from "react";
 import { Textarea as MTTextarea } from "@material-tailwind/react";
 
 interface TextareaProps {
@@ -8,18 +9,25 @@ interface TextareaProps {
   size?: string | undefined;
   id: string;
   rows: number;
+  [key: string]: any;
 }
 
-const TextArea = ({ rows, id, className, variant, size }: TextareaProps) => {
-  return (
-    <MTTextarea
-      className={className}
-      variant={variant}
-      size={size}
-      id={id}
-      rows={rows}
-    />
-  );
-};
+const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ rows, id, className, variant, size, ...rest }, ref) => {
+    return (
+      <MTTextarea
+        className={className}
+        variant={variant}
+        size={size}
+        id={id}
+        rows={rows}
+        ref={ref}
+        {...rest}
+      />
+    );
+  }
+);
+
+TextArea.displayName = "TextArea";
 
 export default TextArea;

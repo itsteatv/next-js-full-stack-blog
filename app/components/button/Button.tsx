@@ -8,6 +8,7 @@ interface ButtonProps {
   content: string;
   color?: color;
   type: "button" | "reset" | "submit";
+  disabled?: boolean;
 }
 
 import { Button as MaterialButton } from "@material-tailwind/react";
@@ -21,6 +22,7 @@ const Button = ({
   variant,
   size,
   type,
+  disabled,
 }: ButtonProps) => {
   return (
     <MaterialButton
@@ -30,6 +32,7 @@ const Button = ({
       size={size}
       color={color}
       type={type}
+      disabled={disabled}
     >
       {content}
     </MaterialButton>
