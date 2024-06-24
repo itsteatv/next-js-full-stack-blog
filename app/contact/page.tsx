@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
 import Button from "../components/button/Button";
 import Input from "../components/input/Input";
 import TextArea from "../components/textarea/TextArea";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { emailContactSchema } from "@/schemas/emailContactSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TEmailContactSchema } from "@/schemas/emailContactSchema";
 
 const Contact = () => {
   const {
@@ -14,14 +16,17 @@ const Contact = () => {
     formState: { errors, isSubmitting },
     reset,
     getValues,
-  } = useForm();
+  } = useForm<TEmailContactSchema>({
+    resolver: zodResolver(emailContactSchema),
+  });
 
   const onSubmit = async function (data: FieldValues) {
     // TODO
     // Sending email ...
 
+    console.log("Form Submitted", data);
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    reset(); // Reset form after submission
+    reset();
   };
 
   return (
@@ -42,13 +47,7 @@ const Contact = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Your name"
-              {...register("name", {
-                required: "Name is required",
-                minLength: {
-                  value: 5,
-                  message: "Name must be at least 5 characters",
-                },
-              })}
+              {...register("name")}
             />
             {errors.name &&
               toast.error(`${errors.name.message}`, {
@@ -66,15 +65,7 @@ const Contact = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               placeholder="Your email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  value:
-                    /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|hotmail\.com)$/i,
-                  message:
-                    "Email must be from a valid domain (e.g., @gmail.com)",
-                },
-              })}
+              {...register("email")}
             />
             {errors.email &&
               toast.error(`${errors.email.message}`, {
@@ -91,9 +82,7 @@ const Contact = () => {
             <TextArea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               rows={4}
-              {...register("message", {
-                required: "Message is required",
-              })}
+              {...register("message")}
             />
             {errors.message &&
               toast.error(`${errors.message.message}`, {
