@@ -1,6 +1,6 @@
 import Image from "next/image";
 import girlIllustration from "@/public/girlIllustration.svg";
-import Button from "./components/button/Button";
+import Button from "@/components/button/Button";
 import Link from "next/link";
 
 export default function Home() {
@@ -24,6 +24,7 @@ export default function Home() {
           </div>
           <Link href="/blog">
             <Button
+              type="button"
               ripple={true}
               variant="outlined"
               size="sm"

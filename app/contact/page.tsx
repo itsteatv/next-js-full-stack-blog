@@ -1,8 +1,8 @@
 "use client";
 
-import Button from "../components/button/Button";
-import Input from "../components/input/Input";
-import TextArea from "../components/textarea/TextArea";
+import Button from "@/components/button/Button";
+import Input from "@/components/input/Input";
+import TextArea from "@/components/textarea/TextArea";
 import { FieldValues, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { emailContactSchema } from "@/schemas/emailContactSchema";
@@ -16,17 +16,17 @@ const Contact = () => {
     formState: { errors, isSubmitting },
     reset,
     getValues,
+    setError,
   } = useForm<TEmailContactSchema>({
     resolver: zodResolver(emailContactSchema),
   });
 
   const onSubmit = async function (data: FieldValues) {
-    // TODO
-    // Sending email ...
-
-    console.log("Form Submitted", data);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    reset();
+    fetch("/api/emails", {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .catch((error) => console.error(error));
   };
 
   return (

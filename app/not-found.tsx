@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "./components/button/Button";
+import Button from "@/components/button/Button";
 
 const NotFound = () => {
   return (
@@ -15,6 +15,7 @@ const NotFound = () => {
 
         <Link href="/">
           <Button
+            type="button"
             content="Go Back Home"
             className="text-white border-white font-Archivo rounded-full  mt-6 font-extralight"
             ripple={true}
