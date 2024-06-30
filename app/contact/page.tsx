@@ -3,37 +3,64 @@
 import Button from "@/components/button/Button";
 import Input from "@/components/input/Input";
 import TextArea from "@/components/textarea/TextArea";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { emailContactSchema } from "@/schemas/emailContactSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TEmailContactSchema } from "@/schemas/emailContactSchema";
+import { sendEmail } from "@/actions/sendEmail";
 
 const Contact = () => {
   const {
     register,
-    handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-    getValues,
     setError,
   } = useForm<TEmailContactSchema>({
     resolver: zodResolver(emailContactSchema),
   });
 
-  const onSubmit = async function (data: FieldValues) {
-    fetch("/api/emails", {
-      method: "POST",
-    })
-      .then((response) => response.json())
-      .catch((error) => console.error(error));
+  const handleFormSubmit = async (data: TEmailContactSchema) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("message", data.message);
+
+    try {
+      await sendEmail(formData);
+      reset();
+      toast.success("Form submitted successfully");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Submitting form failed!");
+      }
+    }
   };
 
   return (
     <section className="mt-28">
       <div className="flex flex-col items-center">
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          action={async (formData) => {
+            const formObject = {
+              name: formData.get("name") as string,
+              email: formData.get("email") as string,
+              message: formData.get("message") as string,
+            };
+
+            const parsed = emailContactSchema.safeParse(formObject);
+
+            if (!parsed.success) {
+              parsed.error.errors.forEach((error) => {
+                toast.error(error.message, { id: error.path.join("-") });
+              });
+              return;
+            }
+
+            await handleFormSubmit(parsed.data);
+          }}
           className="mb-4 rounded-3xl w-full max-w-2xl sm:px-8 md:px-20"
         >
           <div className="mb-4">
@@ -48,6 +75,7 @@ const Contact = () => {
               type="text"
               placeholder="Your name"
               {...register("name")}
+              name="name"
             />
             {errors.name &&
               toast.error(`${errors.name.message}`, {
@@ -66,6 +94,7 @@ const Contact = () => {
               type="email"
               placeholder="Your email"
               {...register("email")}
+              name="email"
             />
             {errors.email &&
               toast.error(`${errors.email.message}`, {
@@ -83,6 +112,7 @@ const Contact = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               rows={4}
               {...register("message")}
+              name="message"
             />
             {errors.message &&
               toast.error(`${errors.message.message}`, {
