@@ -22,9 +22,9 @@ const Contact = () => {
 
   const handleFormSubmit = async (data: TEmailContactSchema) => {
     const formData = new FormData();
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("message", data.message);
+    formData.append("authorName", data.authorName);
+    formData.append("authorEmail", data.authorEmail);
+    formData.append("reviewText", data.reviewText);
 
     try {
       await sendEmail(formData);
@@ -45,9 +45,9 @@ const Contact = () => {
         <form
           action={async (formData) => {
             const formObject = {
-              name: formData.get("name") as string,
-              email: formData.get("email") as string,
-              message: formData.get("message") as string,
+              authorName: formData.get("authorName") as string,
+              authorEmail: formData.get("authorEmail") as string,
+              reviewText: formData.get("reviewText") as string,
             };
 
             const parsed = emailContactSchema.safeParse(formObject);
@@ -74,11 +74,11 @@ const Contact = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Your name"
-              {...register("name")}
-              name="name"
+              {...register("authorName")}
+              name="authorName"
             />
-            {errors.name &&
-              toast.error(`${errors.name.message}`, {
+            {errors.authorName &&
+              toast.error(`${errors.authorName.message}`, {
                 id: "Name-Error",
               })}
           </div>
@@ -93,11 +93,11 @@ const Contact = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               type="email"
               placeholder="Your email"
-              {...register("email")}
-              name="email"
+              {...register("authorEmail")}
+              name="authorEmail"
             />
-            {errors.email &&
-              toast.error(`${errors.email.message}`, {
+            {errors.authorEmail &&
+              toast.error(`${errors.authorEmail.message}`, {
                 id: "Email-Error",
               })}
           </div>
@@ -111,11 +111,11 @@ const Contact = () => {
             <TextArea
               className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               rows={4}
-              {...register("message")}
-              name="message"
+              {...register("reviewText")}
+              name="reviewText"
             />
-            {errors.message &&
-              toast.error(`${errors.message.message}`, {
+            {errors.reviewText &&
+              toast.error(`${errors.reviewText.message}`, {
                 id: "Message-Error",
               })}
           </div>
