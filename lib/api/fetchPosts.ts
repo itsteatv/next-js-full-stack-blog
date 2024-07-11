@@ -1,4 +1,6 @@
-export const fetchPosts = async function (limit: number) {
+import { BlogPost } from "../types"
+
+export const fetchPosts = async function (limit: number): Promise<BlogPost[]> {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`)
 
     if (!response.ok) {

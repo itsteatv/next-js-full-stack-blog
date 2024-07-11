@@ -1,18 +1,7 @@
 "use client";
 
-interface ButtonProps {
-  className?: string;
-  variant?: "filled" | "outlined" | "gradient" | "text";
-  size?: "sm" | "md" | "lg";
-  ripple?: boolean;
-  content: string;
-  color?: color;
-  type: "button" | "reset" | "submit";
-  disabled?: boolean;
-}
-
+import { ButtonProps } from "@/lib/types";
 import { Button as MaterialButton } from "@material-tailwind/react";
-import { color } from "@material-tailwind/react/types/components/alert";
 
 const Button = ({
   color,

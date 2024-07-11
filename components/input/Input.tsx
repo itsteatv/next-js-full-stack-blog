@@ -2,15 +2,7 @@
 
 import { forwardRef } from "react";
 import { Input as MTInput } from "@material-tailwind/react";
-
-interface InputProps {
-  className: string;
-  variant?: "standard" | "outlined" | "static";
-  placeholder: string;
-  id: string;
-  type: string;
-  [key: string]: any;
-}
+import { InputProps } from "@/lib/types";
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ id, type, className, variant, placeholder, ...rest }, ref) => {

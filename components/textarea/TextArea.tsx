@@ -2,15 +2,7 @@
 
 import { forwardRef } from "react";
 import { Textarea as MTTextarea } from "@material-tailwind/react";
-
-interface TextareaProps {
-  className: string;
-  variant?: "standard" | "outlined" | "static";
-  size?: string | undefined;
-  id: string;
-  rows: number;
-  [key: string]: any;
-}
+import { TextareaProps } from "@/lib/types";
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ rows, id, className, variant, size, ...rest }, ref) => {
