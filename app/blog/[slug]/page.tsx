@@ -1,12 +1,11 @@
 import Image from "next/image";
-import singlepostimage from "@/public/singlepostimage.webp";
 
 const SinglePost = () => {
   return (
     <section className="w-full max-w-full flex items-center justify-center">
       <div className="540<=:text-center">
         <Image
-          src={singlepostimage}
+          src="https://placehold.co/600x400"
           alt="ui/ux review check"
           width={480}
           height={480}
