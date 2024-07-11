@@ -3,6 +3,10 @@ import girlIllustration from "@/public/girlIllustration.svg";
 import Button from "@/components/button/Button";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Home",
+};
+
 export default function Home() {
   return (
     <section className="flex">
