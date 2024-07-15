@@ -1,6 +1,6 @@
 import Image from "next/image";
 import girlIllustration from "@/public/girlIllustration.svg";
-import Button from "@/components/button/Button";
+import Button from "@/components/Button";
 import Link from "next/link";
 
 export const metadata = {

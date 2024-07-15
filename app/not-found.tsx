@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "@/components/button/Button";
+import Button from "@/components/Button";
 
 const NotFound = () => {
   return (

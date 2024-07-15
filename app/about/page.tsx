@@ -4,7 +4,7 @@ import { Button } from "@material-tailwind/react";
 import Image from "next/image";
 import boyIllustration from "@/public/boyIllustration.svg";
 import Link from "next/link";
-import Footer from "@/components/footer/Footer";
+import Footer from "@/components/Footer";
 
 const About = () => {
   return (

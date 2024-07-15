@@ -1,8 +1,8 @@
 "use client";
 
-import Button from "@/components/button/Button";
-import Input from "@/components/input/Input";
-import TextArea from "@/components/textarea/TextArea";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import TextArea from "@/components/TextArea";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { emailContactSchema } from "@/schemas/emailContactSchema";

@@ -9,10 +9,15 @@ import {
 } from "@material-tailwind/react";
 
 import Image from "next/image";
-import Button from "../button/Button";
+import Button from "./button/Button";
 import Link from "next/link";
+import { BlogPost } from "@/lib/types";
 
-const BlogCard = () => {
+interface BlogCardProps {
+  post: BlogPost;
+}
+
+const BlogCard = ({ post }: BlogCardProps) => {
   return (
     <Card className="max-w-[24rem] overflow-hidden bg-transparent">
       <CardHeader
@@ -22,7 +27,7 @@ const BlogCard = () => {
         className="m-0 rounded-none"
       >
         <Image
-          src="https://placehold.co/600x400"
+          src={post.urlToImage}
           alt="ui/ux review check"
           width={450}
           height={450}
@@ -30,14 +35,13 @@ const BlogCard = () => {
       </CardHeader>
       <CardBody>
         <Typography variant="h5" className="text-white font-Archivo">
-          UI/UX Review Check
+          {post.title}
         </Typography>
         <Typography
           variant="paragraph"
           className="mt-3 font-light font-FiraSans text-white"
         >
-          Because it&apos;s about motivating the doers. Because I&apos;m here to
-          follow my dreams and inspire others.
+          {post.description}
         </Typography>
       </CardBody>
       <CardFooter className="flex items-center justify-between">
@@ -57,7 +61,7 @@ const BlogCard = () => {
           variant="small"
           className="font-light font-FiraSans text-white"
         >
-          January 10
+          {post.publishedAt}
         </Typography>
       </CardFooter>
     </Card>
