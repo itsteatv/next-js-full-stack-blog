@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import Navbar from "@/components/navbar/Navbar";
+import Navbar from "@/components/Navbar";
 import { Providers } from "@/providers/MaterialTailwindProvider";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";

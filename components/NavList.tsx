@@ -2,7 +2,7 @@ import React from "react";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Button from "../Button";
+import Button from "./Button";
 
 const NavList = () => {
   const pathname = usePathname();
