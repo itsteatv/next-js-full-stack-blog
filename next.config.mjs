@@ -1,13 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+const imageDomains = process.env.NEXT_PUBLIC_IMAGE_DOMAINS?.split(',') || [];
+
 const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'placehold.co',
-            },
-        ],
+        domains: imageDomains,
     },
 };
 
