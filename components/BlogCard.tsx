@@ -9,7 +9,7 @@ import {
 } from "@material-tailwind/react";
 
 import Image from "next/image";
-import Button from "./button/Button";
+import Button from "./Button";
 import Link from "next/link";
 import { BlogPost } from "@/lib/types";
 
@@ -28,9 +28,13 @@ const BlogCard = ({ post }: BlogCardProps) => {
       >
         <Image
           src={post.urlToImage}
-          alt="ui/ux review check"
+          alt={post.urlToImage ? post.urlToImage : "fallback image"}
           width={450}
           height={450}
+          onError={(event) => {
+            event.target.srcset =
+              "https://placehold.co/600x400.svg?text=fallback";
+          }}
         />
       </CardHeader>
       <CardBody>
