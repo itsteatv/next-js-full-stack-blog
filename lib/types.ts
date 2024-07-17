@@ -1,10 +1,17 @@
 import { color } from "@material-tailwind/react/types/components/alert";
 
 export interface BlogPost {
-    userId: number,
-    id: number,
-    title: string,
-    body: string
+    source: {
+        id: string | null,
+        name: string,
+    },
+    author: string,
+    title: string;
+    description: string;
+    url: string;
+    urlToImage: string;
+    publishedAt: string;
+    content: string;
 }
 
 export interface ButtonProps {
