@@ -33,11 +33,11 @@ const BlogCard = ({ post }: BlogCardProps) => {
           height={450}
           onError={(event) => {
             event.target.srcset =
-              "https://placehold.co/600x400.svg?text=fallback";
+              "https://placehold.co/600x320.svg?text=fallback";
           }}
         />
       </CardHeader>
-      <CardBody>
+      <CardBody className="flex-grow h-40 overflow-hidden">
         <Typography variant="h5" className="text-white font-Archivo">
           {post.title}
         </Typography>

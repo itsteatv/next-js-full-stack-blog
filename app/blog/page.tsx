@@ -12,7 +12,7 @@ const Blog = async () => {
   }
 
   return (
-    <main className="grid gap-4 px-16 py-16 md:grid-cols-2 lg:grid-cols-3">
+    <main className="grid gap-4 px-16 py-16 h-full md:grid-cols-2 lg:grid-cols-3">
       {posts.map((post) => (
         <BlogCard key={post.source.id} post={post} />
       ))}
