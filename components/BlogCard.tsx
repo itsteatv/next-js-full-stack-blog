@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import Button from "./Button";
 import Link from "next/link";
+import { truncateText } from "@/lib/truncateText";
 import { BlogPost } from "@/lib/types";
 
 interface BlogCardProps {
@@ -45,7 +46,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           variant="paragraph"
           className="mt-3 font-light font-FiraSans text-white"
         >
-          {post.description}
+          {truncateText(post.description, 100)}
         </Typography>
       </CardBody>
       <CardFooter className="flex items-center justify-between">
