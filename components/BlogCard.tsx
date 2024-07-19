@@ -27,18 +27,19 @@ const BlogCard = ({ post }: BlogCardProps) => {
         color="transparent"
         className="m-0 rounded-none"
       >
-        <Image
-          src={post.urlToImage}
-          alt={post.urlToImage ? post.urlToImage : "fallback image"}
-          width={450}
-          height={450}
-          onError={(event) => {
-            event.target.srcset =
-              "https://placehold.co/600x320.svg?text=fallback";
-          }}
-        />
+        <div className="relative w-full h-[250px] overflow-hidden">
+          <Image
+            src={post.urlToImage}
+            alt={post.urlToImage ? post.urlToImage : "fallback image"}
+            fill
+            onError={(event) => {
+              event.target.src =
+                "https://placehold.co/600x320.svg?text=fallback";
+            }}
+          />
+        </div>
       </CardHeader>
-      <CardBody className="flex-grow h-40 overflow-hidden">
+      <CardBody className="flex-grow overflow-hidden">
         <Typography variant="h5" className="text-white font-Archivo">
           {post.title}
         </Typography>
