@@ -4,7 +4,6 @@ import { Button } from "@material-tailwind/react";
 import Image from "next/image";
 import boyIllustration from "@/public/boyIllustration.svg";
 import Link from "next/link";
-import Footer from "@/components/Footer";
 
 const About = () => {
   return (
@@ -16,7 +15,7 @@ const About = () => {
         <p className="text-white mr-24 mt-20 font-Archivo font-extrabold text-sclamp 768<=:text-center 768<=:mr-auto 768<=:text-tclamp">
           Next.js 14 Full Stack Blog
         </p>
-        <div className="text-left mr-24 768<=:mr-0 768<=:text-center mt-6">
+        <div className="text-left mr-24 mb-10 768<=:mr-0 768<=:text-center mt-6">
           <div className="">
             <p className="text-gray-400 font-Archivo font-extralight text-fclamp 768<=:text-foclamp 768<=:mx-2">
               Welcome to our blog! We're passionate about exploring the world{" "}
@@ -39,7 +38,7 @@ const About = () => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </section>
   );
 };
