@@ -13,6 +13,7 @@ import Button from "./Button";
 import Link from "next/link";
 import { truncateText } from "@/lib/truncateText";
 import { BlogPost } from "@/lib/types";
+import { formateData } from "@/lib/formateDate";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -67,7 +68,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           variant="small"
           className="font-light font-FiraSans text-white"
         >
-          {post.publishedAt}
+          {formateData(post.publishedAt)}
         </Typography>
       </CardFooter>
     </Card>
