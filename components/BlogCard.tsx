@@ -13,7 +13,7 @@ import Button from "./Button";
 import Link from "next/link";
 import { truncateText } from "@/lib/truncateText";
 import { BlogPost } from "@/lib/types";
-import { formateData } from "@/lib/formateDate";
+import { formateDate } from "@/lib/formateDate";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -30,8 +30,8 @@ const BlogCard = ({ post }: BlogCardProps) => {
       >
         <div className="relative w-full h-[250px] overflow-hidden">
           <Image
-            src={post.urlToImage}
-            alt={post.urlToImage ? post.urlToImage : "fallback image"}
+            src="https://placehold.co/600x320.svg?text=fallback"
+            alt="fallback image"
             fill
             onError={(event) => {
               event.target.src =
@@ -48,12 +48,12 @@ const BlogCard = ({ post }: BlogCardProps) => {
           variant="paragraph"
           className="mt-3 font-light font-FiraSans text-white"
         >
-          {truncateText(post.description, 100)}
+          {truncateText(post.body, 100)}
         </Typography>
       </CardBody>
       <CardFooter className="flex items-center justify-between">
         <div className="flex items-center -space-x-3">
-          <Link href="/blog/posts">
+          <Link href={`/blog/${post.id}`}>
             <Button
               content="Read more"
               type="button"
@@ -68,7 +68,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           variant="small"
           className="font-light font-FiraSans text-white"
         >
-          {formateData(post.publishedAt)}
+          {/* {formateDate(post.publishedAt)} */}
         </Typography>
       </CardFooter>
     </Card>
