@@ -1,22 +1,14 @@
-import BlogCard from "@/components/BlogCard";
-import { fetchPosts } from "@/lib/api/fetchPosts";
-import { BlogPost } from "@/lib/types";
+import { Suspense } from "react";
+import PostsList from "@/components/PostsList";
+import Spinner from "@/components/Spinner";
 
-const Blog = async () => {
-  let posts: BlogPost[] = [];
-
-  try {
-    posts = await fetchPosts();
-  } catch (error) {
-    console.error(error);
-  }
-
+const Blog = () => {
   return (
-    <main className="grid gap-4 px-16 py-16 md:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => (
-        <BlogCard key={post.id} post={post} />
-      ))}
-    </main>
+    <>
+      <Suspense fallback={<Spinner />}>
+        <PostsList />
+      </Suspense>
+    </>
   );
 };
 
