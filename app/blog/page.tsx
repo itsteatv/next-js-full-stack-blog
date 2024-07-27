@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import PostsList from "@/components/PostsList";
-import Spinner from "@/components/Spinner";
+import Loading from "./loading";
 
 const Blog = () => {
   return (
     <>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Loading />}>
         <PostsList />
       </Suspense>
     </>
