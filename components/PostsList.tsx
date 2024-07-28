@@ -6,7 +6,7 @@ const PostsList = async () => {
   let posts: BlogPost[] = [];
 
   try {
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     posts = await fetchPosts();
   } catch (error) {
     console.error(error);

@@ -1,7 +1,7 @@
 import { BlogPost } from "../types"
 
 export const fetchPosts = async function (): Promise<BlogPost[]> {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=10`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=10`, { next: { revalidate: 3600 } });
 
     if (!response.ok) {
         throw new Error("Failed to fetch posts")
