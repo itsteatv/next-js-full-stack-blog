@@ -1,11 +1,22 @@
+import createPost from "@/actions/createPost";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { redirect } from "next/navigation";
 
-const page = () => {
+const page = async () => {
+  const { isAuthenticated } = getKindeServerSession();
+
+  if (!(await isAuthenticated())) {
+    redirect("/api/auth/login?post_login_redirect_url=/create-post");
+  }
+
+  console.log(isAuthenticated);
+
   return (
     <section className="mt-20">
       <div className="flex flex-col items-center justify-center">
-        <form className="mb-4 rounded-3xl w-full max-w-60">
+        <form action={createPost} className="mb-4 rounded-3xl w-full max-w-60">
           <div className="mb-4">
             <label
               className="block text-white text-sm font-bold mb-2"
