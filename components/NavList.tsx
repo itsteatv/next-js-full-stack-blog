@@ -1,3 +1,8 @@
+import Loading from "@/app/blog/loading";
+import {
+  LogoutLink,
+  useKindeBrowserClient,
+} from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -7,6 +12,14 @@ const NavList = () => {
   const isActive = function (href: string) {
     return pathname === href ? "font-bold" : "";
   };
+
+  const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  console.log(user, isAuthenticated);
 
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -49,6 +62,7 @@ const NavList = () => {
           Create Post
         </Link>
       </p>
+      {isAuthenticated && <LogoutLink>Logout</LogoutLink>}
     </ul>
   );
 };
