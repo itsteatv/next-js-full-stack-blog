@@ -1,10 +1,12 @@
 import Loading from "@/app/blog/loading";
-import {
-  LogoutLink,
-  useKindeBrowserClient,
-} from "@kinde-oss/kinde-auth-nextjs";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  LoginLink,
+  RegisterLink,
+  LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/components";
 import Button from "./Button";
 
 const NavList = () => {
@@ -68,6 +70,9 @@ const NavList = () => {
               />
             </LogoutLink>
           </li>
+          <li>
+             {user?.given_name}
+          </li>
         </>
       ) : (
         <>
@@ -76,7 +81,7 @@ const NavList = () => {
               "/login"
             )}`}
           >
-            <Link href="/login" className="flex items-center transition-colors">
+            <LoginLink>
               <Button
                 content="Login"
                 type="button"
@@ -84,17 +89,14 @@ const NavList = () => {
                 variant="filled"
                 className="font-bold"
               />
-            </Link>
+            </LoginLink>
           </li>
           <li
             className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
               "/register"
             )}`}
           >
-            <Link
-              href="/register"
-              className="flex items-center transition-colors"
-            >
+            <RegisterLink>
               <Button
                 content="Register"
                 type="button"
@@ -102,7 +104,7 @@ const NavList = () => {
                 variant="filled"
                 className="font-bold"
               />
-            </Link>
+            </RegisterLink>
           </li>
         </>
       )}
