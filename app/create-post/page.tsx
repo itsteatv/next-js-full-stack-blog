@@ -1,6 +1,7 @@
 import createPost from "@/actions/createPost";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import TextArea from "@/components/TextArea";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -11,8 +12,6 @@ const page = async () => {
     redirect("/api/auth/login?post_login_redirect_url=/create-post");
   }
 
-  console.log(isAuthenticated);
-
   return (
     <section className="mt-20">
       <div className="flex flex-col items-center justify-center">
@@ -20,7 +19,7 @@ const page = async () => {
           <div className="mb-4">
             <label
               className="block text-white text-sm font-bold mb-2"
-              htmlFor="name"
+              htmlFor="title"
             >
               Title
             </label>
@@ -29,6 +28,20 @@ const page = async () => {
               type="text"
               placeholder="Your title"
               name="title"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-white text-sm font-bold mb-2"
+              htmlFor="body"
+            >
+              Body
+            </label>
+            <TextArea
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+              rows={4}
+              name="body"
+              placeholder="Your body"
             />
           </div>
           <div className="flex items-center justify-between">
