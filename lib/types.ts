@@ -1,8 +1,8 @@
 import { color } from "@material-tailwind/react/types/components/alert";
 
 export interface BlogPost {
-    userId?: number; 
-    id: number;
+    userId?: number;
+    id: string;
     title: string;
     body: string;
     createdAt?: Date;

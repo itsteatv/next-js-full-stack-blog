@@ -16,9 +16,20 @@ export const fetchPosts = async function (): Promise<BlogPost[]> {
 
     const jsonPlaceholderPosts: BlogPost[] = await jsonPlaceholderResponse.json();
 
-    const combinedPosts = [...jsonPlaceholderPosts, ...prismaPosts];
+    const jsonPlaceholderPostsWithUniqueIds = jsonPlaceholderPosts.map(post => ({
+        ...post,
+        id: `json-${post.id}`
+    }));
 
-    console.log(combinedPosts);
+    const prismaPostsWithUniqueIds = prismaPosts.map(post => ({
+        id: `prisma-${post.id}`,
+        title: post.title,
+        body: post.body,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt
+    }));
+
+    const combinedPosts = [...jsonPlaceholderPostsWithUniqueIds, ...prismaPostsWithUniqueIds];
 
     return combinedPosts;
 }
