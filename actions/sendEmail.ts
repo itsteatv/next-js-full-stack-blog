@@ -7,22 +7,9 @@ import React from "react";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const sendEmail = async function (formData: FormData) {
-    console.log("Running on server");
+export const sendEmail = async function (formData: unknown) {
 
-    const authorName = formData.get("authorName") as string;
-    const authorEmail = formData.get("authorEmail") as string;
-    const reviewText = formData.get("reviewText") as string;
-
-    console.log(authorName);
-    console.log(authorEmail);
-    console.log(reviewText);
-
-    if (!authorName || !authorEmail || !reviewText) {
-        throw new Error("Missing required form fields");
-    }
-
-    const parsed = emailContactSchema.safeParse({ authorName, authorEmail, reviewText });
+    const parsed = emailContactSchema.safeParse(formData);
 
     if (!parsed.success) {
         const errors = parsed.error.errors.reduce((acc, error) => {
@@ -34,10 +21,10 @@ export const sendEmail = async function (formData: FormData) {
 
     try {
         await resend.emails.send({
-            from: `${authorName}'s Review <onboarding@resend.dev>`,
-            to: "yourEmail@gmail.com",
+            from: `${parsed.data.authorName}'s Review <onboarding@resend.dev>`,
+            to: "rezashow60@gmail.com",
             subject: "Review",
-            react: React.createElement(ContactFormEmail, { authorName: authorName, authorEmail: authorEmail, reviewText: reviewText }),
+            react: React.createElement(ContactFormEmail, { authorName: parsed.data.authorName, authorEmail: parsed.data.authorEmail, reviewText: parsed.data.reviewText }),
         });
     } catch (error) {
         console.error("Error sending email:", error);

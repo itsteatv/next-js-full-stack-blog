@@ -15,26 +15,35 @@ const Contact = () => {
     register,
     formState: { errors, isSubmitting },
     reset,
-    setError,
   } = useForm<TEmailContactSchema>({
     resolver: zodResolver(emailContactSchema),
   });
 
-  const handleFormSubmit = async (data: TEmailContactSchema) => {
-    const formData = new FormData();
-    formData.append("authorName", data.authorName);
-    formData.append("authorEmail", data.authorEmail);
-    formData.append("reviewText", data.reviewText);
+  const handleFormSubmit = async (formData: FormData) => {
+    const data = {
+      authorName: formData.get("authorName") as string,
+      authorEmail: formData.get("authorEmail") as string,
+      reviewText: formData.get("reviewText") as string,
+    };
+
+    const parsed = emailContactSchema.safeParse(data);
+
+    if (!parsed.success) {
+      parsed.error.errors.forEach((error) => {
+        toast.error(error.message, { id: error.path.join("-") });
+      });
+      return;
+    }
 
     try {
-      await sendEmail(formData);
+      await sendEmail(parsed.data);
       reset();
       toast.success("Form submitted successfully");
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
       } else {
-        toast.error("Submitting form failed!");
+        toast.error("Failed to submit the form!");
       }
     }
   };
@@ -43,24 +52,7 @@ const Contact = () => {
     <section className="mt-28">
       <div className="flex flex-col items-center">
         <form
-          action={async (formData) => {
-            const formObject = {
-              authorName: formData.get("authorName") as string,
-              authorEmail: formData.get("authorEmail") as string,
-              reviewText: formData.get("reviewText") as string,
-            };
-
-            const parsed = emailContactSchema.safeParse(formObject);
-
-            if (!parsed.success) {
-              parsed.error.errors.forEach((error) => {
-                toast.error(error.message, { id: error.path.join("-") });
-              });
-              return;
-            }
-
-            await handleFormSubmit(parsed.data);
-          }}
+          action={handleFormSubmit}
           className="mb-4 rounded-3xl w-full max-w-2xl sm:px-8 md:px-20"
         >
           <div className="mb-4">
