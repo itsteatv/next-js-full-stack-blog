@@ -14,7 +14,7 @@ export interface ButtonProps {
     variant?: "filled" | "outlined" | "gradient" | "text";
     size?: "sm" | "md" | "lg";
     ripple?: boolean;
-    content: string;
+    content: React.ReactNode;
     color?: color;
     type: "button" | "reset" | "submit";
     disabled?: boolean;

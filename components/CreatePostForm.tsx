@@ -15,7 +15,7 @@ import {
 const CreatePostForm = () => {
   const {
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<TCreatePostSchema>({ resolver: zodResolver(createPostSchema) });
 
@@ -92,8 +92,8 @@ const CreatePostForm = () => {
       </div>
       <div className="flex items-center justify-between">
         <Button
-          disabled={isSubmitting}
-          className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed bg-black px-8 py-4 mt-4 text-center duration-300 font-semibold text-white no-underline [box-shadow:rgb(19,_83,_254)_6px_6px]"
+          usePendingStatus={true}
+          className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline"
           type="submit"
           content="Create"
         />
