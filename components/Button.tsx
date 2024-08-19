@@ -6,6 +6,7 @@ import { useFormStatus } from "react-dom";
 
 interface ExtendedButtonProps extends ButtonProps {
   usePendingStatus?: boolean;
+  pendingContent?: string;
 }
 
 const Button = ({
@@ -18,9 +19,10 @@ const Button = ({
   type,
   disabled,
   usePendingStatus = false,
+  pendingContent = "Processing...",
 }: ExtendedButtonProps) => {
   const { pending } = useFormStatus();
-  const displayContent = usePendingStatus && pending ? "Creating..." : content;
+  const displayContent = usePendingStatus && pending ? pendingContent : content;
 
   return (
     <MaterialButton
