@@ -18,6 +18,9 @@ export interface ButtonProps {
     color?: color;
     type: "button" | "reset" | "submit";
     disabled?: boolean;
+    onClick?: () => void;
+    usePendingStatus?: boolean;
+    pendingContent?: string;
 }
 
 export interface InputProps {

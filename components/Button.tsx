@@ -4,11 +4,6 @@ import { ButtonProps } from "@/lib/types";
 import { Button as MaterialButton } from "@material-tailwind/react";
 import { useFormStatus } from "react-dom";
 
-interface ExtendedButtonProps extends ButtonProps {
-  usePendingStatus?: boolean;
-  pendingContent?: string;
-}
-
 const Button = ({
   color,
   content,
@@ -18,9 +13,10 @@ const Button = ({
   size,
   type,
   disabled,
+  onClick,
   usePendingStatus = false,
   pendingContent = "Processing...",
-}: ExtendedButtonProps) => {
+}: ButtonProps) => {
   const { pending } = useFormStatus();
   const displayContent = usePendingStatus && pending ? pendingContent : content;
 
@@ -33,6 +29,7 @@ const Button = ({
       color={color}
       type={type}
       disabled={disabled || pending}
+      onClick={onClick}
     >
       {displayContent}
     </MaterialButton>
