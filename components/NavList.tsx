@@ -64,7 +64,7 @@ const NavList = () => {
             )}`}
           >
             <Link
-              href="/Dashboard"
+              href="/dashboard"
               className="flex items-center transition-colors"
             >
               Dashboard
