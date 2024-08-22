@@ -8,6 +8,7 @@ import {
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import Button from "./Button";
+import AdminButton from "@/components/AdminButton";
 
 const NavList = () => {
   const pathname = usePathname();
@@ -57,6 +58,18 @@ const NavList = () => {
               Create Post
             </Link>
           </li>
+          <li
+            className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
+              "/Dashboard"
+            )}`}
+          >
+            <Link
+              href="/Dashboard"
+              className="flex items-center transition-colors"
+            >
+              Dashboard
+            </Link>
+          </li>
           <li>
             <LogoutLink>
               <Button
@@ -70,9 +83,7 @@ const NavList = () => {
               />
             </LogoutLink>
           </li>
-          <li>
-             {user?.given_name}
-          </li>
+          <li>{user?.given_name}</li>
         </>
       ) : (
         <>
