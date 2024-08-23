@@ -1,4 +1,5 @@
 import { color } from "@material-tailwind/react/types/components/alert";
+import { size } from "@material-tailwind/react/types/components/input";
 
 export interface BlogPost {
     userId?: number;
@@ -35,7 +36,7 @@ export interface InputProps {
 export interface TextareaProps {
     className: string;
     variant?: "standard" | "outlined" | "static";
-    size?: string | undefined;
+    size?: size | undefined;
     id: string;
     rows: number;
     [key: string]: any;

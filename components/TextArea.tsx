@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import { Textarea as MTTextarea } from "@material-tailwind/react";
 import { TextareaProps } from "@/lib/types";
 
-const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+const TextArea = forwardRef<HTMLDivElement, TextareaProps>(
   ({ rows, id, className, variant, size, ...rest }, ref) => {
     return (
       <MTTextarea
