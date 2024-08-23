@@ -2,11 +2,13 @@ import CreatePostForm from "@/components/CreatePostForm";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
-const page = async () => {
+const CreatePost = async () => {
   const { isAuthenticated } = getKindeServerSession();
 
-  if (!(await isAuthenticated())) {
-    redirect("/api/auth/login?post_login_redirect_url=/create-post");
+  const isLoggedIn = await isAuthenticated();
+
+  if (!isLoggedIn) {
+    redirect("/api/auth/login");
   }
 
   return (
@@ -18,4 +20,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default CreatePost;
