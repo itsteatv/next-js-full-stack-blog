@@ -7,7 +7,7 @@ const Admin = async () => {
   const isLoggedIn = await isAuthenticated();
 
   if (!isLoggedIn) {
-    redirect("/api/auth/login");
+    redirect("/api/auth/login?post_login_redirect_url=/dashboard");
   }
 
   const requiredPermission = await getPermission("all::permissions");
