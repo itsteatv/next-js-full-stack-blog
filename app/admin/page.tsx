@@ -11,9 +11,8 @@ const Admin = async () => {
   }
 
   const requiredPermission = await getPermission("all::permissions");
-
   if (!requiredPermission?.isGranted) {
-    redirect("/");
+    redirect("/dashboard");
   }
 
   return (
