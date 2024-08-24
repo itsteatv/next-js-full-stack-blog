@@ -1,3 +1,5 @@
+"use client";
+
 import Loading from "@/app/blog/loading";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
@@ -13,17 +15,19 @@ import AdminButton from "@/components/AdminButton";
 const NavList = () => {
   const pathname = usePathname();
 
-  const isActive = function (href: string) {
-    return pathname === href ? "font-bold" : "";
-  };
+  const isActive = (href: string) => (pathname === href ? "font-bold" : "");
 
-  const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
+  const { user, isAuthenticated, isLoading, getPermission } =
+    useKindeBrowserClient();
 
   if (isLoading) {
     return <Loading />;
   }
 
-  console.log(user, isAuthenticated);
+  const requiredPermission = getPermission("all::permissions");
+  const isAdmin = requiredPermission?.isGranted;
+
+  console.log(user, isAuthenticated, isAdmin);
 
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
@@ -60,7 +64,7 @@ const NavList = () => {
           </li>
           <li
             className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
-              "/Dashboard"
+              "/dashboard"
             )}`}
           >
             <Link
@@ -70,6 +74,15 @@ const NavList = () => {
               Dashboard
             </Link>
           </li>
+          {isAdmin && (
+            <li
+              className={`p-1 duration-150 hover:text-gray-500 text-[#d6d6d6] font-Archivo ${isActive(
+                "/admin"
+              )}`}
+            >
+              <AdminButton isAdmin={!!isAdmin} />
+            </li>
+          )}
           <li>
             <LogoutLink>
               <Button
