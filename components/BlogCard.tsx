@@ -42,6 +42,9 @@ const BlogCard = ({ post }: BlogCardProps) => {
       </CardHeader>
       <CardBody className="flex-grow overflow-hidden">
         <Typography variant="h5" className="text-white font-Archivo">
+          {post.author}
+        </Typography>
+        <Typography variant="h5" className="text-white font-Archivo">
           {post.title}
         </Typography>
         <Typography
@@ -64,12 +67,12 @@ const BlogCard = ({ post }: BlogCardProps) => {
             />
           </Link>
         </div>
-        <Typography
+        {/* <Typography
           variant="small"
           className="font-light font-FiraSans text-white"
         >
-          {/* {formateDate(post.publishedAt)} */}
-        </Typography>
+          {formateDate(post.publishedAt)}
+        </Typography> */}
       </CardFooter>
     </Card>
   );

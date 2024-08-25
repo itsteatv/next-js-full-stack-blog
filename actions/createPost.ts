@@ -8,11 +8,14 @@ import { redirect } from "next/navigation"
 
 export default async function createPost(formData: unknown) {
 
-    const { isAuthenticated } = getKindeServerSession()
+    const { isAuthenticated, getUser } = getKindeServerSession()
 
     if (!(await isAuthenticated())) {
         redirect("/api/auth/login")
     }
+
+    const user = await getUser()
+    const username = user?.username ?? "Unknown Author";
 
     const parsed = createPostSchema.safeParse(formData);
 
@@ -26,7 +29,10 @@ export default async function createPost(formData: unknown) {
 
     try {
         await prisma.post.create({
-            data: parsed.data
+            data: {
+                ...parsed.data,
+                author: username
+            }
         })
     } catch (error) {
         console.error("Error creating post:", error);

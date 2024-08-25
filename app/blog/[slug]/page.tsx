@@ -21,6 +21,7 @@ const SinglePost = async ({ params }: { params: { slug: string } }) => {
           height={480}
           className="mt-20 rounded-md"
         />
+        <h3 className="text-white mt-6 font-Archivo">{post.author}</h3>
         <h1 className="text-white mt-6 font-Archivo">{post.title}</h1>
         <div className="mt-6 text-white">
           <p>{post.body}</p>

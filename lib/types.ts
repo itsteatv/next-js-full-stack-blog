@@ -6,6 +6,7 @@ export interface BlogPost {
     id: string;
     title: string;
     body: string;
+    author: string | null | undefined;
     createdAt?: Date;
     updatedAt?: Date;
 }

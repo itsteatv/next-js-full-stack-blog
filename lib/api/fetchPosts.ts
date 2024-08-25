@@ -25,6 +25,7 @@ export const fetchPosts = async function (): Promise<BlogPost[]> {
         id: `prisma-${post.id}`,
         title: post.title,
         body: post.body,
+        author: post.author,
         createdAt: post.createdAt,
         updatedAt: post.updatedAt
     }));
