@@ -26,16 +26,12 @@ import AdminButton from "@/components/AdminButton";
 import Image from "next/image";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Home", href: "/", current: false },
+  { name: "Blog", href: "/blog", current: false },
+  { name: "About", href: "/about", current: false },
+  { name: "Contact", href: "/contact", current: false },
 ];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
-];
+const userNavigation = [{ name: "Your Profile", href: "/dashboard" }];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -44,6 +40,10 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   const { user, isAuthenticated, isLoading, getPermission } =
     useKindeBrowserClient();
+
+  console.log(user);
+
+  const pathname = usePathname();
 
   if (isLoading) {
     return <Loading />;
@@ -57,6 +57,11 @@ export default function Navbar() {
     email: user?.email,
     imageUrl: user?.picture,
   };
+
+  const updatedNavigation = navigation.map((item) => ({
+    ...item,
+    current: pathname === item.href,
+  }));
 
   return (
     <Disclosure as="nav" className="font-Archivo">
@@ -78,165 +83,184 @@ export default function Navbar() {
                 />
               </DisclosureButton>
             </div>
-            <div className="flex flex-shrink-0 items-center text-white">
-              <Link href="/">Home</Link>
-            </div>
-            <div className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-              {navigation.map((item) => (
-                <a
+            <div className="hidden md:flex md:items-center md:space-x-4">
+              {updatedNavigation.map((item) => (
+                <Link
                   key={item.name}
                   href={item.href}
                   aria-current={item.current ? "page" : undefined}
                   className={classNames(
                     item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      ? "font-extrabold text-white bg-gray-800"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-white",
                     "rounded-md px-3 py-2 text-sm font-medium"
                   )}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
           <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <button
-                type="button"
-                className="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-              >
-                <PlusIcon aria-hidden="true" className="-ml-0.5 h-5 w-5" />
-                New Job
-              </button>
-            </div>
-            <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
-              <button
-                type="button"
-                className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                <span className="absolute -inset-1.5" />
-                <span className="sr-only">View notifications</span>
-                <BellIcon aria-hidden="true" className="h-6 w-6" />
-              </button>
-
-              {/* Profile dropdown */}
-              <Menu as="div" className="relative ml-3">
-                <div>
-                  <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">Open user menu</span>
-                    {userProfile.imageUrl ? (
-                      <Image
-                        alt=""
-                        src={userProfile.imageUrl}
-                        className="rounded-full"
-                        style={{ width: "2rem", height: "2rem" }}
+            {isAuthenticated ? (
+              <>
+                <Link href="/create-post">
+                  <div className="flex flex-row">
+                    <button
+                      type="button"
+                      className="relative duration-300 inline-flex items-center gap-x-1.5 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                    >
+                      <PlusIcon
+                        aria-hidden="true"
+                        className="-ml-0.5 h-5 w-5"
                       />
-                    ) : (
-                      <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
-                        <svg
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                          className="h-full w-full text-gray-300"
-                        >
-                          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                      </span>
-                    )}
-                  </MenuButton>
+                      Create Post
+                    </button>
+                  </div>
+                </Link>
+                <div className="hidden  md:flex md:flex-shrink-0 md:items-center">
+                  {/* Profile dropdown */}
+                  <Menu as="div" className="relative ml-3">
+                    <div>
+                      <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                        <span className="absolute -inset-1.5" />
+                        <span className="sr-only">Open user menu</span>
+                        {userProfile.imageUrl ? (
+                          <Image
+                            alt=""
+                            src={userProfile.imageUrl}
+                            className="rounded-full"
+                            // style={{ width: "2rem", height: "2rem" }}
+                            width={32}
+                            height={32}
+                          />
+                        ) : (
+                          <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
+                            <svg
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              className="h-full w-full text-gray-300"
+                            >
+                              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                          </span>
+                        )}
+                      </MenuButton>
+                    </div>
+                    <MenuItems
+                      transition
+                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                    >
+                      {userNavigation.map((item) => (
+                        <MenuItem key={item.name}>
+                          <Link
+                            href={item.href}
+                            className="block px-4 py-2 text-sm duration-300 text-gray-700 data-[focus]:bg-gray-100"
+                          >
+                            {item.name}
+                          </Link>
+                        </MenuItem>
+                      ))}
+                      <LogoutLink className="block rounded-sm px-3 py-2 text-base font-medium duration-300 text-red-600 hover:bg-red-700 hover:text-white">
+                        Logout
+                      </LogoutLink>
+                    </MenuItems>
+                  </Menu>
                 </div>
-                <MenuItems
-                  transition
-                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                >
-                  {userNavigation.map((item) => (
-                    <MenuItem key={item.name}>
-                      <a
-                        href={item.href}
-                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
-                      >
-                        {item.name}
-                      </a>
-                    </MenuItem>
-                  ))}
-                </MenuItems>
-              </Menu>
-            </div>
+              </>
+            ) : (
+              <span className="isolate inline-flex rounded-md shadow-sm">
+                <LoginLink>
+                  <button
+                    type="button"
+                    className="relative inline-flex items-center rounded-l-md  rounded-r-md px-3 py-2 text-sm font-semibold text-white duration-300 hover:bg-gray-50 hover:text-black focus:z-10"
+                  >
+                    Login
+                  </button>
+                </LoginLink>
+
+                <RegisterLink>
+                  <button
+                    type="button"
+                    className="relative -ml-px inline-flex items-center rounded-r-md rounded-l-md px-3 py-2 text-sm font-semibold text-white duration-300 hover:bg-gray-50 hover:text-black focus:z-10"
+                  >
+                    Register
+                  </button>
+                </RegisterLink>
+              </span>
+            )}
           </div>
         </div>
       </div>
 
       <DisclosurePanel className="md:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-          {navigation.map((item) => (
-            <DisclosureButton
+          {updatedNavigation.map((item) => (
+            <Link
               key={item.name}
-              as="a"
               href={item.href}
               aria-current={item.current ? "page" : undefined}
               className={classNames(
                 item.current
-                  ? "bg-gray-900 text-white"
+                  ? "bg-gray-900 text-white duration-300"
                   : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                "block rounded-md px-3 py-2 text-base font-medium"
+                "block rounded-md px-3 py-2 text-base font-medium duration-300"
               )}
             >
               {item.name}
-            </DisclosureButton>
+            </Link>
           ))}
         </div>
-        <div className="border-t border-gray-700 pb-3 pt-4">
-          <div className="flex items-center px-5 sm:px-6">
-            <div className="flex-shrink-0">
-              {userProfile.imageUrl ? (
-                <Image
-                  alt=""
-                  src={userProfile.imageUrl}
-                  className="rounded-full"
-                  style={{ width: "2rem", height: "2rem" }}
-                />
-              ) : (
-                <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    className="h-full w-full text-gray-300"
-                  >
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
-              )}
-            </div>
-            <div className="ml-3">
-              <div className="text-base font-medium text-white">
-                {userProfile.name}
+        {isAuthenticated && (
+          <div className="border-t border-gray-700 pb-3 pt-4">
+            <div className="flex items-center px-5 sm:px-6">
+              <div className="flex-shrink-0">
+                {userProfile.imageUrl ? (
+                  <Image
+                    alt=""
+                    src={userProfile.imageUrl}
+                    className="rounded-full"
+                    width={32}
+                    height={32}
+                    // style={{ width: "2rem", height: "2rem" }}
+                  />
+                ) : (
+                  <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      className="h-full w-full text-gray-300"
+                    >
+                      <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </span>
+                )}
               </div>
-              <div className="text-sm font-medium text-gray-400">
-                {userProfile.email}
+              <div className="ml-3">
+                <div className="text-base font-medium text-white">
+                  {userProfile.name}
+                </div>
+                <div className="text-sm font-medium text-gray-400">
+                  {userProfile.email}
+                </div>
               </div>
             </div>
-            <button
-              type="button"
-              className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="h-6 w-6" />
-            </button>
+            <div className="mt-4 space-y-1 px-2 sm:px-3">
+              {userNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block rounded-md duration-300 px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <LogoutLink className="block rounded-md px-3 py-2 text-base font-medium text-red-600 hover:bg-red-700 hover:text-white">
+                Logout
+              </LogoutLink>
+            </div>
           </div>
-          <div className="mt-3 space-y-1 px-2 sm:px-3">
-            {userNavigation.map((item) => (
-              <DisclosureButton
-                key={item.name}
-                as="a"
-                href={item.href}
-                className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-              >
-                {item.name}
-              </DisclosureButton>
-            ))}
-          </div>
-        </div>
+        )}
       </DisclosurePanel>
     </Disclosure>
   );
