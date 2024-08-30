@@ -12,15 +12,12 @@ export interface BlogPost {
 }
 
 export interface ButtonProps {
-    className?: string;
-    variant?: "filled" | "outlined" | "gradient" | "text";
-    size?: "sm" | "md" | "lg";
-    ripple?: boolean;
-    content: React.ReactNode;
-    color?: color;
-    type: "button" | "reset" | "submit";
-    disabled?: boolean;
+    label?: string;
     onClick?: () => void;
+    className?: string;
+    disabled?: boolean;
+    icon?: React.ReactNode;
+    type?: "button" | "submit" | "reset";
     usePendingStatus?: boolean;
     pendingContent?: string;
 }
