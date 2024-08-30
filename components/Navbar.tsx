@@ -21,9 +21,8 @@ import {
   RegisterLink,
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
-import Button from "./Button";
-import AdminButton from "@/components/AdminButton";
 import Image from "next/image";
+import Button from "./Button";
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -91,8 +90,8 @@ export default function Navbar() {
                   aria-current={item.current ? "page" : undefined}
                   className={classNames(
                     item.current
-                      ? "font-extrabold text-white bg-gray-800"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-white",
+                      ? "font-extrabold text-white bg-gray-800 duration-300"
+                      : "text-gray-300 hover:bg-gray-800 hover:text-white duration-300",
                     "rounded-md px-3 py-2 text-sm font-medium"
                   )}
                 >
@@ -106,16 +105,17 @@ export default function Navbar() {
               <>
                 <Link href="/create-post">
                   <div className="flex flex-row">
-                    <button
+                    <Button
                       type="button"
                       className="relative duration-300 inline-flex items-center gap-x-1.5 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                    >
-                      <PlusIcon
-                        aria-hidden="true"
-                        className="-ml-0.5 h-5 w-5"
-                      />
-                      Create Post
-                    </button>
+                      label="Create Post"
+                      icon={
+                        <PlusIcon
+                          aria-hidden="true"
+                          className="-ml-0.5 h-5 w-5"
+                        />
+                      }
+                    />
                   </div>
                 </Link>
                 <div className="hidden  md:flex md:flex-shrink-0 md:items-center">
@@ -130,7 +130,6 @@ export default function Navbar() {
                             alt=""
                             src={userProfile.imageUrl}
                             className="rounded-full"
-                            // style={{ width: "2rem", height: "2rem" }}
                             width={32}
                             height={32}
                           />
@@ -171,21 +170,19 @@ export default function Navbar() {
             ) : (
               <span className="isolate inline-flex rounded-md shadow-sm">
                 <LoginLink>
-                  <button
+                  <Button
+                    label="Login"
+                    className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
                     type="button"
-                    className="relative inline-flex items-center rounded-l-md  rounded-r-md px-3 py-2 text-sm font-semibold text-white duration-300 hover:bg-gray-50 hover:text-black focus:z-10"
-                  >
-                    Login
-                  </button>
+                  />
                 </LoginLink>
 
                 <RegisterLink>
-                  <button
+                  <Button
+                    label="Register"
+                    className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
                     type="button"
-                    className="relative -ml-px inline-flex items-center rounded-r-md rounded-l-md px-3 py-2 text-sm font-semibold text-white duration-300 hover:bg-gray-50 hover:text-black focus:z-10"
-                  >
-                    Register
-                  </button>
+                  />
                 </RegisterLink>
               </span>
             )}
