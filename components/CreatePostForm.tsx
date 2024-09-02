@@ -96,7 +96,7 @@ const CreatePostForm = () => {
           pendingContent="Creating..."
           className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline"
           type="submit"
-          content="Create"
+          label="Create"
         />
       </div>
     </form>
