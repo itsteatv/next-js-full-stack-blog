@@ -23,7 +23,7 @@ const Button = ({
       disabled={disabled || pending}
       onClick={onClick}
     >
-      {icon}
+      {icon && icon}
       {displayContent}
     </button>
   );
