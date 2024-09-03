@@ -1,25 +1,23 @@
 "use client";
 
 import { forwardRef } from "react";
-import { Textarea as MTTextarea } from "@material-tailwind/react";
 import { TextareaProps } from "@/lib/types";
 
-const TextArea = forwardRef<HTMLDivElement, TextareaProps>(
-  ({ rows, id, className, variant, size, ...rest }, ref) => {
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ rows, id, className, name, defaultValue }, ref) => {
     return (
-      <MTTextarea
-        className={className}
-        variant={variant}
-        size={size}
+      <textarea
         id={id}
+        name={name}
         rows={rows}
+        className={className}
+        defaultValue={defaultValue}
         ref={ref}
-        {...rest}
       />
     );
   }
 );
 
-TextArea.displayName = "TextArea";
+Textarea.displayName = "Textarea";
 
-export default TextArea;
+export default Textarea;

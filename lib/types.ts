@@ -33,9 +33,9 @@ export interface InputProps {
 
 export interface TextareaProps {
     className: string;
-    variant?: "standard" | "outlined" | "static";
-    size?: size | undefined;
     id: string;
     rows: number;
+    name: string;
+    defaultValue?: string;
     [key: string]: any;
 }
