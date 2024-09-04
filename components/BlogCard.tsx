@@ -58,12 +58,9 @@ const BlogCard = ({ post }: BlogCardProps) => {
         <div className="flex items-center -space-x-3">
           <Link href={`/blog/${post.id}`}>
             <Button
-              content="Read more"
+              label="Read More"
               type="button"
-              ripple={true}
-              size="sm"
-              variant="outlined"
-              className="hover:bg-black hover:text-white duration-300 font-Archivo text-white border-white"
+              className="rounded-md bg-white/10 px-3.5 py-2.5 mt-6 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
             />
           </Link>
         </div>

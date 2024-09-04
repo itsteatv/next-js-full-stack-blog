@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@material-tailwind/react";
 import Image from "next/image";
 import boyIllustration from "@/public/boyIllustration.svg";
 import Link from "next/link";
+import Button from "@/components/Button";
 
 const About = () => {
   return (
@@ -27,14 +27,13 @@ const About = () => {
               Join us as we journey through fascinating topics.
             </p>
           </div>
-          <Button
-            ripple={true}
-            variant="outlined"
-            size="sm"
-            className="text-white border-white font-Archivo rounded-full w-28 mt-6 font-extralight"
-          >
-            <Link href="/contact">Contact Us</Link>
-          </Button>
+          <Link href="/contact">
+            <Button
+              type="button"
+              className="rounded-md bg-white/10 px-3.5 duration-300 py-2.5 mt-6 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+              label="Contact Us"
+            />
+          </Link>
         </div>
       </div>
 
