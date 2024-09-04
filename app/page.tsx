@@ -29,11 +29,8 @@ export default function Home() {
           <Link href="/blog">
             <Button
               type="button"
-              ripple={true}
-              variant="outlined"
-              size="sm"
-              className="text-white border-white font-Archivo rounded-full w-28 mt-6 font-extralight"
-              content="Explore"
+              className="rounded-md bg-white/10 px-3.5 duration-300 py-2.5 mt-6 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+              label="Explore"
             />
           </Link>
         </div>
