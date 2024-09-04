@@ -3,7 +3,7 @@
 import createPost from "@/actions/createPost";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import TextArea from "@/components/TextArea";
+import Textarea from "./Textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
@@ -60,7 +60,7 @@ const CreatePostForm = () => {
           Title
         </label>
         <Input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-inset focus:ring-indigo-600"
           type="text"
           placeholder="Your title"
           {...register("title")}
@@ -78,12 +78,12 @@ const CreatePostForm = () => {
         >
           Body
         </label>
-        <TextArea
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+        <Textarea
+          className="block w-full rounded-md border-0 py-1.5 text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           rows={4}
           {...register("body")}
           name="body"
-          placeholder="Your body"
+          id="body"
         />
         {errors.body &&
           toast.error(`${errors.body.message}`, {

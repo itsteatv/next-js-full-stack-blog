@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import TextArea from "@/components/TextArea";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +10,7 @@ import {
   emailContactSchema,
 } from "@/schemas/emailContactSchema";
 import { sendEmail } from "@/actions/sendEmail";
+import Textarea from "./Textarea";
 
 const ContactPostForm = () => {
   const {
@@ -66,7 +66,7 @@ const ContactPostForm = () => {
               Name
             </label>
             <Input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               type="text"
               placeholder="Your name"
               {...register("authorName")}
@@ -85,7 +85,7 @@ const ContactPostForm = () => {
               Email
             </label>
             <Input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-inset focus:ring-indigo-600"
               type="email"
               placeholder="Your email"
               {...register("authorEmail")}
@@ -103,11 +103,12 @@ const ContactPostForm = () => {
             >
               Message
             </label>
-            <TextArea
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            <Textarea
+              className="block w-full rounded-md border-0 py-1.5 text-gray-900 bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               rows={4}
               {...register("reviewText")}
               name="reviewText"
+              id="reviewText"
             />
             {errors.reviewText &&
               toast.error(`${errors.reviewText.message}`, {
