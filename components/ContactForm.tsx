@@ -11,6 +11,8 @@ import {
 } from "@/schemas/emailContactSchema";
 import { sendEmail } from "@/actions/sendEmail";
 import Textarea from "./Textarea";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { InboxIcon } from "@heroicons/react/24/outline";
 
 const ContactPostForm = () => {
   const {
@@ -52,26 +54,36 @@ const ContactPostForm = () => {
   };
 
   return (
-    <section className="mt-28">
-      <div className="flex flex-col items-center">
+    <section className="flex mx-5 flex-col items-center justify-center mt-12">
+      <div>
         <form
           action={handleFormSubmit}
-          className="mb-4 rounded-3xl w-full max-w-2xl sm:px-8 md:px-20"
+          className="mb-4 rounded-3xl w-full max-w-lg sm:px-8 md:px-20"
         >
           <div className="mb-4">
             <label
-              className="block text-white text-sm font-bold mb-2"
               htmlFor="name"
+              className="block text-sm font-medium leading-6 text-white"
             >
               Name
             </label>
-            <Input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              type="text"
-              placeholder="Your name"
-              {...register("authorName")}
-              name="authorName"
-            />
+            <div>
+              <div className="relative mt-2 rounded-md shadow-sm">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
+                  <InboxIcon
+                    aria-hidden="true"
+                    className="h-5 w-5 text-gray-400"
+                  />
+                </div>
+              </div>
+              <Input
+                className="block w-full rounded-md border-0 py-1.5 pl-10 text-white ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                placeholder="Your name"
+                {...register("authorName")}
+                name="authorName"
+              />
+            </div>
             {errors.authorName &&
               toast.error(`${errors.authorName.message}`, {
                 id: "Name-Error",
@@ -84,13 +96,23 @@ const ContactPostForm = () => {
             >
               Email
             </label>
-            <Input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-              type="email"
-              placeholder="Your email"
-              {...register("authorEmail")}
-              name="authorEmail"
-            />
+            <div>
+              <div className="relative mt-2 rounded-md shadow-sm">
+                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
+                  <EnvelopeIcon
+                    aria-hidden="true"
+                    className="h-5 w-5 text-gray-400"
+                  />
+                </div>
+              </div>
+              <Input
+                className="block w-full rounded-md border-0 py-1.5 pl-10 text-white ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="email"
+                placeholder="Your email"
+                {...register("authorEmail")}
+                name="authorEmail"
+              />
+            </div>
             {errors.authorEmail &&
               toast.error(`${errors.authorEmail.message}`, {
                 id: "Email-Error",
@@ -104,7 +126,7 @@ const ContactPostForm = () => {
               Message
             </label>
             <Textarea
-              className="block w-full rounded-md border-0 py-1.5 text-gray-900 bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 px-1.5 text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               rows={4}
               {...register("reviewText")}
               name="reviewText"

@@ -11,6 +11,7 @@ import {
   createPostSchema,
   TCreatePostSchema,
 } from "@/schemas/createPostSchema";
+import { ItalicIcon } from "@heroicons/react/24/outline";
 
 const CreatePostForm = () => {
   const {
@@ -48,58 +49,70 @@ const CreatePostForm = () => {
   };
 
   return (
-    <form
-      action={handleFormSubmit}
-      className="mb-4 rounded-3xl w-full max-w-60"
-    >
-      <div className="mb-4">
-        <label
-          className="block text-white text-sm font-bold mb-2"
-          htmlFor="title"
-        >
-          Title
-        </label>
-        <Input
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-          type="text"
-          placeholder="Your title"
-          {...register("title")}
-          name="title"
-        />
-        {errors.title &&
-          toast.error(`${errors.title.message}`, {
-            id: "Title-Error",
-          })}
-      </div>
-      <div className="mb-4">
-        <label
-          className="block text-white text-sm font-bold mb-2"
-          htmlFor="body"
-        >
-          Body
-        </label>
-        <Textarea
-          className="block w-full rounded-md border-0 py-1.5 text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          rows={4}
-          {...register("body")}
-          name="body"
-          id="body"
-        />
-        {errors.body &&
-          toast.error(`${errors.body.message}`, {
-            id: "Body-Error",
-          })}
-      </div>
-      <div className="flex items-center justify-between">
-        <Button
-          usePendingStatus={true}
-          pendingContent="Creating..."
-          className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline"
-          type="submit"
-          label="Create"
-        />
-      </div>
-    </form>
+    <section className="flex mx-5 flex-col items-center justify-center">
+      <form
+        action={handleFormSubmit}
+        className="mb-4 rounded-3xl w-full max-w-60"
+      >
+        <div className="mb-4">
+          <label
+            className="block text-white text-sm font-bold mb-2"
+            htmlFor="title"
+          >
+            Title
+          </label>
+          <div>
+            <div className="relative mt-2 rounded-md shadow-sm">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
+                <ItalicIcon
+                  aria-hidden="true"
+                  className="h-5 w-5 text-gray-400"
+                />
+              </div>
+            </div>
+            <Input
+              className="block w-full rounded-md border-0 py-1.5 pl-10 text-white ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              type="text"
+              placeholder="Your title"
+              {...register("title")}
+              name="title"
+            />
+          </div>
+          {errors.title &&
+            toast.error(`${errors.title.message}`, {
+              id: "Title-Error",
+            })}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-white text-sm font-bold mb-2"
+            htmlFor="body"
+          >
+            Body
+          </label>
+          <Textarea
+            className="block w-full rounded-md border-0 py-1.5 px-1.5 text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            rows={4}
+            {...register("body")}
+            name="body"
+            id="body"
+          />
+          {errors.body &&
+            toast.error(`${errors.body.message}`, {
+              id: "Body-Error",
+            })}
+        </div>
+        <div className="flex items-center justify-between">
+          <Button
+            usePendingStatus={true}
+            pendingContent="Creating..."
+            className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline"
+            type="submit"
+            label="Create"
+          />
+        </div>
+      </form>
+    </section>
   );
 };
 
