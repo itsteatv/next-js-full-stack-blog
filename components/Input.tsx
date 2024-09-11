@@ -5,16 +5,15 @@ import { Input as MTInput } from "@material-tailwind/react";
 import { InputProps } from "@/lib/types";
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, type, className, variant, placeholder, ...rest }, ref) => {
+  ({ id, type, className = "", placeholder, ...props }, ref) => {
     return (
-      <MTInput
+      <input
         id={id}
         type={type}
         className={className}
-        variant={variant}
         placeholder={placeholder}
         ref={ref}
-        {...rest}
+        {...props}
       />
     );
   }
