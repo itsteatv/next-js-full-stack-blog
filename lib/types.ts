@@ -1,6 +1,3 @@
-import { color } from "@material-tailwind/react/types/components/alert";
-import { size } from "@material-tailwind/react/types/components/input";
-
 export interface BlogPost {
     userId?: number;
     id: string;
