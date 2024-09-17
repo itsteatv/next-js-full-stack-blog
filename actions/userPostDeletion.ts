@@ -4,7 +4,7 @@ import prisma from "@/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { revalidatePath } from "next/cache";
 
-export default async function userPostDeletion(postId: string) { // Ensure postId is a string
+export default async function userPostDeletion(postId: string) {
     const { isAuthenticated, getUser } = getKindeServerSession();
 
     if (!isAuthenticated) {
