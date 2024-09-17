@@ -5,6 +5,7 @@ import { createPostSchema } from "@/schemas/createPostSchema"
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { v4 as uuidv4 } from "uuid";
 
 export default async function createPost(formData: unknown) {
 
@@ -15,7 +16,30 @@ export default async function createPost(formData: unknown) {
     }
 
     const user = await getUser()
+    const userId = user?.id;
     const username = user?.username ?? "Unknown Author";
+
+    console.log(userId);
+
+    if (!userId) {
+        throw new Error("User ID is required to create a post.");
+    }
+
+    const existingUser = await prisma.user.findUnique({
+        where: { id: userId },
+    });
+
+    console.log(existingUser);
+
+    if (!existingUser) {
+        await prisma.user.create({
+            data: {
+                id: userId,
+                name: username,
+                email: user?.email ?? "unknown@example.com",
+            }
+        });
+    }
 
     const parsed = createPostSchema.safeParse(formData);
 
@@ -28,12 +52,17 @@ export default async function createPost(formData: unknown) {
     }
 
     try {
+        const postId = uuidv4();
+
         await prisma.post.create({
             data: {
-                ...parsed.data,
-                author: username
+                id: postId,
+                title: parsed.data.title,
+                body: parsed.data.body,
+                author: username,
+                userId: userId,
             }
-        })
+        });
     } catch (error) {
         console.error("Error creating post:", error);
         throw new Error("Failed to create the post");
