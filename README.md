@@ -67,8 +67,16 @@ Start the server
 
 ## Blog Features Checklist
 
-### Basic Features
+### Core Features
 
+- [x] Homepage
+  - [x] Blog post summaries or excerpts
+  - [x] Navigation menu
+- [ ] Post Details Page
+  - [x] Full blog post content
+  - [x] Author information
+  - [ ] Post date and time
+  - [ ] Tags or categories
 - [ ] Post Management
   - [ ] Create, edit, delete, and publish posts.
   - [ ] Draft and schedule posts.
@@ -89,8 +97,8 @@ Start the server
   - [ ] Search bar for finding posts.
   - [ ] Filters and sorting options (by date, popularity, etc.).
 - [ ] Content Display
-  - [ ] Responsive design for different devices.
-  - [ ] Featured images or media for posts.
+  - [x] Responsive design for different devices.
+  - [x] Featured images or media for posts.
   - [ ] Related posts or recommended reading.
   - [ ] Pagination or infinite scroll.
 - [ ] SEO Features
@@ -121,13 +129,15 @@ Start the server
   - [ ] Custom headers and footers.
   - [ ] Color schemes and fonts.
 - [ ] User Interaction
+
   - [ ] Contact forms and feedback mechanisms.
-  - [ ] Polls or surveys.
+  - [ ] Quizzes, interactive infographics, surveys or polls
   - [ ] Newsletter subscription.
+  - [ ] Users can bookmark or save posts for later reading
 - [ ] Security Features
   - [ ] SSL/TLS encryption.
   - [ ] Two-factor authentication.
-  - [ ] Regular backups.
+  - [ ] Backup blog content and settings.
   - [ ] User activity logs.
 - [ ] Performance Optimization
   - [ ] Caching mechanisms.
@@ -147,6 +157,22 @@ Start the server
   - [ ] Privacy policy and terms of service.
   - [ ] GDPR compliance features.
   - [ ] Cookie consent.
+  - [ ] Analytics and Reporting
+  - [ ] Track page views, post views, and user engagement
+
+## Admin Features
+
+- [ ] Dashboard
+  - [ ] Overview of post statistics, comments, and user activity
+- [ ] User Roles and Permissions
+  - [ ] Manage user roles and permissions
+- [ ] Content Moderation
+  - [ ] Review and manage content before publication
+- [ ] Customizable Themes
+  - [ ] Choose or customize blog themes and layouts
+- [ ] Advanced Comment Management
+  - [ ] Comment moderation queue
+  - [ ] Spam filtering
 
 ### Community Features
 
