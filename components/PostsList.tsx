@@ -11,6 +11,14 @@ const PostsList = async () => {
   } catch (error) {
     console.error(error);
   }
+  
+    if (posts.length === 0) {
+      return (
+        <div className="text-center font-bold text-white mt-16">
+          <p>No posts available.</p>
+        </div>
+      );
+    }
 
   return (
     <main className="grid gap-4 px-16 py-16 md:grid-cols-2 lg:grid-cols-3">
