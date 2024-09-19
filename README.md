@@ -65,6 +65,98 @@ Start the server
   npm run dev
 ```
 
+## Blog Features Checklist
+
+### Basic Features
+
+- [ ] Post Management
+  - [ ] Create, edit, delete, and publish posts.
+  - [ ] Draft and schedule posts.
+  - [ ] Categories and tags for organizing content.
+  - [ ] Post previews before publishing.
+- [ ] Comments
+  - [ ] Enable/disable comments on posts.
+  - [ ] Comment moderation (approve, reject, or delete comments).
+  - [ ] Nested comments or replies.
+  - [ ] User authentication for commenting.
+  - [ ] Spam filtering.
+- [ ] User Management
+  - [x] User registration and login.
+  - [ ] User roles (admin, editor, author, contributor, subscriber).
+  - [ ] User profiles and avatars.
+  - [x] User permissions and access control.
+- [ ] Search Functionality
+  - [ ] Search bar for finding posts.
+  - [ ] Filters and sorting options (by date, popularity, etc.).
+- [ ] Content Display
+  - [ ] Responsive design for different devices.
+  - [ ] Featured images or media for posts.
+  - [ ] Related posts or recommended reading.
+  - [ ] Pagination or infinite scroll.
+- [ ] SEO Features
+  - [ ] Meta titles and descriptions.
+  - [ ] SEO-friendly URLs.
+  - [ ] Schema markup for rich snippets.
+  - [ ] XML sitemap.
+
+### Advanced Features
+
+- [ ] Social Media Integration
+  - [ ] Social sharing buttons.
+  - [ ] Social media feeds or widgets.
+  - [ ] Auto-posting to social media platforms.
+- [ ] Monetization
+  - [ ] Ad placement and management.
+  - [ ] Affiliate links and product reviews.
+  - [ ] Subscription or membership models.
+  - [ ] E-commerce integration (for selling products or services).
+- [ ] Content Management
+  - [ ] Media library for managing images, videos, and files.
+  - [ ] Content import/export tools.
+  - [ ] WYSIWYG or markdown editor for content creation.
+  - [ ] Custom post types (e.g., events, reviews).
+- [ ] Customization and Branding
+  - [ ] Custom themes and templates.
+  - [ ] Widgets and sidebars.
+  - [ ] Custom headers and footers.
+  - [ ] Color schemes and fonts.
+- [ ] User Interaction
+  - [ ] Contact forms and feedback mechanisms.
+  - [ ] Polls or surveys.
+  - [ ] Newsletter subscription.
+- [ ] Security Features
+  - [ ] SSL/TLS encryption.
+  - [ ] Two-factor authentication.
+  - [ ] Regular backups.
+  - [ ] User activity logs.
+- [ ] Performance Optimization
+  - [ ] Caching mechanisms.
+  - [ ] Content Delivery Network (CDN) integration.
+  - [ ] Lazy loading for images and videos.
+- [ ] Accessibility Features
+  - [ ] Alt text for images.
+  - [ ] Keyboard navigation support.
+  - [ ] Screen reader compatibility.
+- [ ] Localization and Internationalization
+  - [ ] Multi-language support.
+  - [ ] Regional settings (date formats, currency).
+- [ ] Notifications
+  - [ ] Email notifications for new posts or comments.
+  - [ ] Push notifications for updates.
+- [ ] Legal and Compliance
+  - [ ] Privacy policy and terms of service.
+  - [ ] GDPR compliance features.
+  - [ ] Cookie consent.
+
+### Community Features
+
+- [ ] User-generated Content
+  - [ ] Guest posts.
+  - [ ] User profiles with bios and links.
+- [ ] Forums or Discussion Boards
+  - [ ] Threads and topics for community discussions.
+  - [ ] User reputation or ranking system.
+
 ## Screenshots
 
 `Home Page`
