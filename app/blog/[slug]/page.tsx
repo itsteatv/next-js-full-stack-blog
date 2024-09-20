@@ -2,6 +2,28 @@ import { fetchPosts } from "@/lib/api/fetchPosts";
 import { BlogPost } from "@/lib/types";
 import Image from "next/image";
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
+  const posts: BlogPost[] = await fetchPosts();
+
+  const post = posts.find((post) => post.id === params.slug);
+
+  if (!post) {
+    return {
+      title: "Post not found",
+      description: "The post you are looking for does not exist.",
+    };
+  }
+
+  return {
+    title: `${post.author}'s post - ${post.title}`,
+    description: post.body.slice(0, 150),
+  };
+};
+
 const SinglePost = async ({ params }: { params: { slug: string } }) => {
   const posts: BlogPost[] = await fetchPosts();
 
