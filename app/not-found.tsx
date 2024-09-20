@@ -16,10 +16,8 @@ const NotFound = () => {
         <Link href="/">
           <Button
             type="button"
-            content="Go Back Home"
+            label="Go Back Home"
             className="text-white border-white font-Archivo rounded-full  mt-6 font-extralight"
-            ripple={true}
-            variant="gradient"
           />
         </Link>
       </div>
