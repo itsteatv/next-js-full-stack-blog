@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/components/Navbar";
-import { Providers } from "@/providers/MaterialTailwindProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 
@@ -20,15 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-neutral-950">
-      <Providers>
-        <body className={inter.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <ThemeProvider>
           <NextTopLoader showSpinner={false} color="#fff" />
           <Toaster />
           <Navbar />
           {children}
-        </body>
-      </Providers>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

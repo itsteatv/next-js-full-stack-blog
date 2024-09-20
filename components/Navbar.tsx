@@ -9,7 +9,7 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/20/solid";
 
 import Link from "next/link";
@@ -23,6 +23,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import Image from "next/image";
 import Button from "./Button";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -168,23 +169,26 @@ export default function Navbar() {
                 </div>
               </>
             ) : (
-              <span className="isolate inline-flex rounded-md shadow-sm">
-                <LoginLink>
-                  <Button
-                    label="Login"
-                    className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
-                    type="button"
-                  />
-                </LoginLink>
+              <div className="flex items-center gap-4 flex-row-reverse">
+                <span className="isolate inline-flex rounded-md shadow-sm">
+                  <LoginLink>
+                    <Button
+                      label="Login"
+                      className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
+                      type="button"
+                    />
+                  </LoginLink>
 
-                <RegisterLink>
-                  <Button
-                    label="Register"
-                    className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
-                    type="button"
-                  />
-                </RegisterLink>
-              </span>
+                  <RegisterLink>
+                    <Button
+                      label="Register"
+                      className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
+                      type="button"
+                    />
+                  </RegisterLink>
+                </span>
+                <ThemeSwitcher />
+              </div>
             )}
           </div>
         </div>
