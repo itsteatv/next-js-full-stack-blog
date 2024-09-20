@@ -56,7 +56,7 @@ const CreatePostForm = () => {
       >
         <div className="mb-4">
           <label
-            className="block text-white text-sm font-bold mb-2"
+            className="block dark:text-white text-sm font-bold mb-2"
             htmlFor="title"
           >
             Title
@@ -71,7 +71,7 @@ const CreatePostForm = () => {
               </div>
             </div>
             <Input
-              className="block w-full rounded-md border-0 py-1.5 pl-10 text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
               type="text"
               placeholder="Your title"
               {...register("title")}
@@ -85,13 +85,13 @@ const CreatePostForm = () => {
         </div>
         <div className="mb-4">
           <label
-            className="block text-white text-sm font-bold mb-2"
+            className="block dark:text-white text-sm font-bold mb-2"
             htmlFor="body"
           >
             Body
           </label>
           <Textarea
-            className="block w-full rounded-md border-0 py-1.5 px-1.5 text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-1.5 px-1.5 dark:text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             rows={4}
             {...register("body")}
             name="body"
@@ -106,7 +106,7 @@ const CreatePostForm = () => {
           <Button
             usePendingStatus={true}
             pendingContent="Creating..."
-            className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline"
+            className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed dark:bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline dark:hover:bg-gray-300 hover:bg-gray-200 ring-1 ring-inset ring-gray-300"
             type="submit"
             label="Create"
           />

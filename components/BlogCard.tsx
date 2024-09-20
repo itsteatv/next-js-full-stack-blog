@@ -22,17 +22,13 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {
-  const { user, isAuthenticated, getPermission } =
-    useKindeBrowserClient();
+  const { user, isAuthenticated, getPermission } = useKindeBrowserClient();
 
   const isAuthor = isAuthenticated && user && user.id === post.userId;
 
   const adminDeletePermission = getPermission("admin::post::delete");
   const canAdminDelete =
     isAuthenticated && user && adminDeletePermission?.isGranted;
-
-  console.log(post);
-  console.log(canAdminDelete);
 
   const handleAdminDeletePost = async () => {
     if (confirm("Are you sure you want to delete your post?")) {
@@ -66,23 +62,19 @@ const BlogCard = ({ post }: BlogCardProps) => {
             src="https://placehold.co/600x320.svg?text=fallback"
             alt="fallback image"
             fill
-            onError={(event) => {
-              event.target.src =
-                "https://placehold.co/600x320.svg?text=fallback";
-            }}
           />
         </div>
       </CardHeader>
       <CardBody className="flex-grow overflow-hidden">
-        <Typography variant="h5" className="text-white font-Archivo">
+        <Typography variant="h5" className="dark:text-white font-Archivo">
           {post.author}
         </Typography>
-        <Typography variant="h5" className="text-white font-Archivo">
+        <Typography variant="h5" className="dark:text-white font-Archivo">
           {post.title}
         </Typography>
         <Typography
           variant="paragraph"
-          className="mt-3 font-light font-FiraSans text-white"
+          className="mt-3 font-light font-FiraSans dark:text-white"
         >
           {truncateText(post.body, 100)}
         </Typography>
@@ -92,7 +84,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           <Button
             label="Read More"
             type="button"
-            className="rounded-md bg-white/10 px-3.5 py-2.5 mt-6 text-sm font-semibold text-white"
+            className="rounded-md dark:bg-white/10 bg-gray-100 px-3.5 py-2.5 mt-6 text-sm font-semibold dark:text-white"
           />
         </Link>
         {!canAdminDelete && isAuthor && (

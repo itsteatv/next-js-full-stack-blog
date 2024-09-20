@@ -63,7 +63,7 @@ const ContactPostForm = () => {
           <div className="mb-4">
             <label
               htmlFor="name"
-              className="block text-sm font-medium leading-6 text-white"
+              className="block text-sm font-medium leading-6 dark:text-white"
             >
               Name
             </label>
@@ -77,7 +77,7 @@ const ContactPostForm = () => {
                 </div>
               </div>
               <Input
-                className="block w-full rounded-md border-0 py-1.5 pl-10 text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 type="text"
                 placeholder="Your name"
                 {...register("authorName")}
@@ -91,7 +91,7 @@ const ContactPostForm = () => {
           </div>
           <div className="mb-4">
             <label
-              className="block text-white text-sm font-bold mb-2"
+              className="block dark:text-white text-sm font-bold mb-2"
               htmlFor="email"
             >
               Email
@@ -106,7 +106,7 @@ const ContactPostForm = () => {
                 </div>
               </div>
               <Input
-                className="block w-full rounded-md border-0 py-1.5 pl-10 text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 type="email"
                 placeholder="Your email"
                 {...register("authorEmail")}
@@ -120,13 +120,13 @@ const ContactPostForm = () => {
           </div>
           <div className="mb-4">
             <label
-              className="block text-white text-sm font-bold mb-2"
+              className="block dark:text-white text-sm font-bold mb-2"
               htmlFor="message"
             >
               Message
             </label>
             <Textarea
-              className="block w-full rounded-md border-0 py-1.5 px-1.5 text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 px-1.5 dark:text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               rows={4}
               {...register("reviewText")}
               name="reviewText"
@@ -141,7 +141,7 @@ const ContactPostForm = () => {
             <Button
               usePendingStatus={true}
               pendingContent="Sending..."
-              className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline"
+              className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed dark:bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline dark:hover:bg-gray-300 hover:bg-gray-200 ring-1 ring-inset ring-gray-300"
               type="submit"
               label="Send"
             />

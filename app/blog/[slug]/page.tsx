@@ -30,7 +30,9 @@ const SinglePost = async ({ params }: { params: { slug: string } }) => {
   const post = posts.find((post) => post.id === params.slug);
 
   if (!post) {
-    return <p className="text-white text-center">Post not found</p>;
+    return (
+      <p className="dark:text-white text-center text-bold">Post not found</p>
+    );
   }
 
   return (
@@ -43,9 +45,9 @@ const SinglePost = async ({ params }: { params: { slug: string } }) => {
           height={480}
           className="mt-20 rounded-md"
         />
-        <h3 className="text-white mt-6 font-Archivo">{post.author}</h3>
-        <h1 className="text-white mt-6 font-Archivo">{post.title}</h1>
-        <div className="mt-6 text-white">
+        <h3 className="dark:text-white mt-6 font-Archivo">{post.author}</h3>
+        <h1 className="dark:text-white mt-6 font-Archivo">{post.title}</h1>
+        <div className="mt-6 dark:text-white">
           <p>{post.body}</p>
         </div>
         <div className="mt-6 text-white">

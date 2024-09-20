@@ -11,7 +11,7 @@ const Dashboard = async () => {
     redirect("/api/auth/login");
   }
   return (
-    <div className="text-white flex items-center flex-col mt-16">
+    <div className="dark:text-white flex items-center flex-col mt-16">
       <p>Given Name: {user?.given_name}</p>
       <p>Username: {user?.username}</p>
       <p>Email: {user?.email}</p>

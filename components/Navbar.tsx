@@ -91,8 +91,8 @@ export default function Navbar() {
                   aria-current={item.current ? "page" : undefined}
                   className={classNames(
                     item.current
-                      ? "font-extrabold text-white bg-gray-800 duration-300"
-                      : "text-gray-300 hover:bg-gray-800 hover:text-white duration-300",
+                      ? "font-extrabold dark:text-white dark:bg-gray-800 bg-gray-100 duration-300"
+                      : "dark:text-gray-300 hover:bg-gray-800 hover:text-white duration-300",
                     "rounded-md px-3 py-2 text-sm font-medium"
                   )}
                 >
@@ -119,11 +119,11 @@ export default function Navbar() {
                     />
                   </div>
                 </Link>
-                <div className="hidden  md:flex md:flex-shrink-0 md:items-center">
+                <div className="hidden md:flex md:flex-shrink-0 md:items-center">
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <MenuButton className="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
                         {userProfile.imageUrl ? (
@@ -149,21 +149,24 @@ export default function Navbar() {
                     </div>
                     <MenuItems
                       transition
-                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md dark:bg-dark py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                     >
                       {userNavigation.map((item) => (
                         <MenuItem key={item.name}>
                           <Link
                             href={item.href}
-                            className="block px-4 py-2 text-sm duration-300 text-gray-700 data-[focus]:bg-gray-100"
+                            className="block px-4 py-2 text-sm duration-300 dark:text-white text-black hover:text-white data-[focus]:bg-gray-700 rounded-md"
                           >
                             {item.name}
                           </Link>
                         </MenuItem>
                       ))}
-                      <LogoutLink className="block rounded-sm px-3 py-2 text-base font-medium duration-300 text-red-600 hover:bg-red-700 hover:text-white">
+                      <LogoutLink className="block rounded-md px-3 py-2 text-base font-medium duration-300 text-red-600 hover:bg-red-700 hover:text-white ">
                         Logout
                       </LogoutLink>
+                      <div className="px-3 py-2 ">
+                        <ThemeSwitcher />
+                      </div>
                     </MenuItems>
                   </Menu>
                 </div>
@@ -260,6 +263,7 @@ export default function Navbar() {
                 Logout
               </LogoutLink>
             </div>
+            <ThemeSwitcher />
           </div>
         )}
       </DisclosurePanel>
