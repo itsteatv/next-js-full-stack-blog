@@ -3,11 +3,19 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
 const CreatePost = async () => {
-  const { isAuthenticated } = getKindeServerSession();
+  const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
 
-  const isLoggedIn = await isAuthenticated();
+  try {
+    const isLoggedIn = await isAuthenticated();
+    const user = await getUser();
+    const createPostPermission = await getPermission("basic::permission");
+    const canCreatePost = isLoggedIn && user && createPostPermission?.isGranted;
 
-  if (!isLoggedIn) {
+    if (!canCreatePost) {
+      redirect("/api/auth/login");
+    }
+  } catch (error) {
+    console.error("Authentication check failed:", error);
     redirect("/api/auth/login");
   }
 
