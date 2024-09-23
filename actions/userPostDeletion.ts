@@ -5,13 +5,17 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export default async function userPostDeletion(postId: string) {
-    const { isAuthenticated, getUser } = getKindeServerSession();
+    const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
 
     if (!isAuthenticated) {
         throw new Error("Not authenticated.");
     }
 
     const user = await getUser();
+
+    if (!user) {
+        throw new Error("User not found.");
+    }
 
     const post = await prisma.post.findUnique({
         where: { id: postId },
@@ -21,7 +25,10 @@ export default async function userPostDeletion(postId: string) {
         throw new Error("Post not found.");
     }
 
-    if (post.userId !== user?.id) {
+    const isUserPostAuthor = post.userId === user?.id
+    const userDeletePermission = await getPermission("basic::permissions");
+
+    if (!isUserPostAuthor && !userDeletePermission?.isGranted) {
         throw new Error("You are not authorized to delete this post.");
     }
 
