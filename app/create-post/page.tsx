@@ -8,8 +8,12 @@ const CreatePost = async () => {
   try {
     const isLoggedIn = await isAuthenticated();
     const user = await getUser();
-    const createPostPermission = await getPermission("basic::permission");
-    const canCreatePost = isLoggedIn && user && createPostPermission?.isGranted;
+    const createPostPermission = await getPermission("basic::permissions");
+    const adminCreatePostPermission = await getPermission("all::permissions");
+    const canCreatePost =
+      isLoggedIn &&
+      user &&
+      (createPostPermission?.isGranted || adminCreatePostPermission?.isGranted);
 
     if (!canCreatePost) {
       redirect("/api/auth/login");
