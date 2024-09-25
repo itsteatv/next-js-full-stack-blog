@@ -14,7 +14,7 @@ export default async function adminPostDeletion(postId: string) {
         redirect("/api/auth/login?post_login_redirect_url=/dashboard");
     }
 
-    const adminDeletePermission = await getPermission("admin::post::delete");
+    const adminDeletePermission = await getPermission("all::permissions");
     const isAdminAuthorized = adminDeletePermission?.isGranted;
 
     if (!isAuthenticated || !isAdminAuthorized) {
