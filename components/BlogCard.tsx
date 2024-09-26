@@ -10,7 +10,8 @@ import toast from "react-hot-toast";
 import userPostDeletion from "@/actions/userPostDeletion";
 import adminPostDeletion from "@/actions/adminPostDeletion";
 import Dropdown from "./Dropdown";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -18,6 +19,7 @@ interface BlogCardProps {
 
 const BlogCard = ({ post }: BlogCardProps) => {
   const { user, isAuthenticated, getPermission } = useKindeBrowserClient();
+  const router = useRouter();
 
   const isAuthor = isAuthenticated && user && user.id === post.userId;
 
@@ -49,19 +51,37 @@ const BlogCard = ({ post }: BlogCardProps) => {
     }
   };
 
+  const handleEditPost = () => {
+    router.push(`/blog/${post.id}/edit`);
+  };
+
   const dropdownItems = [];
   if (canAdminDelete) {
-    dropdownItems.push({
-      label: "Admin Delete Post",
-      onClick: handleAdminDeletePost,
-      icon: TrashIcon,
-    });
+    dropdownItems.push(
+      {
+        label: "Admin Delete Post",
+        onClick: handleAdminDeletePost,
+        icon: TrashIcon,
+      },
+      {
+        label: "Edit Post",
+        onClick: handleEditPost,
+        icon: PencilIcon,
+      }
+    );
   } else if (isAuthor) {
-    dropdownItems.push({
-      label: "Delete Your Post",
-      onClick: handleUserDeletePost,
-      icon: TrashIcon,
-    });
+    dropdownItems.push(
+      {
+        label: "Delete Your Post",
+        onClick: handleUserDeletePost,
+        icon: TrashIcon,
+      },
+      {
+        label: "Edit Your Post",
+        onClick: handleEditPost,
+        icon: PencilIcon,
+      }
+    );
   }
 
   return (
