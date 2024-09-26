@@ -1,12 +1,5 @@
 "use client";
 
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-} from "@material-tailwind/react";
 import Image from "next/image";
 import Button from "./Button";
 import Link from "next/link";
@@ -16,6 +9,8 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import toast from "react-hot-toast";
 import userPostDeletion from "@/actions/userPostDeletion";
 import adminPostDeletion from "@/actions/adminPostDeletion";
+import Dropdown from "./Dropdown";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -26,7 +21,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
 
   const isAuthor = isAuthenticated && user && user.id === post.userId;
 
-  const adminDeletePermission = getPermission("admin::post::delete");
+  const adminDeletePermission = getPermission("all::permissions");
   const canAdminDelete =
     isAuthenticated && user && adminDeletePermission?.isGranted;
 
@@ -54,9 +49,24 @@ const BlogCard = ({ post }: BlogCardProps) => {
     }
   };
 
+  const dropdownItems = [];
+  if (canAdminDelete) {
+    dropdownItems.push({
+      label: "Admin Delete Post",
+      onClick: handleAdminDeletePost,
+      icon: TrashIcon,
+    });
+  } else if (isAuthor) {
+    dropdownItems.push({
+      label: "Delete Your Post",
+      onClick: handleUserDeletePost,
+      icon: TrashIcon,
+    });
+  }
+
   return (
-    <Card className="max-w-[24rem] overflow-hidden bg-transparent">
-      <CardHeader floated={false} shadow={false} color="transparent">
+    <div className="max-w-[24rem]  bg-transparent">
+      <div>
         <div className="relative w-full h-[250px] overflow-hidden">
           <Image
             src="https://placehold.co/600x320.svg?text=fallback"
@@ -64,22 +74,15 @@ const BlogCard = ({ post }: BlogCardProps) => {
             fill
           />
         </div>
-      </CardHeader>
-      <CardBody className="flex-grow overflow-hidden">
-        <Typography variant="h5" className="dark:text-white font-Archivo">
-          {post.author}
-        </Typography>
-        <Typography variant="h5" className="dark:text-white font-Archivo">
-          {post.title}
-        </Typography>
-        <Typography
-          variant="paragraph"
-          className="mt-3 font-light font-FiraSans dark:text-white"
-        >
+      </div>
+      <div className="flex-grow overflow-hidden">
+        <p className="dark:text-white font-Archivo">{post.author}</p>
+        <p className="dark:text-white font-Archivo">{post.title}</p>
+        <p className="mt-3 font-light font-FiraSans dark:text-white">
           {truncateText(post.body, 100)}
-        </Typography>
-      </CardBody>
-      <CardFooter className="flex items-center justify-between">
+        </p>
+      </div>
+      <div className="flex items-center justify-between">
         <Link href={`/blog/${post.id}`}>
           <Button
             label="Read More"
@@ -87,25 +90,13 @@ const BlogCard = ({ post }: BlogCardProps) => {
             className="rounded-md dark:bg-white/10 bg-gray-100 px-3.5 py-2.5 mt-6 text-sm font-semibold dark:text-white"
           />
         </Link>
-        {!canAdminDelete && isAuthor && (
-          <Button
-            label="Delete"
-            type="button"
-            className="rounded-md bg-red-500 px-3.5 py-2.5 mt-6 text-sm font-semibold text-white shadow-sm hover:bg-red-600"
-            onClick={handleUserDeletePost}
-          />
+        {(isAuthor || canAdminDelete) && (
+          <div className="flex items-center flex-col justify-center">
+            <Dropdown buttonLabel="Actions" items={dropdownItems} />
+          </div>
         )}
-
-        {canAdminDelete && (
-          <Button
-            label="Delete"
-            type="button"
-            className="rounded-md bg-red-500 px-3.5 py-2.5 mt-6 text-sm font-semibold text-white shadow-sm hover:bg-red-600"
-            onClick={handleAdminDeletePost}
-          />
-        )}
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 };
 
