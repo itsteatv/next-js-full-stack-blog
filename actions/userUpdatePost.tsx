@@ -2,8 +2,34 @@
 
 import prisma from "@/lib/db";
 import { updatePostSchema } from "@/schemas/updatePostSchema";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-export default async function userUpdatePost(formData: unknown, id: string) {
+export default async function userUpdatePost(
+  formData: unknown,
+  id: string,
+  postUserId: string
+) {
+  const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
+
+  if (!isAuthenticated) {
+    throw new Error("Not authenticated.");
+  }
+
+  const user = await getUser();
+
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
+  const isUserPostAuthor = postUserId === user?.id;
+  const userDeletePermission = await getPermission("basic::permissions");
+
+  console.log(isUserPostAuthor);
+
+  if (!isUserPostAuthor && !userDeletePermission?.isGranted) {
+    throw new Error("You are not authorized to update this post.");
+  }
+
   const parsed = updatePostSchema.safeParse(formData);
 
   if (!parsed.success) {

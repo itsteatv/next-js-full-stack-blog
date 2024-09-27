@@ -23,7 +23,6 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
   const {
     register,
     formState: { errors },
-    reset,
   } = useForm<TUpdatePostSchema>({ resolver: zodResolver(updatePostSchema) });
 
   const handleFormSubmit = async function (formData: FormData) {
@@ -33,7 +32,8 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
     };
 
     const parsed = updatePostSchema.safeParse(data);
-    const id = post.id;
+    const id = post?.id;
+    const postUserId = post?.userId;
 
     if (!parsed.success) {
       parsed.error.errors.forEach((error) => {
@@ -43,8 +43,12 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
     }
 
     try {
-      await userUpdatePost(parsed.data, id);
-      toast.success("Post created successfully");
+      if (postUserId && id) {
+        await userUpdatePost(parsed.data, id, postUserId);
+        toast.success("Post created successfully");
+      } else {
+        throw new Error("Post User Id is missing");
+      }
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
