@@ -78,7 +78,7 @@ Start the server
   - [ ] Post date and time
   - [ ] Tags or categories
 - [ ] Post Management
-  - [ ] Create, edit, delete, and publish posts.
+  - [x] Create, edit, delete, and publish posts.
   - [ ] Draft and schedule posts.
   - [ ] Categories and tags for organizing content.
   - [ ] Post previews before publishing.
@@ -134,6 +134,7 @@ Start the server
   - [ ] Quizzes, interactive infographics, surveys or polls
   - [ ] Newsletter subscription.
   - [ ] Users can bookmark or save posts for later reading
+
 - [ ] Security Features
   - [ ] SSL/TLS encryption.
   - [ ] Two-factor authentication.
