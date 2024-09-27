@@ -64,7 +64,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
         icon: TrashIcon,
       },
       {
-        label: "Edit Post",
+        label: "Admin Edit Post",
         onClick: handleEditPost,
         icon: PencilIcon,
       }
@@ -85,7 +85,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
   }
 
   return (
-    <div className="max-w-[24rem]  bg-transparent">
+    <div className="max-w-[24rem] bg-transparent">
       <div>
         <div className="relative w-full h-[250px] overflow-hidden">
           <Image
@@ -111,7 +111,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
           />
         </Link>
         {(isAuthor || canAdminDelete) && (
-          <div className="flex items-center flex-col justify-center">
+          <div className="flex items-center flex-col justify-center mb-16">
             <Dropdown buttonLabel="Actions" items={dropdownItems} />
           </div>
         )}
