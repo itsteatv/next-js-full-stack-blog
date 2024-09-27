@@ -1,12 +1,12 @@
-    export interface BlogPost {
-        userId?: string;
-        id: string;
-        title: string;
-        body: string;
-        author: string | null | undefined;
-        createdAt?: Date;
-        updatedAt?: Date;
-    }
+export interface BlogPost {
+    userId?: string;
+    id: string;
+    title: string;
+    body: string;
+    author: string | null | undefined;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
 
 export interface ButtonProps {
     label?: string;
@@ -25,6 +25,7 @@ export interface InputProps {
     placeholder: string;
     id: string;
     type: string;
+    defaultValue: string;
     [key: string]: any;
 }
 
