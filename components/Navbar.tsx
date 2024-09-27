@@ -91,8 +91,8 @@ export default function Navbar() {
                   aria-current={item.current ? "page" : undefined}
                   className={classNames(
                     item.current
-                      ? "font-extrabold dark:text-white dark:bg-gray-800 bg-gray-100 duration-300"
-                      : "dark:text-gray-300 hover:bg-gray-800 hover:text-white duration-300",
+                      ? "font-extrabold dark:text-white dark:bg-gray-800 bg-gray-900 text-white duration-300"
+                      : "dark:text-gray-300 hover:bg-gray-700 hover:text-white duration-300",
                     "rounded-md px-3 py-2 text-sm font-medium"
                   )}
                 >
@@ -135,7 +135,7 @@ export default function Navbar() {
                             height={32}
                           />
                         ) : (
-                          <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
+                          <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-700">
                             <svg
                               fill="currentColor"
                               viewBox="0 0 24 24"
@@ -177,7 +177,7 @@ export default function Navbar() {
                   <LoginLink>
                     <Button
                       label="Login"
-                      className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
+                      className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold dark:text-white hover:bg-white dark:hover:text-black focus:z-10"
                       type="button"
                     />
                   </LoginLink>
@@ -185,7 +185,7 @@ export default function Navbar() {
                   <RegisterLink>
                     <Button
                       label="Register"
-                      className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold text-white hover:bg-white hover:text-black focus:z-10"
+                      className="relative inline-flex items-center duration-300 rounded-l-md rounded-r-md px-3 py-2 text-sm font-semibold dark:text-white hover:bg-gray-100 dark:hover:text-black focus:z-10"
                       type="button"
                     />
                   </RegisterLink>
@@ -206,8 +206,8 @@ export default function Navbar() {
               aria-current={item.current ? "page" : undefined}
               className={classNames(
                 item.current
-                  ? "bg-gray-900 text-white duration-300"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                  ? "bg-gray-900 dark:text-white text-white duration-300"
+                  : "dark:text-white hover:bg-gray-700 hover:text-white",
                 "block rounded-md px-3 py-2 text-base font-medium duration-300"
               )}
             >
@@ -226,10 +226,9 @@ export default function Navbar() {
                     className="rounded-full"
                     width={32}
                     height={32}
-                    // style={{ width: "2rem", height: "2rem" }}
                   />
                 ) : (
-                  <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-100">
+                  <span className="inline-block h-8 w-8 overflow-hidden rounded-full bg-gray-700">
                     <svg
                       fill="currentColor"
                       viewBox="0 0 24 24"
@@ -241,10 +240,10 @@ export default function Navbar() {
                 )}
               </div>
               <div className="ml-3">
-                <div className="text-base font-medium text-white">
+                <div className="text-base font-medium dark:text-white">
                   {userProfile.name}
                 </div>
-                <div className="text-sm font-medium text-gray-400">
+                <div className="text-sm font-medium dark:text-gray-400">
                   {userProfile.email}
                 </div>
               </div>
@@ -254,7 +253,7 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block rounded-md duration-300 px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                  className="block rounded-md duration-300 px-3 py-2 text-base font-medium dark:text-gray-400 hover:bg-gray-700 hover:text-white"
                 >
                   {item.name}
                 </Link>
@@ -263,7 +262,9 @@ export default function Navbar() {
                 Logout
               </LogoutLink>
             </div>
-            <ThemeSwitcher />
+            <div className="px-4 py-2 mt-4">
+              <ThemeSwitcher />
+            </div>
           </div>
         )}
       </DisclosurePanel>
