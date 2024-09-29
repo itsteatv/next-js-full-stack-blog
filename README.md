@@ -81,7 +81,7 @@ Start the server
   - [x] Create, edit, delete, and publish posts.
   - [ ] Draft and schedule posts.
   - [ ] Categories and tags for organizing content.
-  - [ ] Post previews before publishing.
+  - [x] Post previews before publishing.
 - [ ] Comments
   - [ ] Enable/disable comments on posts.
   - [ ] Comment moderation (approve, reject, or delete comments).
