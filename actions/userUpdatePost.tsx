@@ -3,6 +3,7 @@
 import prisma from "@/lib/db";
 import { updatePostSchema } from "@/schemas/updatePostSchema";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { revalidatePath } from "next/cache";
 
 export default async function userUpdatePost(
   formData: unknown,
@@ -49,6 +50,7 @@ export default async function userUpdatePost(
         updatedAt: new Date(),
       },
     });
+    revalidatePath("/blog");
     return updatedPost;
   } catch (error) {
     console.error("Error updating post:", error);
