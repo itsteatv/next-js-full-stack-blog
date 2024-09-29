@@ -1,4 +1,5 @@
 import { fetchPosts } from "@/lib/api/fetchPosts";
+import { formatDate } from "@/lib/formatDate";
 import { BlogPost } from "@/lib/types";
 import Image from "next/image";
 
@@ -45,13 +46,13 @@ const SinglePost = async ({ params }: { params: { slug: string } }) => {
           height={480}
           className="mt-20 rounded-md"
         />
-        <h3 className="dark:text-white mt-6 font-Archivo">{post.author}</h3>
+        <div className="flex flex-row items-center mt-7 mb-7 gap-x-10">
+          <p>{formatDate(post.createdAt)}</p>
+          <h3 className="dark:text-white font-Archivo">{post.author}</h3>
+        </div>
         <h1 className="dark:text-white mt-6 font-Archivo">{post.title}</h1>
         <div className="mt-6 dark:text-white">
           <p>{post.body}</p>
-        </div>
-        <div className="mt-6 text-white">
-          {/* <p>{formateDate(posts.publishedAt)}</p> */}
         </div>
       </div>
     </section>
