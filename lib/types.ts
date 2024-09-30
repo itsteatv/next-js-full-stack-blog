@@ -34,6 +34,7 @@ export interface TextareaProps {
     id: string;
     rows: number;
     name: string;
-    defaultValue?: string;
-    [key: string]: any;
+    value?: string; // Include value prop
+    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void; // Include onChange prop
+    [key: string]: any; // Keep any other additional props
 }
