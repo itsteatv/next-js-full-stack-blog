@@ -12,13 +12,34 @@ import {
   TCreatePostSchema,
 } from "@/schemas/createPostSchema";
 import { ItalicIcon } from "@heroicons/react/24/outline";
+import Modal from "./Modal";
+import { useState } from "react";
 
 const CreatePostForm = () => {
   const {
     register,
     formState: { errors },
     reset,
+    getValues,
   } = useForm<TCreatePostSchema>({ resolver: zodResolver(createPostSchema) });
+
+  const [previewMode, setPreviewMode] = useState(false);
+  const [previewData, setPreviewData] = useState<{
+    title: string;
+    body: string;
+  }>({
+    title: "",
+    body: "",
+  });
+
+  const handlePreview = () => {
+    const values = getValues();
+    setPreviewData({
+      title: values.title || "",
+      body: values.body || "",
+    });
+    setPreviewMode(true);
+  };
 
   const handleFormSubmit = async function (formData: FormData) {
     const data = {
@@ -102,7 +123,7 @@ const CreatePostForm = () => {
               id: "Body-Error",
             })}
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center flex-col justify-between">
           <Button
             usePendingStatus={true}
             pendingContent="Creating..."
@@ -110,8 +131,24 @@ const CreatePostForm = () => {
             type="submit"
             label="Create"
           />
+          <Button
+            className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed dark:bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline dark:hover:bg-gray-300 hover:bg-gray-200 ring-1 ring-inset ring-gray-300"
+            type="button"
+            label="Preview"
+            onClick={handlePreview}
+          />
         </div>
       </form>
+      <Modal isOpen={previewMode} onClose={() => setPreviewMode(false)}>
+        <div className="flex items-center justify-center flex-col">
+          <h1 className="text-xl font-bold dark:text-black text-white">
+            Post Body: {previewData.title}
+          </h1>{" "}
+          <p className="text-xl font-bold dark:text-black text-white">
+            Post Body: {previewData.body}
+          </p>
+        </div>
+      </Modal>
     </section>
   );
 };

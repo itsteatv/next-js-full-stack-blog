@@ -24,7 +24,7 @@ const CreatePost = async () => {
   }
 
   return (
-    <section className="mt-20">
+    <section className="mt-9">
       <div className="flex flex-col items-center justify-center">
         <CreatePostForm />
       </div>
