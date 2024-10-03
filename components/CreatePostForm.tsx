@@ -37,9 +37,14 @@ const CreatePostForm = () => {
   const handlePreview = () => {
     const values = getValues();
 
+    if (!values.title || !values.body) {
+      toast.error("Title and Body must be filled to preview the post");
+      return;
+    }
+
     setPreviewData({
-      title: values.title || "",
-      body: values.body || "",
+      title: values.title,
+      body: values.body,
     });
     setPreviewMode(true);
   };
@@ -153,10 +158,10 @@ const CreatePostForm = () => {
           }`}
         >
           <h1 className="text-xl font-bold dark:text-black text-white">
-            Post Body: {previewData.title}
-          </h1>{" "}
+            Post Title: {previewData.title || "Untitled Post"}{" "}
+          </h1>
           <p className="text-xl font-bold dark:text-black text-white">
-            Post Body: {previewData.body}
+            Post Body: {previewData.body || "No content available."}{" "}
           </p>
         </div>
       </Modal>
