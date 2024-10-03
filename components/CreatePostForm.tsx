@@ -14,6 +14,7 @@ import {
 import { ItalicIcon } from "@heroicons/react/24/outline";
 import Modal from "./Modal";
 import { useState } from "react";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 const CreatePostForm = () => {
   const {
@@ -24,6 +25,7 @@ const CreatePostForm = () => {
   } = useForm<TCreatePostSchema>({ resolver: zodResolver(createPostSchema) });
 
   const [previewMode, setPreviewMode] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [previewData, setPreviewData] = useState<{
     title: string;
     body: string;
@@ -34,6 +36,7 @@ const CreatePostForm = () => {
 
   const handlePreview = () => {
     const values = getValues();
+
     setPreviewData({
       title: values.title || "",
       body: values.body || "",
@@ -76,12 +79,22 @@ const CreatePostForm = () => {
         className="mb-4 rounded-3xl w-full max-w-60"
       >
         <div className="mb-4">
-          <label
-            className="block dark:text-white text-sm font-bold mb-2"
-            htmlFor="title"
-          >
-            Title
-          </label>
+          <div className="flex items-center justify-between">
+            <label
+              className="block dark:text-white text-sm font-bold mb-2"
+              htmlFor="title"
+            >
+              Title
+            </label>
+            <InformationCircleIcon
+              onClick={handlePreview}
+              className={`mb-2 h-5 w-5 cursor-pointer text-white duration-300 ${
+                isHovered ? "text-blue-500 duration-300" : ""
+              }`}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            />
+          </div>
           <div>
             <div className="relative mt-2 rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
@@ -131,16 +144,14 @@ const CreatePostForm = () => {
             type="submit"
             label="Create"
           />
-          <Button
-            className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed dark:bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline dark:hover:bg-gray-300 hover:bg-gray-200 ring-1 ring-inset ring-gray-300"
-            type="button"
-            label="Preview"
-            onClick={handlePreview}
-          />
         </div>
       </form>
       <Modal isOpen={previewMode} onClose={() => setPreviewMode(false)}>
-        <div className="flex items-center justify-center flex-col">
+        <div
+          className={`flex items-center justify-center flex-col transition-opacity duration-300 ease-out ${
+            previewMode ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        >
           <h1 className="text-xl font-bold dark:text-black text-white">
             Post Body: {previewData.title}
           </h1>{" "}
