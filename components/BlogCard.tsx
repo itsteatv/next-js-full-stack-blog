@@ -18,6 +18,7 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {
+
   const { user, isAuthenticated, getPermission } = useKindeBrowserClient();
   const router = useRouter();
 
@@ -98,6 +99,10 @@ const BlogCard = ({ post }: BlogCardProps) => {
       <div className="flex-grow overflow-hidden">
         <p className="dark:text-white font-Archivo">{post.author}</p>
         <p className="dark:text-white font-Archivo">{post.title}</p>
+        <p className="dark:text-gray-400 font-Archivo">
+          Category:{" "}
+          {post.categories?.length ? post.categories[0].name : "Uncategorized"}
+        </p>
         <p className="mt-3 font-light font-FiraSans dark:text-white">
           {truncateText(post.body, 100)}
         </p>

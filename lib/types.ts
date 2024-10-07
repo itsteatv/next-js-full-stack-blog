@@ -6,6 +6,12 @@ export interface BlogPost {
     author: string | null | undefined;
     createdAt?: Date;
     updatedAt?: Date;
+    categories?: Category[];
+}
+
+export interface Category {
+    id: string;
+    name: string;
 }
 
 export interface ButtonProps {
@@ -34,7 +40,7 @@ export interface TextareaProps {
     id: string;
     rows: number;
     name: string;
-    value?: string; // Include value prop
+    value?: string;
     onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void; // Include onChange prop
-    [key: string]: any; // Keep any other additional props
+    [key: string]: any;
 }

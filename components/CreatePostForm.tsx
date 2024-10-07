@@ -13,8 +13,10 @@ import {
 } from "@/schemas/createPostSchema";
 import { ItalicIcon } from "@heroicons/react/24/outline";
 import Modal from "./Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
+import { Category } from "@/lib/types";
+import { getCategories } from "@/actions/categories";
 
 const CreatePostForm = () => {
   const {
@@ -33,6 +35,16 @@ const CreatePostForm = () => {
     title: "",
     body: "",
   });
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const data = await getCategories();
+      setCategories(data);
+    }
+    fetchCategories();
+  }, []);
 
   const handlePreview = () => {
     const values = getValues();
@@ -53,6 +65,7 @@ const CreatePostForm = () => {
     const data = {
       title: formData.get("title"),
       body: formData.get("body"),
+      categoryId: formData.get("categoryId"),
     };
 
     const parsed = createPostSchema.safeParse(data);
@@ -141,6 +154,30 @@ const CreatePostForm = () => {
               id: "Body-Error",
             })}
         </div>
+        <div className="mb-4">
+          <label
+            className="block dark:text-white text-sm font-bold mb-2"
+            htmlFor="category"
+          >
+            Category
+          </label>
+          <select
+            className="block w-full rounded-md border-0 py-1.5 dark:text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            {...register("categoryId")}
+            name="categoryId"
+            defaultValue=""
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className="flex items-center flex-col justify-between">
           <Button
             usePendingStatus={true}
@@ -163,6 +200,11 @@ const CreatePostForm = () => {
           <p className="text-xl font-bold dark:text-black text-white">
             Post Body: {previewData.body || "No content available."}{" "}
           </p>
+          <h3 className="text-xl font-bold dark:text-black text-white">
+            Category:{" "}
+            {categories.find((cat) => cat.id === getValues().categoryId)
+              ?.name || "Uncategorized"}
+          </h3>
         </div>
       </Modal>
     </section>

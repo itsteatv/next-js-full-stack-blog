@@ -3,10 +3,12 @@ import { BlogPost } from "../types";
 
 export const fetchPosts = async function (): Promise<BlogPost[]> {
     try {
-        // Fetch only the Prisma posts
-        const prismaPosts = await prisma.post.findMany();
+        const prismaPosts = await prisma.post.findMany({
+            include: {
+                category: true,
+            },
+        });
 
-        // Map the Prisma posts to match the BlogPost type
         const prismaPostsWithUniqueIds = prismaPosts.map(post => ({
             id: post.id,
             title: post.title,
@@ -15,6 +17,7 @@ export const fetchPosts = async function (): Promise<BlogPost[]> {
             createdAt: post.createdAt,
             updatedAt: post.updatedAt,
             userId: post.userId,
+            categories: post.category ? [{ id: post.category.id, name: post.category.name }] : [], // Include the category if it exists
         }));
 
         console.log(prismaPostsWithUniqueIds);

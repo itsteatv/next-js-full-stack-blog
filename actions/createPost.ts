@@ -61,6 +61,7 @@ export default async function createPost(formData: unknown) {
                 body: parsed.data.body,
                 author: username,
                 userId: userId,
+                categoryId: parsed.data.categoryId || null,
             }
         });
     } catch (error) {
