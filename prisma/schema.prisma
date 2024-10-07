@@ -17,12 +17,8 @@ model Post {
   updatedAt DateTime @updatedAt
 
   user       User      @relation(fields: [userId], references: [id])
-  tags       Tag[]     @relation("PostTags")
-  category   Category? @relation(fields: [categoryId], references: [id])
   categoryId String?
-
-  Tag   Tag?    @relation(fields: [tagId], references: [id])
-  tagId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
 }
 
 model User {
@@ -30,13 +26,6 @@ model User {
   name  String
   email String @unique
   posts Post[]
-}
-
-model Tag {
-  id    String @id
-  name  String @unique
-  posts Post[] @relation("PostTags")
-  Post  Post[]
 }
 
 model Category {
