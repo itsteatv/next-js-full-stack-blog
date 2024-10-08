@@ -96,6 +96,7 @@ const CreatePostForm = () => {
     try {
       await createPost(parsed.data);
       reset();
+      setSelectedCategories([]);
       toast.success("Post created successfully");
     } catch (error) {
       if (error instanceof Error) {
@@ -223,8 +224,15 @@ const CreatePostForm = () => {
           </p>
           <h3 className="text-xl font-bold dark:text-black text-white">
             Category:{" "}
-            {categories.find((cat) => cat.id === getValues().categoryId)
-              ?.name || "Uncategorized"}
+            {selectedCategories.length > 0
+              ? selectedCategories
+                  .map(
+                    (categoryId) =>
+                      categories.find((cat) => cat.id === categoryId)?.name
+                  )
+                  .filter(Boolean)
+                  .join(", ")
+              : "Uncategorized"}
           </h3>
         </div>
       </Modal>
