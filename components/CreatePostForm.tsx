@@ -37,6 +37,10 @@ const CreatePostForm = () => {
   });
 
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+  console.log(selectedCategories);
+  console.log(categories);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -61,12 +65,24 @@ const CreatePostForm = () => {
     setPreviewMode(true);
   };
 
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategories((prev) => {
+      if (prev.includes(categoryId)) {
+        return prev.filter((id) => id !== categoryId);
+      } else {
+        return [...prev, categoryId];
+      }
+    });
+  };
+
   const handleFormSubmit = async function (formData: FormData) {
     const data = {
       title: formData.get("title"),
       body: formData.get("body"),
-      categoryId: formData.get("categoryId"),
+      categoryId: selectedCategories,
     };
+
+    console.log(data);
 
     const parsed = createPostSchema.safeParse(data);
 
@@ -161,21 +177,26 @@ const CreatePostForm = () => {
           >
             Category
           </label>
-          <select
-            className="block w-full rounded-md border-0 py-1.5 dark:text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            {...register("categoryId")}
-            name="categoryId"
-            defaultValue=""
-          >
-            <option value="" disabled>
-              Select a category
-            </option>
+          <div>
             {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
+              <div key={category.id} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  id={category.id}
+                  value={category.id}
+                  checked={selectedCategories.includes(category.id)}
+                  onChange={() => handleCategoryChange(category.id)}
+                  className="mr-2"
+                />
+                <label
+                  htmlFor={`category-${category.id}`}
+                  className="dark:text-white"
+                >
+                  {category.name}
+                </label>
+              </div>
             ))}
-          </select>
+          </div>
         </div>
 
         <div className="flex items-center flex-col justify-between">

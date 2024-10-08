@@ -18,6 +18,7 @@ interface BlogCardProps {
 }
 
 const BlogCard = ({ post }: BlogCardProps) => {
+  console.log(post);
 
   const { user, isAuthenticated, getPermission } = useKindeBrowserClient();
   const router = useRouter();
@@ -100,8 +101,10 @@ const BlogCard = ({ post }: BlogCardProps) => {
         <p className="dark:text-white font-Archivo">{post.author}</p>
         <p className="dark:text-white font-Archivo">{post.title}</p>
         <p className="dark:text-gray-400 font-Archivo">
-          Category:{" "}
-          {post.categories?.length ? post.categories[0].name : "Uncategorized"}
+          Categories:{" "}
+          {post.categories?.length
+            ? post.categories.map((category) => category.name).join(", ")
+            : "Uncategorized"}
         </p>
         <p className="mt-3 font-light font-FiraSans dark:text-white">
           {truncateText(post.body, 100)}

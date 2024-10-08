@@ -5,7 +5,7 @@ export const fetchPosts = async function (): Promise<BlogPost[]> {
     try {
         const prismaPosts = await prisma.post.findMany({
             include: {
-                category: true,
+                categories: true,
             },
         });
 
@@ -17,7 +17,10 @@ export const fetchPosts = async function (): Promise<BlogPost[]> {
             createdAt: post.createdAt,
             updatedAt: post.updatedAt,
             userId: post.userId,
-            categories: post.category ? [{ id: post.category.id, name: post.category.name }] : [], // Include the category if it exists
+            categories: post.categories.map(category => ({
+                id: category.id,
+                name: category.name,
+            })),
         }));
 
         console.log(prismaPostsWithUniqueIds);

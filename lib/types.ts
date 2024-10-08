@@ -6,7 +6,7 @@ export interface BlogPost {
     author: string | null | undefined;
     createdAt?: Date;
     updatedAt?: Date;
-    categories?: Category[];
+    categories: { id: string; name: string }[];
 }
 
 export interface Category {

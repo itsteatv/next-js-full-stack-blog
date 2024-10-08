@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from "uuid";
 
 export default async function createPost(formData: unknown) {
 
+    console.log(formData);
+
     const { isAuthenticated, getUser } = getKindeServerSession()
 
     if (!(await isAuthenticated())) {
@@ -61,7 +63,9 @@ export default async function createPost(formData: unknown) {
                 body: parsed.data.body,
                 author: username,
                 userId: userId,
-                categoryId: parsed.data.categoryId || null,
+                categories: {
+                    connect: parsed.data.categoryId?.map(id => ({ id })),
+                },
             }
         });
     } catch (error) {
