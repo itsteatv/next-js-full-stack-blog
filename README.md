@@ -76,11 +76,13 @@ Start the server
   - [x] Full blog post content
   - [x] Author information
   - [x] Post date and time
-  - [ ] Tags or categories
+  - [ ] Categories
+  - [ ] Tags
 - [ ] Post Management
   - [x] Create, edit, delete, and publish posts.
   - [ ] Draft and schedule posts.
-  - [ ] Categories and tags for organizing content.
+  - [x] Categories for organizing content.
+  - [ ] Tags for organizing content.
   - [x] Post previews before publishing.
 - [ ] Comments
   - [ ] Enable/disable comments on posts.
