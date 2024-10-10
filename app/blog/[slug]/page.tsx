@@ -51,6 +51,21 @@ const SinglePost = async ({ params }: { params: { slug: string } }) => {
           <h3 className="dark:text-white font-Archivo">{post.author}</h3>
         </div>
         <h1 className="dark:text-white mt-6 font-Archivo">{post.title}</h1>
+        <div className="mt-4">
+          <p className="dark:text-white text-lg font-bold">Categories:</p>
+          {post.categories.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-4">
+              {post.categories.map((category) => (
+                <span
+                  key={category.id}
+                  className="inline-flex items-center rounded-md bg-purple-400/10 px-2 py-1 text-xs font-medium text-purple-400 ring-1 ring-inset ring-purple-400/30"
+                >
+                  {category.name}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
         <div className="mt-6 dark:text-white">
           <p>{post.body}</p>
         </div>
