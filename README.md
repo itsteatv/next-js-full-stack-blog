@@ -76,7 +76,7 @@ Start the server
   - [x] Full blog post content
   - [x] Author information
   - [x] Post date and time
-  - [ ] Categories
+  - [x] Categories
   - [ ] Tags
 - [ ] Post Management
   - [x] Create, edit, delete, and publish posts.
