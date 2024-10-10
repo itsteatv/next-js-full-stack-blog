@@ -58,6 +58,11 @@ const CreatePostForm = () => {
       return;
     }
 
+    if (selectedCategories.length === 0) {
+      toast.error("At least one category must be selected to preview the post");
+      return;
+    }
+
     setPreviewData({
       title: values.title,
       body: values.body,
@@ -123,7 +128,7 @@ const CreatePostForm = () => {
             </label>
             <InformationCircleIcon
               onClick={handlePreview}
-              className={`mb-2 h-5 w-5 cursor-pointer text-white duration-300 ${
+              className={`mb-2 h-5 w-5 cursor-pointer dark:text-white duration-300 ${
                 isHovered ? "text-blue-500 duration-300" : ""
               }`}
               onMouseEnter={() => setIsHovered(true)}
