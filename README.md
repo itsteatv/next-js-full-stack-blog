@@ -96,7 +96,7 @@ Start the server
   - [ ] User profiles and avatars.
   - [x] User permissions and access control.
 - [ ] Search Functionality
-  - [ ] Search bar for finding posts.
+  - [x] Search bar for finding posts.
   - [ ] Filters and sorting options (by date, popularity, etc.).
 - [ ] Content Display
   - [x] Responsive design for different devices.
