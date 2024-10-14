@@ -24,8 +24,8 @@ const PostsList = () => {
   }, [searchQuery]);
 
   return (
-    <div>
-      <div className="mb-6">
+    <div className="max-w-6xl mx-auto">
+      <div className="mt-24 max-w-2xl mx-auto">
         <Input
           type="text"
           placeholder="Search posts..."
@@ -33,7 +33,7 @@ const PostsList = () => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setSearchQuery(e.target.value)
           }
-          className="w-full px-4 py-2 border rounded-md"
+          className="w-full px-5 py-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
       </div>
 
