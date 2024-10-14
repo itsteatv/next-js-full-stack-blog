@@ -26,13 +26,14 @@ export interface ButtonProps {
 }
 
 export interface InputProps {
-    className: string;
+    className?: string;
     variant?: "standard" | "outlined" | "static";
-    placeholder: string;
-    id: string;
+    placeholder?: string;
+    id?: string;
     type: string;
     value?: string;
-    defaultValue: string;
+    defaultValue?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     [key: string]: any;
 }
 

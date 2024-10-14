@@ -5,7 +5,16 @@ import { InputProps } from "@/lib/types";
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { id, type, className = "", placeholder, value, defaultValue, ...props },
+    {
+      id,
+      type,
+      className = "",
+      placeholder,
+      value,
+      defaultValue,
+      onChange,
+      ...props
+    },
     ref
   ) => {
     return (
@@ -15,7 +24,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         className={className}
         placeholder={placeholder}
         ref={ref}
+        value={value}
         defaultValue={defaultValue}
+        onChange={onChange}
         {...props}
       />
     );
