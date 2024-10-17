@@ -1,5 +1,5 @@
 import UpdatePostForm from "@/components/UpdatePostForm";
-import { fetchPosts } from "@/lib/api/fetchPosts";
+import { fetchPosts } from "@/actions/fetchPosts";
 import { BlogPost } from "@/lib/types";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";

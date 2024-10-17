@@ -12,12 +12,13 @@ import adminPostDeletion from "@/actions/adminPostDeletion";
 import Dropdown from "./Dropdown";
 import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import { forwardRef } from "react";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
-const BlogCard = ({ post }: BlogCardProps) => {
+const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(({ post }, ref) => {
   console.log(post);
 
   const { user, isAuthenticated, getPermission } = useKindeBrowserClient();
@@ -87,7 +88,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
   }
 
   return (
-    <div className="max-w-[24rem] bg-transparent">
+    <div ref={ref} className="max-w-[24rem] bg-transparent">
       <div>
         <div className="relative w-full h-[250px] overflow-hidden">
           <Image
@@ -98,7 +99,9 @@ const BlogCard = ({ post }: BlogCardProps) => {
         </div>
       </div>
       <div className="flex-grow overflow-hidden">
-        <p className="dark:text-white font-Archivo">{post.author}</p>
+        <p className="dark:text-white font-Archivo">
+          {post.author ? post.author : "Unknown Author"}
+        </p>
         <p className="dark:text-white font-Archivo">{post.title}</p>
         <p className="dark:text-gray-400 font-Archivo">
           Categories:{" "}
@@ -126,6 +129,8 @@ const BlogCard = ({ post }: BlogCardProps) => {
       </div>
     </div>
   );
-};
+});
+
+BlogCard.displayName = "BlogCard";
 
 export default BlogCard;

@@ -3,7 +3,7 @@
 import prisma from "@/lib/db";
 import { BlogPost } from "@/lib/types";
 
-export const searchPosts = async (searchQuery: string = ''): Promise<BlogPost[]> => {
+export const searchPosts = async (searchQuery: string = '', skip: number = 0, take: number = 0): Promise<BlogPost[]> => {
     try {
         const where = searchQuery
             ? {
@@ -18,6 +18,8 @@ export const searchPosts = async (searchQuery: string = ''): Promise<BlogPost[]>
 
         const posts = await prisma.post.findMany({
             where,
+            skip,
+            take,
             include: {
                 categories: true,
                 user: true,

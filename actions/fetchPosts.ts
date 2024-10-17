@@ -1,9 +1,13 @@
-import prisma from "../db";
-import { BlogPost } from "../types";
+"use server"
 
-export const fetchPosts = async function (): Promise<BlogPost[]> {
+import prisma from "../lib/db";
+import { BlogPost } from "../lib/types";
+
+export const fetchPosts = async function (skip: number = 0, take: number = 0): Promise<BlogPost[]> {
     try {
         const prismaPosts = await prisma.post.findMany({
+            skip,
+            take,
             include: {
                 categories: true,
             },

@@ -1,4 +1,4 @@
-import { fetchPosts } from "@/lib/api/fetchPosts";
+import { fetchPosts } from "@/actions/fetchPosts";
 import { formatDate } from "@/lib/formatDate";
 import { BlogPost } from "@/lib/types";
 import Image from "next/image";
