@@ -102,7 +102,7 @@ Start the server
   - [x] Responsive design for different devices.
   - [x] Featured images or media for posts.
   - [ ] Related posts or recommended reading.
-  - [ ] Pagination or infinite scroll.
+  - [x] Pagination or infinite scroll.
 - [ ] SEO Features
   - [ ] Meta titles and descriptions.
   - [ ] SEO-friendly URLs.
