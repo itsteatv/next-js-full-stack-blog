@@ -46,3 +46,12 @@ export interface TextareaProps {
     onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void; // Include onChange prop
     [key: string]: any;
 }
+
+export interface SiteConfigProps {
+    name: string;
+    description: string;
+    url: string;
+    links: {
+        github: string;
+    }
+}
