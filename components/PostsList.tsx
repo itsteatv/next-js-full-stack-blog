@@ -7,6 +7,7 @@ import Input from "./Input";
 import { fetchPosts } from "@/actions/fetchPosts";
 import Loading from "@/app/blog/loading";
 import Button from "./Button";
+import { searchPosts } from "@/actions/searchPosts";
 
 const PostsList = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -21,12 +22,19 @@ const PostsList = () => {
   const loadPosts = async () => {
     setLoading(true);
     try {
-      const newPosts = await fetchPosts(skip, take);
+      let newPosts: BlogPost[];
+
+      if (searchQuery) {
+        newPosts = await searchPosts(searchQuery, skip, take);
+      } else {
+        newPosts = await fetchPosts(skip, take);
+      }
 
       setPosts((prevPosts) => {
         const allPosts = [...prevPosts, ...newPosts];
-        const uniquePosts = Array.from(new Set(allPosts.map((post) => post.id)))
-          .map((id) => allPosts.find((post) => post.id === id));
+        const uniquePosts = Array.from(
+          new Set(allPosts.map((post) => post.id))
+        ).map((id) => allPosts.find((post) => post.id === id));
         return uniquePosts as BlogPost[];
       });
 
@@ -41,7 +49,7 @@ const PostsList = () => {
 
   useEffect(() => {
     loadPosts();
-  }, [skip]);
+  }, [skip, searchQuery]);
 
   const handleLoadMore = () => {
     setSkip((prevSkip) => prevSkip + take);
