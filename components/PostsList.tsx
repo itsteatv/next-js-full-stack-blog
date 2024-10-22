@@ -8,6 +8,7 @@ import { fetchPosts } from "@/actions/fetchPosts";
 import Loading from "@/app/blog/loading";
 import Button from "./Button";
 import { searchPosts } from "@/actions/searchPosts";
+import { debounce } from "@/lib/debounce";
 
 const PostsList = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -47,6 +48,13 @@ const PostsList = () => {
     setLoading(false);
   };
 
+  const debouncedSearch = debounce((value: string) => {
+    setPosts([]);
+    setSkip(0);
+    setSearchQuery(value);
+    setHasMore(true);
+  }, 500);
+
   useEffect(() => {
     loadPosts();
   }, [skip, searchQuery]);
@@ -62,12 +70,9 @@ const PostsList = () => {
           type="text"
           placeholder="Search posts..."
           value={searchQuery}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPosts([]);
-            setSkip(0);
-            setSearchQuery(e.target.value);
-            setHasMore(true);
-          }}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            debouncedSearch(e.target.value)
+          }
           className="w-full px-5 py-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
       </div>
