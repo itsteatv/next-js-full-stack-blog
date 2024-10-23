@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import BlogCard from "@/components/BlogCard";
 import { BlogPost } from "@/lib/types";
 import Input from "./Input";
@@ -8,7 +8,7 @@ import { fetchPosts } from "@/actions/fetchPosts";
 import Loading from "@/app/blog/loading";
 import Button from "./Button";
 import { searchPosts } from "@/actions/searchPosts";
-import { debounce } from "@/lib/debounce";
+import debounce from "lodash/debounce";
 
 const PostsList = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -20,7 +20,7 @@ const PostsList = () => {
 
   const lastPostRef = useRef<HTMLDivElement | null>(null);
 
-  const loadPosts = async () => {
+  const loadPosts = useCallback(async () => {
     setLoading(true);
     try {
       let newPosts: BlogPost[];
@@ -46,14 +46,17 @@ const PostsList = () => {
       console.error("Error fetching posts:", error);
     }
     setLoading(false);
-  };
+  }, [searchQuery, skip, take]);
 
-  const debouncedSearch = debounce((value: string) => {
-    setPosts([]);
-    setSkip(0);
-    setSearchQuery(value);
-    setHasMore(true);
-  }, 500);
+  const handleSearchChange = useCallback(
+    debounce((query: string) => {
+      setPosts([]);
+      setSkip(0);
+      setSearchQuery(query);
+      setHasMore(true);
+    }, 300),
+    []
+  );
 
   useEffect(() => {
     loadPosts();
@@ -71,7 +74,7 @@ const PostsList = () => {
           placeholder="Search posts..."
           value={searchQuery}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            debouncedSearch(e.target.value)
+            handleSearchChange(e.target.value)
           }
           className="w-full px-5 py-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
