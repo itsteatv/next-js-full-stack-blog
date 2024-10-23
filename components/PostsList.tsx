@@ -9,11 +9,13 @@ import Loading from "@/app/blog/loading";
 import Button from "./Button";
 import { searchPosts } from "@/actions/searchPosts";
 import debounce from "lodash/debounce";
+import toast from "react-hot-toast";
 
 const PostsList = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [skip, setSkip] = useState<number>(0);
   const take = 10;
@@ -22,6 +24,7 @@ const PostsList = () => {
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
+    setError(false);
     try {
       let newPosts: BlogPost[];
 
@@ -44,6 +47,8 @@ const PostsList = () => {
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
+      toast.error("Failed to load posts. Please try again later.");
+      setError(true);
     }
     setLoading(false);
   }, [searchQuery, skip, take]);
@@ -80,11 +85,19 @@ const PostsList = () => {
         />
       </div>
 
-      {posts.length === 0 ? (
+      {loading && posts.length === 0 && (
+        <div className="text-center font-bold text-white mt-16 flex items-center justify-center min-h-screen">
+          <Loading />
+        </div>
+      )}
+
+      {!loading && posts.length === 0 && !error && (
         <div className="text-center font-bold text-white mt-16">
           <p>No posts found.</p>
         </div>
-      ) : (
+      )}
+
+      {!error && posts.length > 0 && (
         <main className="px-16 py-16 sm:max-w-lg md:max-w-4xl mx-auto">
           <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, index) => (
@@ -97,7 +110,8 @@ const PostsList = () => {
           </div>
         </main>
       )}
-      {hasMore && (
+
+      {hasMore && !loading && !error && (
         <div className="text-center mt-8">
           <Button
             onClick={handleLoadMore}
@@ -108,7 +122,9 @@ const PostsList = () => {
         </div>
       )}
 
-      {!hasMore && <p className="text-center mt-8">No more posts available.</p>}
+      {!hasMore && !loading && !error && (
+        <p className="text-center mt-8">No more posts available.</p>
+      )}
     </div>
   );
 };
