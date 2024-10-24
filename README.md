@@ -21,20 +21,19 @@ web application built with Next.js 14 .
 
 To run this project, you will need to create a `.env` file in the root directory of your project. This file should include the following environment variables:
 
-- `RESEND_API_KEY`
-- `KINDE_CLIENT_ID`
-- `KINDE_CLIENT_SECRET`
-- `KINDE_ISSUER_URL`
-- `KINDE_SITE_URL`
-- `KINDE_POST_LOGOUT_REDIRECT_URL`
-- `KINDE_POST_LOGIN_REDIRECT_URL`
-- `NEXT_PUBLIC_IMAGE_DOMAINS`
+`RESEND_API_KEY`
+`KINDE_CLIENT_ID`
+`KINDE_CLIENT_SECRET`
+`KINDE_ISSUER_URL`
+`KINDE_SITE_URL`
+`KINDE_POST_LOGOUT_REDIRECT_URL`
+`KINDE_POST_LOGIN_REDIRECT_URL`
+`NEXT_PUBLIC_IMAGE_DOMAINS`
 
 Additionally, for Prisma to function correctly, you need to create a `.env.local` file in the root directory. This file should include the following environment variable:
 
 ````plaintext
 DATABASE_URL="file:./dev.db"
-
 
 ## Run Locally
 
