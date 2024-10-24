@@ -19,25 +19,22 @@ web application built with Next.js 14 .
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to create a `.env` file in the root directory of your project. This file should include the following environment variables:
 
-`RESEND_API_KEY`
+- `RESEND_API_KEY`
+- `KINDE_CLIENT_ID`
+- `KINDE_CLIENT_SECRET`
+- `KINDE_ISSUER_URL`
+- `KINDE_SITE_URL`
+- `KINDE_POST_LOGOUT_REDIRECT_URL`
+- `KINDE_POST_LOGIN_REDIRECT_URL`
+- `NEXT_PUBLIC_IMAGE_DOMAINS`
 
-`NEWS_API_KEY`
+Additionally, for Prisma to function correctly, you need to create a `.env.local` file in the root directory. This file should include the following environment variable:
 
-`KINDE_CLIENT_ID`
+````plaintext
+DATABASE_URL="file:./dev.db"
 
-`KINDE_CLIENT_SECRET`
-
-`KINDE_ISSUER_URL`
-
-`KINDE_SITE_URL`
-
-`KINDE_POST_LOGOUT_REDIRECT_URL`
-
-`KINDE_POST_LOGIN_REDIRECT_URL`
-
-`NEXT_PUBLIC_IMAGE_DOMAINS`
 
 ## Run Locally
 
@@ -45,7 +42,7 @@ Clone the project
 
 ```bash
   git clone https://github.com/itsteatv/next-js-full-stack-blog.git
-```
+````
 
 Go to the project directory
 
