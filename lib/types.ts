@@ -52,6 +52,7 @@ export interface SiteConfigProps {
     description: string;
     url: string;
     og: string;
+    ogImage: string;
     links: {
         github: string;
     }

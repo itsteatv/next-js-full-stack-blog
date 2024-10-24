@@ -42,12 +42,20 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.og,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} Open Graph Image`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [`${siteConfig.url}/og`],
+    images: [siteConfig.og],
     creator: "itsteatv",
   },
   icons: {
