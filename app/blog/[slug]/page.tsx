@@ -8,9 +8,8 @@ export const generateMetadata = async ({
 }: {
   params: { slug: string };
 }) => {
-  const posts: BlogPost[] = await fetchPosts();
-
-  const post = posts.find((post) => post.id === params.slug);
+  const posts = await fetchPosts(0, 0, params.slug);
+  const post = posts[0];
 
   if (!post) {
     return {
@@ -26,9 +25,8 @@ export const generateMetadata = async ({
 };
 
 const SinglePost = async ({ params }: { params: { slug: string } }) => {
-  const posts: BlogPost[] = await fetchPosts();
-
-  const post = posts.find((post) => post.id === params.slug);
+  const posts = await fetchPosts(0, 0, params.slug);
+  const post = posts[0];
 
   if (!post) {
     return (

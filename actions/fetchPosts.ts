@@ -3,17 +3,24 @@
 import prisma from "../lib/db";
 import { BlogPost } from "../lib/types";
 
-export const fetchPosts = async function (skip: number = 0, take: number = 0): Promise<BlogPost[]> {
+export const fetchPosts = async function (
+    skip: number = 0,
+    take: number = 0,
+    id?: string
+): Promise<BlogPost[]> {
     try {
-        const prismaPosts = await prisma.post.findMany({
-            skip,
-            take,
-            include: {
-                categories: true,
-            },
-        });
+        const prismaPosts = id
+            ? await prisma.post.findMany({
+                where: { id },
+                include: { categories: true },
+            })
+            : await prisma.post.findMany({
+                skip,
+                take,
+                include: { categories: true },
+            });
 
-        const prismaPostsWithUniqueIds = prismaPosts.map(post => ({
+        const prismaPostsWithUniqueIds = prismaPosts.map((post) => ({
             id: post.id,
             title: post.title,
             body: post.body,
@@ -21,13 +28,11 @@ export const fetchPosts = async function (skip: number = 0, take: number = 0): P
             createdAt: post.createdAt,
             updatedAt: post.updatedAt,
             userId: post.userId,
-            categories: post.categories.map(category => ({
+            categories: post.categories.map((category) => ({
                 id: category.id,
                 name: category.name,
             })),
         }));
-
-        console.log(prismaPostsWithUniqueIds);
 
         return prismaPostsWithUniqueIds;
     } catch (error) {
@@ -35,3 +40,4 @@ export const fetchPosts = async function (skip: number = 0, take: number = 0): P
         throw new Error("Failed to fetch posts from Prisma");
     }
 };
+
