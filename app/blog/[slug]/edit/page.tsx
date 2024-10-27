@@ -1,6 +1,5 @@
 import UpdatePostForm from "@/components/UpdatePostForm";
 import { fetchPosts } from "@/actions/fetchPosts";
-import { BlogPost } from "@/lib/types";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -15,14 +14,12 @@ const EditPost = async ({ params }: { params: { slug: string } }) => {
 
   const isUserPostAuthor = post?.userId === user?.id;
 
-  const UpdatePostPermission = await getPermission("basic::permissions");
   const adminUpdatePostPermission = await getPermission("all::permissions");
 
   const canUpdatePost =
     isLoggedIn &&
     user &&
-    isUserPostAuthor &&
-    (UpdatePostPermission?.isGranted || adminUpdatePostPermission?.isGranted);
+    (isUserPostAuthor || adminUpdatePostPermission?.isGranted);
 
   if (!canUpdatePost) {
     redirect("/blog");
