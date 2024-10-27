@@ -10,8 +10,8 @@ const EditPost = async ({ params }: { params: { slug: string } }) => {
   const isLoggedIn = await isAuthenticated();
   const user = await getUser();
 
-  const posts: BlogPost[] = await fetchPosts();
-  const post = posts.find((post) => post.id === params.slug);
+  const posts = await fetchPosts(0, 0, params.slug);
+  const post = posts[0];
 
   const isUserPostAuthor = post?.userId === user?.id;
 
