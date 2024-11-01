@@ -23,11 +23,11 @@ export default async function userUpdatePost(
   }
 
   const isUserPostAuthor = postUserId === user?.id;
-  const userDeletePermission = await getPermission("basic::permissions");
+  const userUpdatePermission = await getPermission("all::permissions");
 
   console.log(isUserPostAuthor);
 
-  if (!isUserPostAuthor && !userDeletePermission?.isGranted) {
+  if (!isUserPostAuthor && !userUpdatePermission?.isGranted) {
     throw new Error("You are not authorized to update this post.");
   }
 
@@ -48,6 +48,9 @@ export default async function userUpdatePost(
         title: parsed.data.title,
         body: parsed.data.body,
         updatedAt: new Date(),
+        categories: {
+          set: parsed.data.categoryId?.map((id) => ({ id })) ?? [],
+        },
       },
     });
     revalidatePath("/blog");

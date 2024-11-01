@@ -12,8 +12,10 @@ import {
 } from "@/schemas/updatePostSchema";
 import { ItalicIcon } from "@heroicons/react/24/outline";
 import userUpdatePost from "@/actions/userUpdatePost";
-import { BlogPost } from "@/lib/types";
+import { BlogPost, Category } from "@/lib/types";
 import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getCategories } from "@/actions/categories";
 
 interface UpdatePostFormProps {
   post: BlogPost;
@@ -25,10 +27,34 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
     formState: { errors },
   } = useForm<TUpdatePostSchema>({ resolver: zodResolver(updatePostSchema) });
 
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    post.categories.map((cat) => cat.id)
+  );
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const data = await getCategories();
+      setCategories(data);
+    }
+    fetchCategories();
+  }, []);
+
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategories((prev) => {
+      if (prev.includes(categoryId)) {
+        return prev.filter((id) => id !== categoryId);
+      } else {
+        return [...prev, categoryId];
+      }
+    });
+  };
+
   const handleFormSubmit = async function (formData: FormData) {
     const data = {
       title: formData.get("title"),
       body: formData.get("body"),
+      categoryId: selectedCategories,
     };
 
     const parsed = updatePostSchema.safeParse(data);
@@ -114,6 +140,34 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
             toast.error(`${errors.body.message}`, {
               id: "Body-Error",
             })}
+        </div>
+        <div className="mb-4">
+          <label
+            className="block dark:text-white text-sm font-bold mb-2"
+            htmlFor="category"
+          >
+            Category
+          </label>
+          <div>
+            {categories.map((category) => (
+              <div key={category.id} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  id={category.id}
+                  value={category.id}
+                  checked={selectedCategories.includes(category.id)}
+                  onChange={() => handleCategoryChange(category.id)}
+                  className="mr-2"
+                />
+                <label
+                  htmlFor={`category-${category.id}`}
+                  className="dark:text-white"
+                >
+                  {category.name}
+                </label>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="flex items-center justify-between">
           <Button
