@@ -1,12 +1,12 @@
 import { fetchPosts } from "@/actions/fetchPosts";
 import { formatDate } from "@/lib/formatDate";
-import { BlogPost } from "@/lib/types";
+import { siteConfig } from "@/lib/siteConfig";
 import Image from "next/image";
 
 export const generateMetadata = async ({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; category: string };
 }) => {
   const posts = await fetchPosts(0, 0, params.slug);
   const post = posts[0];
@@ -18,9 +18,18 @@ export const generateMetadata = async ({
     };
   }
 
+  let { title, body, createdAt, author } = post;
+
   return {
-    title: `${post.author}'s post - ${post.title}`,
-    description: post.body.slice(0, 150),
+    title: `${author}'s post - ${title}`,
+    description: body.slice(0, 150),
+    openGraph: {
+      title,
+      body,
+      type: "article",
+      createdAt,
+      url: `${siteConfig.url}/blog/${post.id}`,
+    },
   };
 };
 
