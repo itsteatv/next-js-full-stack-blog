@@ -53,35 +53,55 @@ const PostsList = () => {
     setLoading(false);
   }, [searchQuery, skip, take]);
 
-  const handleSearchChange = useCallback(
-    debounce((query: string) => {
-      setPosts([]);
-      setSkip(0);
-      setSearchQuery(query);
-      setHasMore(true);
-    }, 300),
-    []
-  );
-
   useEffect(() => {
+    if (posts.length === 0 && !searchQuery) {
+      loadPosts();
+    }
+  }, [loadPosts, searchQuery, posts.length]);
+
+  const handleSearch = () => {
+    setSkip(0);
+    setPosts([]);
+    setHasMore(true);
     loadPosts();
-  }, [skip, searchQuery]);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   const handleLoadMore = () => {
     setSkip((prevSkip) => prevSkip + take);
+    loadPosts();
   };
+
+  useEffect(() => {
+    if (!searchQuery) {
+      loadPosts();
+    }
+  }, [searchQuery, loadPosts]);
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="mt-24 max-w-2xl mx-auto">
+      <div className="mt-24 max-w-2xl mx-auto flex items-center gap-6">
         <Input
           type="text"
           placeholder="Search posts..."
           value={searchQuery}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleSearchChange(e.target.value)
-          }
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
           className="w-full px-5 py-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+        <Button
+          onClick={handleSearch}
+          className="px-6 py-3 bg-blue-500 text-white font-bold rounded"
+          label="Search"
         />
       </div>
 
