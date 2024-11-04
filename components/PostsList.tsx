@@ -8,7 +8,6 @@ import { fetchPosts } from "@/actions/fetchPosts";
 import Loading from "@/app/blog/loading";
 import Button from "./Button";
 import { searchPosts } from "@/actions/searchPosts";
-import debounce from "lodash/debounce";
 import toast from "react-hot-toast";
 
 const PostsList = () => {
@@ -20,6 +19,7 @@ const PostsList = () => {
   const [skip, setSkip] = useState<number>(0);
   const take = 10;
 
+  const initialLoad = useRef(true);
   const lastPostRef = useRef<HTMLDivElement | null>(null);
 
   const loadPosts = useCallback(async () => {
@@ -54,10 +54,11 @@ const PostsList = () => {
   }, [searchQuery, skip, take]);
 
   useEffect(() => {
-    if (posts.length === 0 && !searchQuery) {
+    if (initialLoad.current && !searchQuery) {
       loadPosts();
+      initialLoad.current = false;
     }
-  }, [loadPosts, searchQuery, posts.length]);
+  }, [loadPosts, searchQuery]);
 
   const handleSearch = () => {
     setSkip(0);
@@ -67,7 +68,24 @@ const PostsList = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+    const newQuery = e.target.value;
+    setSearchQuery(newQuery);
+
+    if (newQuery === "") {
+      setSkip(0);
+      setPosts([]);
+      setHasMore(true);
+      initialLoad.current = true;
+    }
+  };
+
+  const handleClear = () => {
+    setSearchQuery("");
+    setSkip(0);
+    setPosts([]);
+    setHasMore(true);
+    initialLoad.current = true;
+    loadPosts();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -80,12 +98,6 @@ const PostsList = () => {
     setSkip((prevSkip) => prevSkip + take);
     loadPosts();
   };
-
-  useEffect(() => {
-    if (!searchQuery) {
-      loadPosts();
-    }
-  }, [searchQuery, loadPosts]);
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -103,6 +115,13 @@ const PostsList = () => {
           className="px-6 py-3 bg-blue-500 text-white font-bold rounded"
           label="Search"
         />
+        {searchQuery && (
+          <Button
+            onClick={handleClear}
+            className="px-6 py-3 bg-gray-500 text-white font-bold rounded"
+            label="Clear"
+          />
+        )}
       </div>
 
       {loading && posts.length === 0 && (
