@@ -11,6 +11,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className = "",
       placeholder,
       value,
+      name,
       defaultValue,
       onChange,
       ...props
@@ -24,6 +25,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         className={className}
         placeholder={placeholder}
         ref={ref}
+        name={name}
         value={value}
         defaultValue={defaultValue}
         onChange={onChange}
