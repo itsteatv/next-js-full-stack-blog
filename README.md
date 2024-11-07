@@ -69,37 +69,79 @@ Start the server
 - [x] Homepage
   - [x] Blog post summaries or excerpts
   - [x] Navigation menu
+
 - [ ] Post Details Page
   - [x] Full blog post content
   - [x] Author information
   - [x] Post date and time
   - [x] Categories
   - [ ] Tags
+
 - [ ] Post Management
   - [x] Create, edit, delete, and publish posts.
   - [ ] Draft and schedule posts.
   - [x] Categories for organizing content.
   - [ ] Tags for organizing content.
   - [x] Post previews before publishing.
+
 - [ ] Comments
   - [ ] Enable/disable comments on posts.
   - [ ] Comment moderation (approve, reject, or delete comments).
   - [ ] Nested comments or replies.
   - [ ] User authentication for commenting.
   - [ ] Spam filtering.
+  - [ ] Highlight top comments, making discussions more engaging.
+
 - [ ] User Management
   - [x] User registration and login.
   - [ ] User roles (admin, editor, author, contributor, subscriber).
   - [ ] User profiles and avatars.
   - [x] User permissions and access control.
+
 - [ ] Search Functionality
   - [x] Search bar for finding posts.
   - [ ] Filters and sorting options (by date, popularity, etc.).
+
 - [ ] Content Display
+
   - [x] Responsive design for different devices.
   - [x] Featured images or media for posts.
   - [ ] Related posts or recommended reading.
   - [x] Pagination or infinite scroll.
+  - [ ] Display a list of popular tags to help users discover content.
+
+  ## Profile Management
+
+  - [ ] **Profile Editing**  
+         Allow users to update their basic information, including:
+
+    - [ ] Display name
+    - [ ] Email address (with email verification upon change)
+    - [ ] Bio and social links
+
+  - [ ] **Profile Picture Upload**  
+         Enable users to upload or update their profile pictures, ensuring:
+
+    - [x] Default avatars if no picture is uploaded
+
+  - [ ] **Account Settings**  
+         Provide options for managing account preferences, such as:
+
+    - [ ] Privacy settings to control visibility of profile elements
+
+    - [ ] Linked accounts for social media or external login providers
+
+  - [ ] **Password and Security**  
+         Include options for updating passwords and enhancing account security:
+
+    - [ ] Change password feature with current password verification
+    - [ ] Two-factor authentication setup
+    - [ ] Option to view recent account activity and log out from other sessions
+
+  - [ ] **Data Management**  
+         Allow users to manage their data in compliance with privacy standards:
+    - [ ] Download account data as a JSON file
+    - [ ] Delete account (permanent deletion with confirmation)
 
 ## SEO Features
 
@@ -346,6 +388,7 @@ Start the server
 - [ ] Localization and Internationalization
   - [ ] Multi-language support.
   - [ ] Regional settings (date formats, currency).
+  - [ ] Auto-translate or integrate with translation services like Google Translate.
 - [ ] Notifications
   - [ ] Email notifications for new posts or comments.
   - [ ] Push notifications for updates.
