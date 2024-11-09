@@ -13,6 +13,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       value,
       name,
       defaultValue,
+      disabled,
       onChange,
       ...props
     },
@@ -28,6 +29,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         name={name}
         value={value}
         defaultValue={defaultValue}
+        disabled={disabled}
         onChange={onChange}
         {...props}
       />
