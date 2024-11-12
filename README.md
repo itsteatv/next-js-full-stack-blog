@@ -5,36 +5,81 @@
 Full stack, feature rich, modern blogging
 web application built with Next.js 14 .
 
+## Table of Contents
+
+- [Full Stack Blog](#full-stack-blog) - [_Powered By Next.js 14_](#powered-by-nextjs-14)
+  - [Table of Contents](#table-of-contents)
+  - [Tech Stack](#tech-stack)
+  - [Environment Variables](#environment-variables)
+  - [Run Locally](#run-locally)
+  - [Blog Features Checklist](#blog-features-checklist)
+    - [Core Features](#core-features)
+  - [Profile Management](#profile-management)
+  - [SEO Features](#seo-features)
+    - [Core SEO Features](#core-seo-features)
+    - [Performance Optimization](#performance-optimization)
+    - [Content Quality](#content-quality)
+    - [Monitoring and Analytics](#monitoring-and-analytics)
+    - [Advanced SEO Features](#advanced-seo-features)
+    - [Accessibility](#accessibility)
+    - [Legal and Compliance](#legal-and-compliance)
+    - [Additional SEO Features](#additional-seo-features)
+    - [Advanced Features](#advanced-features)
+  - [Admin Features](#admin-features)
+    - [Community Features](#community-features)
+  - [Screenshots](#screenshots)
+  - [Appendix](#appendix)
+
 ## Tech Stack
 
-- Next.JS(React)
-- Typescript
-- TailwindCSS
-- Zod
-- React Hook Form
-- Kinde Auth
-- Prisma ORM
-- SQLite
-- Resend, React Email
+This project uses a modern tech stack that ensures high performance, security, and ease of development:
+
+- **[Next.js](https://nextjs.org/)** - A React-based framework that enables server-side rendering and static site generation, providing excellent performance and SEO benefits.
+- **[TypeScript](https://www.typescriptlang.org/)** - A superset of JavaScript offering type safety and enhanced code reliability.
+- **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework that allows for rapid, custom styling with a responsive design.
+- **[Zod](https://github.com/colinhacks/zod)** - A schema validation library for TypeScript, ensuring safe and validated data handling.
+- **[React Hook Form](https://react-hook-form.com/)** - A performant library for managing forms with minimal re-renders, making forms fast and easy to handle.
+- **[Kinde Auth](https://kinde.com/)** - An authentication library for user management, providing login, registration, and security features.
+- **[Prisma](https://www.prisma.io/)** - An ORM that provides an intuitive way to work with databases, simplifying data access.
+- **[SQLite](https://www.sqlite.org/)** - A lightweight, file-based database ideal for local development.
+- **[Resend & React Email](https://resend.com/)** - Tools for sending and managing emails directly from the app, used for notifications and user communication.
+
+This stack is chosen to balance performance, scalability, and developer experience.
 
 ## Environment Variables
 
-To run this project, you will need to create a `.env` file in the root directory of your project. This file should include the following environment variables:
+To run this project, you will need to create a `.env` file in the root directory of your project with the following variables. These are divided into sections for clarity.
 
-- `RESEND_API_KEY`
-- `KINDE_CLIENT_ID`
-- `KINDE_CLIENT_SECRET`
-- `KINDE_ISSUER_URL`
-- `KINDE_SITE_URL`
-- `KINDE_POST_LOGOUT_REDIRECT_URL`
-- `KINDE_POST_LOGIN_REDIRECT_URL`
-- `NEXT_PUBLIC_IMAGE_DOMAINS`
+### General Configuration
 
-Additionally, for Prisma to function correctly, you need to create a `.env.local` file in the root directory. This file should include the following environment variable:
+- **`NEXT_PUBLIC_IMAGE_DOMAINS`**: A comma-separated list of domains allowed to host images used in the application (e.g., `example.com,cdn.example.com`).
 
-```plaintext
-DATABASE_URL="file:./dev.db"
-```
+### Authentication (Kinde Auth)
+
+For user authentication and session management, configure the following Kinde Auth settings:
+
+- **`KINDE_CLIENT_ID`**: Your client ID from Kinde, uniquely identifying the app.
+- **`KINDE_CLIENT_SECRET`**: The secret key for client authorization.
+- **`KINDE_ISSUER_URL`**: The issuer URL provided by Kinde for token validation.
+- **`KINDE_SITE_URL`**: Base URL of your application, used for redirecting and validating sessions.
+- **`KINDE_POST_LOGOUT_REDIRECT_URL`**: The URL to which users are redirected after logging out.
+- **`KINDE_POST_LOGIN_REDIRECT_URL`**: The URL to which users are redirected after logging in.
+
+### Database (Prisma)
+
+Add this variable in a `.env.local` file in the root directory to specify the local SQLite database URL:
+
+- **`DATABASE_URL="file:./dev.db"`**: Specifies the location of your SQLite database file.
+
+### Email Service (Resend)
+
+For email notifications and communication, provide the Resend API key:
+
+- **`RESEND_API_KEY`**: API key to authenticate and authorize the email-sending service.
+
+### Setting Up the Environment
+
+To avoid potential issues, verify that all variables are correctly set, especially those used for authentication and database connections. Restart the server after any changes to these files to ensure they take effect.
 
 ## Run Locally
 
@@ -67,10 +112,12 @@ Start the server
 ### Core Features
 
 - [x] Homepage
+
   - [x] Blog post summaries or excerpts
   - [x] Navigation menu
 
 - [ ] Post Details Page
+
   - [x] Full blog post content
   - [x] Author information
   - [x] Post date and time
@@ -78,6 +125,7 @@ Start the server
   - [ ] Tags
 
 - [ ] Post Management
+
   - [x] Create, edit, delete, and publish posts.
   - [ ] Draft and schedule posts.
   - [x] Categories for organizing content.
@@ -85,6 +133,7 @@ Start the server
   - [x] Post previews before publishing.
 
 - [ ] Comments
+
   - [ ] Enable/disable comments on posts.
   - [ ] Comment moderation (approve, reject, or delete comments).
   - [ ] Nested comments or replies.
@@ -93,12 +142,14 @@ Start the server
   - [ ] Highlight top comments, making discussions more engaging.
 
 - [ ] User Management
+
   - [x] User registration and login.
   - [ ] User roles (admin, editor, author, contributor, subscriber).
   - [ ] User profiles and avatars.
   - [x] User permissions and access control.
 
 - [ ] Search Functionality
+
   - [x] Search bar for finding posts.
   - [ ] Filters and sorting options (by date, popularity, etc.).
 
