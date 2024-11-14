@@ -32,7 +32,7 @@ export interface InputProps {
   id?: string;
   type: string;
   name: string;
-  disabled: boolean;
+  disabled?: boolean;
   value?: string;
   defaultValue?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
