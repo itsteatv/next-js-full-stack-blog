@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import { siteConfig } from "@/lib/siteConfig";
+import { AuthProvider } from "@/app/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -71,15 +72,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider>
-          <NextTopLoader showSpinner={false} color="#fff" />
-          <Toaster />
-          <Navbar />
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
+          <ThemeProvider>
+            <NextTopLoader showSpinner={false} color="#fff" />
+            <Toaster />
+            <Navbar />
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </AuthProvider>
   );
 }
