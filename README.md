@@ -145,7 +145,7 @@ Start the server
 
   - [x] User registration and login.
   - [ ] User roles (admin, editor, author, contributor, subscriber).
-  - [ ] User profiles and avatars.
+  - [x] User profiles and avatars.
   - [x] User permissions and access control.
 
 - [ ] Search Functionality
@@ -166,7 +166,7 @@ Start the server
   - [ ] **Profile Editing**  
          Allow users to update their basic information, including:
 
-    - [ ] Display name
+    - [x] Display name
     - [ ] Email address (with email verification upon change)
     - [ ] Bio and social links
 
