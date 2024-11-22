@@ -21,10 +21,15 @@ model Post {
 }
 
 model User {
-  id    String @id
-  name  String
-  email String @unique
-  posts Post[]
+  id          String   @id
+  name        String
+  email       String   @unique
+  familyName  String?
+  bio         String?
+  socialLinks String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  posts       Post[]
 }
 
 model Category {
