@@ -12,19 +12,30 @@ import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import { updateUserInfo } from "@/actions/updateUserInfo";
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
+import { updateBioAndSocialLinks } from "@/actions/updateBioAndSocialLinks";
 
 interface UserProfileFormProps {
   user: KindeUser | null;
+  bio?: string;
+  socialLinks?: string;
 }
 
-const UserProfileForm = ({ user }: UserProfileFormProps) => {
+const UserProfileForm = ({
+  user,
+  bio = "",
+  socialLinks = "",
+}: UserProfileFormProps) => {
   const [formData, setFormData] = useState({
     given_name: user?.given_name || "",
     family_name: user?.family_name || "",
     email: user?.email || "",
     picture: user?.picture || "",
     provided_id: user?.id || "",
+    bio: bio || "",
+    socialLinks: socialLinks || "",
   });
+
+  console.log(formData);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,24 +45,50 @@ const UserProfileForm = ({ user }: UserProfileFormProps) => {
   };
 
   const handleSubmit = async () => {
-    const updatedFormData = {
-      ...formData,
-      is_suspended: false,
-      is_password_reset_requested: false,
-    };
+    const { given_name, family_name, picture, bio, socialLinks } = formData;
 
-    console.log(updatedFormData);
+    const needsApiUpdate =
+      given_name !== user?.given_name ||
+      family_name !== user?.family_name ||
+      picture !== user?.picture;
+
+    const needsPrismaUpdate = bio !== "" || socialLinks !== "";
 
     try {
-      await updateUserInfo(updatedFormData);
-      toast.success("User information updated successfully.");
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-        console.error(error.message);
-      } else {
-        toast.error("An unknown error occurred");
+      if (needsApiUpdate) {
+        const accessToken = process.env.KINDE_API_ACCESS_TOKEN;
+        if (!accessToken) {
+          console.warn("Access token is missing. Skipping API update.");
+        } else {
+          await updateUserInfo({
+            given_name,
+            family_name,
+            picture,
+            is_suspended: false,
+            is_password_reset_requested: false,
+            provided_id: formData.provided_id,
+          });
+        }
       }
+
+      if (needsPrismaUpdate) {
+        const updatedLocalUser = await updateBioAndSocialLinks({
+          userId: formData.provided_id,
+          bio,
+          socialLinks,
+        });
+
+        setFormData((prev) => ({
+          ...prev,
+          bio: updatedLocalUser.bio || "",
+          socialLinks: updatedLocalUser.socialLinks || "",
+        }));
+      }
+
+      toast.success("Profile updated successfully.");
+    } catch (error) {
+      toast.error("Failed to update the profile. Please try again.");
+      console.error(error);
     }
   };
 
@@ -184,6 +221,40 @@ const UserProfileForm = ({ user }: UserProfileFormProps) => {
               />
             </div>
           </div>
+        </div>
+        <div className="col-span-full">
+          <label
+            htmlFor="bio"
+            className="block text-sm font-medium leading-6 text-white"
+          >
+            Bio
+          </label>
+          <textarea
+            id="bio"
+            name="bio"
+            value={formData.bio}
+            onChange={handleChange}
+            placeholder="Tell us a bit about yourself..."
+            className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            rows={3}
+          />
+        </div>
+        <div className="col-span-full">
+          <label
+            htmlFor="socialLinks"
+            className="block text-sm font-medium leading-6 text-white"
+          >
+            Social Links
+          </label>
+          <textarea
+            id="socialLinks"
+            name="socialLinks"
+            value={formData.socialLinks}
+            onChange={handleChange}
+            placeholder="Provide your social media links (comma-separated)"
+            className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            rows={2}
+          />
         </div>
       </div>
 
