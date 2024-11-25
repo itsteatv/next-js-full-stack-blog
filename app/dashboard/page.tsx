@@ -1,5 +1,6 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
+import prisma from "@/lib/db";
 import UserProfileForm from "@/components/UserProfileForm";
 
 const Dashboard = async () => {
@@ -11,6 +12,11 @@ const Dashboard = async () => {
   if (!isLoggedIn) {
     redirect("/api/auth/login");
   }
+
+  const localUser = await prisma.user.findUnique({
+    where: { id: user?.id },
+    select: { bio: true, socialLinks: true },
+  });
 
   return (
     <div className="divide-y divide-white/5">
@@ -25,7 +31,11 @@ const Dashboard = async () => {
         </div>
 
         <div className="md:col-span-2">
-          <UserProfileForm user={user} />
+          <UserProfileForm
+            user={user}
+            bio={localUser?.bio || ""}
+            socialLinks={localUser?.socialLinks || ""}
+          />
         </div>
       </div>
     </div>
