@@ -14,7 +14,7 @@
     "@hookform/resolvers": "^3.6.0",
     "@kinde-oss/kinde-auth-nextjs": "^2.3.6",
     "@material-tailwind/react": "^2.1.9",
-    "@prisma/client": "^5.17.0",
+    "@prisma/client": "^5.22.0",
     "@react-email/components": "^0.0.19",
     "@react-email/tailwind": "^0.0.18",
     "lodash": "^4.17.21",
@@ -40,7 +40,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8.4.38",
-    "prisma": "^5.18.0",
+    "prisma": "^5.22.0",
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
