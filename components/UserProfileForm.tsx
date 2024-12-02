@@ -45,7 +45,8 @@ const UserProfileForm = ({
   };
 
   const handleSubmit = async () => {
-    const { given_name, family_name, picture, bio, socialLinks } = formData;
+    const { given_name, family_name, picture, bio, socialLinks, email } =
+      formData;
 
     const needsApiUpdate =
       given_name !== user?.given_name ||
@@ -76,6 +77,9 @@ const UserProfileForm = ({
           userId: formData.provided_id,
           bio,
           socialLinks,
+          name: given_name,
+          familyName: family_name,
+          email,
         });
 
         setFormData((prev) => ({
