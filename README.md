@@ -168,7 +168,7 @@ Start the server
 
     - [x] Display name
     - [ ] Email address (with email verification upon change)
-    - [ ] Bio and social links
+    - [x] Bio and social links
 
   - [ ] **Profile Picture Upload**  
          Enable users to upload or update their profile pictures, ensuring:
@@ -468,7 +468,7 @@ Start the server
 
 - [ ] User-generated Content
   - [ ] Guest posts.
-  - [ ] User profiles with bios and links.
+  - [x] User profiles with bios and links.
 - [ ] Forums or Discussion Boards
   - [ ] Threads and topics for community discussions.
   - [ ] User reputation or ranking system.
