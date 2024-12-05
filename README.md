@@ -191,7 +191,7 @@ Start the server
 
   - [ ] **Data Management**  
          Allow users to manage their data in compliance with privacy standards:
-    - [ ] Download account data as a JSON file
+    - [x] Download account data as a JSON file
     - [ ] Delete account (permanent deletion with confirmation)
 
 ## SEO Features
