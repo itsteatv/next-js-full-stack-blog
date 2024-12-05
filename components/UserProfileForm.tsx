@@ -13,6 +13,7 @@ import { updateUserInfo } from "@/actions/updateUserInfo";
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { updateBioAndSocialLinks } from "@/actions/updateBioAndSocialLinks";
+import { downloadUserData } from "@/actions/downloadUserData";
 
 interface UserProfileFormProps {
   user: KindeUser | null;
@@ -93,6 +94,25 @@ const UserProfileForm = ({
     } catch (error) {
       toast.error("Failed to update the profile. Please try again.");
       console.error(error);
+    }
+  };
+
+  const handleDownloadData = async () => {
+    try {
+      const jsonString = await downloadUserData();
+
+      const blob = new Blob([jsonString], { type: "application/json" });
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "user_data.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Failed to download user data:", error);
+      alert("Failed to download user data. Please try again.");
     }
   };
 
@@ -262,13 +282,20 @@ const UserProfileForm = ({
         </div>
       </div>
 
-      <div className="mt-8 flex">
+      <div className="mt-8 flex flex-col items-start gap-y-5">
         <Button
           className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 duration-300"
           type="submit"
           label="Save"
           usePendingStatus={true}
           pendingContent="Saving..."
+        />
+        <Button
+          className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 duration-300"
+          onClick={handleDownloadData}
+          label="Download"
+          usePendingStatus={true}
+          pendingContent="Downloading..."
         />
       </div>
     </form>
