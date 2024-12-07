@@ -36,6 +36,9 @@ const UserProfileForm = ({
     socialLinks: socialLinks || "",
   });
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+
   console.log(formData);
 
   const handleChange = (
@@ -46,6 +49,8 @@ const UserProfileForm = ({
   };
 
   const handleSubmit = async () => {
+    setIsSaving(true);
+
     const { given_name, family_name, picture, bio, socialLinks, email } =
       formData;
 
@@ -94,10 +99,14 @@ const UserProfileForm = ({
     } catch (error) {
       toast.error("Failed to update the profile. Please try again.");
       console.error(error);
+    } finally {
+      setIsSaving(false);
     }
   };
 
   const handleDownloadData = async () => {
+    setIsDownloading(true);
+
     try {
       const jsonString = await downloadUserData();
 
@@ -113,11 +122,13 @@ const UserProfileForm = ({
     } catch (error) {
       console.error("Failed to download user data:", error);
       alert("Failed to download user data. Please try again.");
+    } finally {
+      setIsDownloading(false);
     }
   };
 
   return (
-    <form action={handleSubmit}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
         <div className="col-span-full flex items-center gap-x-8">
           <span className="inline-block h-14 w-14 overflow-hidden rounded-full bg-gray-100">
@@ -284,19 +295,21 @@ const UserProfileForm = ({
 
       <div className="mt-8 flex flex-col items-start gap-y-5">
         <Button
-          className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 duration-300"
-          type="submit"
-          label="Save"
-          usePendingStatus={true}
-          pendingContent="Saving..."
+          className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 duration-300 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          onClick={handleSubmit}
+          label={isSaving ? "Saving..." : "Save"}
+          usePendingStatus={isSaving}
+          disabled={isSaving}
         />
-        <Button
-          className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 duration-300"
-          onClick={handleDownloadData}
-          label="Download"
-          usePendingStatus={true}
-          pendingContent="Downloading..."
-        />
+        <div className="mt-4">
+          <Button
+            onClick={handleDownloadData}
+            label={isDownloading ? "Downloading..." : "Download"}
+            className="bg-green-500 text-black px-3 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
+            usePendingStatus={isDownloading}
+            disabled={isDownloading}
+          />
+        </div>
       </div>
     </form>
   );
