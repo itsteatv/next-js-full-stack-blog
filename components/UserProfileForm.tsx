@@ -129,7 +129,7 @@ const UserProfileForm = ({
 
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
+      <div className="flex mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 sm:px-6 flex-col lg:px-8">
         <div className="col-span-full flex items-center gap-x-8">
           <span className="inline-block h-14 w-14 overflow-hidden rounded-full bg-gray-100">
             <svg
@@ -293,7 +293,7 @@ const UserProfileForm = ({
         </div>
       </div>
 
-      <div className="mt-8 flex flex-col items-start gap-y-5">
+      <div className="mt-10 sm:px-6 lg:px-8 px-4 flex flex-col items-start gap-y-5">
         <Button
           className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 duration-300 disabled:bg-gray-500 disabled:cursor-not-allowed"
           onClick={handleSubmit}
@@ -301,15 +301,22 @@ const UserProfileForm = ({
           usePendingStatus={isSaving}
           disabled={isSaving}
         />
-        <div className="mt-4">
-          <Button
-            onClick={handleDownloadData}
-            label={isDownloading ? "Downloading..." : "Download"}
-            className="bg-green-500 text-black px-3 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
-            usePendingStatus={isDownloading}
-            disabled={isDownloading}
-          />
+      </div>
+      <div className="flex items-start mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 py-24 sm:px-6 flex-col lg:px-8">
+        <div>
+          <h2 className="text-base font-semibold leading-7 text-white">
+            Export account data
+          </h2>
         </div>
+
+        <Button
+          type="submit"
+          className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-400"
+          onClick={handleDownloadData}
+          label={isDownloading ? "Downloading..." : "Download"}
+          usePendingStatus={isDownloading}
+          disabled={isDownloading}
+        />
       </div>
     </form>
   );

@@ -20,8 +20,8 @@ const Dashboard = async () => {
 
   return (
     <div className="divide-y divide-white/5">
-      <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
-        <div>
+      <div className="flex mx-auto max-w-2xl gap-x-8 gap-y-10 py-16 px-4 sm:px-6 flex-col lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <h2 className="text-base font-semibold leading-7 text-white">
             Personal Information
           </h2>
