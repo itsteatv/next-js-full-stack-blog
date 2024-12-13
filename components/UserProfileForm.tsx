@@ -10,10 +10,12 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import { updateUserInfo } from "@/actions/updateUserInfo";
+import { userDeleteAccount } from "@/actions/userDeleteAccount";
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 import { updateBioAndSocialLinks } from "@/actions/updateBioAndSocialLinks";
 import { downloadUserData } from "@/actions/downloadUserData";
+import { useRouter } from "next/navigation";
 
 interface UserProfileFormProps {
   user: KindeUser | null;
@@ -38,8 +40,10 @@ const UserProfileForm = ({
 
   const [isSaving, setIsSaving] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const router = useRouter();
 
-  console.log(formData);
+  console.log(formData.provided_id);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -124,6 +128,31 @@ const UserProfileForm = ({
       alert("Failed to download user data. Please try again.");
     } finally {
       setIsDownloading(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const confirmDeletion = window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      );
+
+      if (!confirmDeletion) {
+        return;
+      }
+
+      setIsDeleting(true);
+
+      await userDeleteAccount({ provided_id: formData.provided_id });
+
+      toast.success("Your account has been successfully deleted.");
+
+      router.push("/");
+    } catch (error) {
+      toast.error("Failed to delete your account. Please try again.");
+      console.error("Error deleting account:", error);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -316,6 +345,21 @@ const UserProfileForm = ({
           label={isDownloading ? "Downloading..." : "Download"}
           usePendingStatus={isDownloading}
           disabled={isDownloading}
+        />
+      </div>
+      <div className="flex items-start mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 py-24 sm:px-6 flex-col lg:px-8">
+        <div>
+          <h2 className="text-base font-semibold text-white">
+            Delete Your Account
+          </h2>
+        </div>
+        <Button
+          type="submit"
+          className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 duration-300"
+          onClick={handleDeleteAccount}
+          label={isDeleting ? "Deleting Account..." : "Delete Account"}
+          usePendingStatus={isDeleting}
+          disabled={isDeleting}
         />
       </div>
     </form>
