@@ -12,9 +12,20 @@ const Button = ({
   icon,
   usePendingStatus = false,
   pendingContent = "Processing...",
+  isLoading = false,
+  loadingComponent,
 }: ButtonProps) => {
   const { pending } = useFormStatus();
-  const displayContent = usePendingStatus && pending ? pendingContent : label;
+  const showLoading = (usePendingStatus && pending) || isLoading;
+
+  const displayContent = showLoading ? (
+    <div className="relative flex items-center space-x-2">
+      {loadingComponent}
+      <span>{pendingContent}</span>
+    </div>
+  ) : (
+    label
+  );
 
   return (
     <button
@@ -23,7 +34,7 @@ const Button = ({
       disabled={disabled || pending}
       onClick={onClick}
     >
-      {icon && icon}
+      {icon && <span>{icon}</span>}
       {displayContent}
     </button>
   );

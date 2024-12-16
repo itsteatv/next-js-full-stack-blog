@@ -23,6 +23,8 @@ export interface ButtonProps {
   type?: "button" | "submit" | "reset";
   usePendingStatus?: boolean;
   pendingContent?: string;
+  isLoading?: boolean;
+  loadingComponent?: React.ReactNode;
 }
 
 export interface InputProps {
