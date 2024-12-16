@@ -324,42 +324,191 @@ const UserProfileForm = ({
 
       <div className="mt-10 sm:px-6 lg:px-8 px-4 flex flex-col items-start gap-y-5">
         <Button
-          className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 duration-300 disabled:bg-gray-500 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-blue-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
           onClick={handleSubmit}
-          label={isSaving ? "Saving..." : "Save"}
-          usePendingStatus={isSaving}
+          label="Save Account Info"
           disabled={isSaving}
+          isLoading={isSaving}
+          pendingContent="Saving Account Info..."
+          loadingComponent={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 50 50"
+              width="24"
+              height="24"
+            >
+              <circle
+                cx="25"
+                cy="25"
+                r="20"
+                fill="none"
+                stroke="white"
+                stroke-width="4"
+                stroke-dasharray="125.6"
+                stroke-dashoffset="100"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.8s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="100;125.6"
+                  dur="0.8s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </svg>
+          }
         />
       </div>
-      <div className="flex items-start mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 py-24 sm:px-6 flex-col lg:px-8">
+      <div
+        className="flex flex-col items-start mx-auto max-w-2xl gap-8 px-4 sm:px-6 py-20 lg:px-8"
+        role="region"
+        aria-labelledby="export-data-heading"
+      >
         <div>
-          <h2 className="text-base font-semibold leading-7 text-white">
-            Export account data
+          <h2
+            id="export-data-heading"
+            className="text-2xl font-semibold text-white leading-tight"
+          >
+            Export Your Account Data
           </h2>
+          <p className="mt-4 text-base text-gray-300 leading-relaxed">
+            Want a backup of your account details? Download all the information
+            linked to your account, including personal settings, purchase
+            history, and saved preferences, in just a few clicks.
+          </p>
+          <p className="mt-2 text-sm text-gray-400">
+            This download includes essential data, such as your account
+            settings, preferences, and transaction history. For security, ensure
+            that you store the file in a safe location to protect your
+            information.
+          </p>
         </div>
 
         <Button
-          type="submit"
-          className="rounded-md bg-green-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-400"
+          type="button"
+          className="inline-flex items-center justify-center rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-green-500 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-green-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
           onClick={handleDownloadData}
-          label={isDownloading ? "Downloading..." : "Download"}
-          usePendingStatus={isDownloading}
           disabled={isDownloading}
+          isLoading={isDownloading}
+          label="Download Account Data"
+          pendingContent="Downloading..."
+          loadingComponent={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 50 50"
+              width="24"
+              height="24"
+            >
+              <circle
+                cx="25"
+                cy="25"
+                r="20"
+                fill="none"
+                stroke="white"
+                stroke-width="4"
+                stroke-dasharray="125.6"
+                stroke-dashoffset="100"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.8s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="100;125.6"
+                  dur="0.8s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </svg>
+          }
+          aria-label={
+            isDownloading
+              ? "Downloading your account data"
+              : "Download your account data"
+          }
         />
       </div>
-      <div className="flex items-start mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 py-24 sm:px-6 flex-col lg:px-8">
+
+      <div
+        className="flex flex-col items-start mx-auto max-w-2xl gap-8 px-4 sm:px-6 lg:px-8"
+        role="region"
+        aria-labelledby="delete-account-heading"
+      >
         <div>
-          <h2 className="text-base font-semibold text-white">
+          <h2
+            id="delete-account-heading"
+            className="text-2xl font-semibold text-white leading-tight"
+          >
             Delete Your Account
           </h2>
+          <p className="mt-4 text-base text-gray-300 leading-relaxed">
+            Deleting your account will permanently remove all your personal
+            data, preferences, and purchase history. Please make sure you really
+            want to proceed.
+          </p>
+          <p className="mt-2 text-sm text-gray-400">
+            Once your account is deleted, it cannot be undone. Ensure you have a
+            backup of any important data before proceeding.
+          </p>
         </div>
+
         <Button
-          type="submit"
-          className="rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 duration-300"
+          type="button"
+          className="inline-flex items-center justify-center rounded-lg bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-red-500 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-red-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
           onClick={handleDeleteAccount}
-          label={isDeleting ? "Deleting Account..." : "Delete Account"}
-          usePendingStatus={isDeleting}
           disabled={isDeleting}
+          isLoading={isDeleting}
+          label="Delete Account"
+          pendingContent="Deleting Account..."
+          loadingComponent={
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 50 50"
+              width="24"
+              height="24"
+            >
+              <circle
+                cx="25"
+                cy="25"
+                r="20"
+                fill="none"
+                stroke="white"
+                stroke-width="4"
+                stroke-dasharray="125.6"
+                stroke-dashoffset="100"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 25 25"
+                  to="360 25 25"
+                  dur="0.8s"
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="stroke-dashoffset"
+                  values="100;125.6"
+                  dur="0.8s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </svg>
+          }
+          aria-label={
+            isDeleting ? "Deleting your account" : "Delete your account"
+          }
         />
       </div>
     </form>
