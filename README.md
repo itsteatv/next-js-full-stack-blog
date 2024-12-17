@@ -475,29 +475,38 @@ Start the server
 
 ## Screenshots
 
-`Home Page`
+`Home Page (Signed-In)`
 
-![HomePage](public/images/HomePage.png)
+![HomeSignedIn](public/images/Home.png)
 
-`About Page`
+`Home Page (Signed-Out)`
 
-![AboutPage](public/images/AboutPage.png)
+![HomeSignedOut](public/images/HomeSignedOut.png)
 
 `Blog Page`
 
-![BlogPage](public/images/BlogPage.png)
+![Blog](public/images/Blog.png)
+
+`About Page`
+
+![About](public/images/About.png)
+
 
 `Single Post Page`
 
-![SinglePostPage](public/images/SinglePostPage.png)
+![SinglePost](public/images/SinglePost.png)
 
 `Contact Page`
 
-![ContactPage](public/images/ContactPage.png)
+![Contact](public/images/Contact.png)
 
 `Create Post Page`
 
-![CreatePostPage](public/images/CreatePostPage.png)
+![CreatePost](public/images/CreatePost.png)
+
+`Dashboard`
+
+![Dashboard](public/images/Dashboard.png)
 
 ## Appendix
 
