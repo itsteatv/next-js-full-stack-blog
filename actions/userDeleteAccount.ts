@@ -9,10 +9,14 @@ interface UpdateUserResponse {
   message?: string;
 }
 
+import { cookies } from "next/headers";
+
 export async function userDeleteAccount({
   provided_id,
 }: UserDeleteAccountParams): Promise<UpdateUserResponse> {
   console.log(provided_id);
+
+  const cookieStore = cookies();
 
   const subdomain = process.env.KIND_API_DOMAIN;
   const accessToken = process.env.KINDE_API_ACCESS_TOKEN;
@@ -29,6 +33,11 @@ export async function userDeleteAccount({
   if (!audience) {
     throw new Error("Environment variable KINDE_API_AUDIENCE is missing");
   }
+  
+  const allCookies = await cookieStore.getAll();
+  allCookies.forEach((cookie) => {
+    cookieStore.delete(cookie.name);
+  });
 
   const endpoint = `${subdomain}/api/v1/user?id=${provided_id}`;
 
