@@ -132,6 +132,8 @@ const UserProfileForm = ({
   };
 
   const handleDeleteAccount = async () => {
+    let deletionSuccessful = false;
+
     try {
       const confirmDeletion = window.confirm(
         "Are you sure you want to delete your account? This action cannot be undone."
@@ -146,16 +148,17 @@ const UserProfileForm = ({
       await userDeleteAccount({ provided_id: formData.provided_id });
 
       toast.success("Your account has been successfully deleted.");
-
-      router.push("/");
+      deletionSuccessful = true;
     } catch (error) {
       toast.error("Failed to delete your account. Please try again.");
       console.error("Error deleting account:", error);
     } finally {
       setIsDeleting(false);
+      if (deletionSuccessful) {
+        router.push("/");
+      }
     }
   };
-
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="flex mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 sm:px-6 flex-col lg:px-8">
