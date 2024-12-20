@@ -149,14 +149,17 @@ const UserProfileForm = ({
 
       toast.success("Your account has been successfully deleted.");
       deletionSuccessful = true;
+
+      router.replace("/");
+
+      if (deletionSuccessful) {
+        window.location.reload();
+      }
     } catch (error) {
       toast.error("Failed to delete your account. Please try again.");
       console.error("Error deleting account:", error);
     } finally {
       setIsDeleting(false);
-      if (deletionSuccessful) {
-        router.push("/");
-      }
     }
   };
   return (
