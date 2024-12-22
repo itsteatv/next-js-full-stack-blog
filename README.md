@@ -144,7 +144,7 @@ Start the server
 - [ ] User Management
 
   - [x] User registration and login.
-  - [ ] User roles (admin, editor, author, contributor, subscriber).
+  - [x] User roles (admin, user, guest, subscriber).
   - [x] User profiles and avatars.
   - [x] User permissions and access control.
 
@@ -490,7 +490,6 @@ Start the server
 `About Page`
 
 ![About](public/images/About.png)
-
 
 `Single Post Page`
 
