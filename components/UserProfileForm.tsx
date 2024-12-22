@@ -11,11 +11,12 @@ import Button from "@/components/Button";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/types";
 import { updateUserInfo } from "@/actions/updateUserInfo";
 import { userDeleteAccount } from "@/actions/userDeleteAccount";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { updateBioAndSocialLinks } from "@/actions/updateBioAndSocialLinks";
 import { downloadUserData } from "@/actions/downloadUserData";
 import { useRouter } from "next/navigation";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 interface UserProfileFormProps {
   user: KindeUser | null;
@@ -41,9 +42,25 @@ const UserProfileForm = ({
   const [isSaving, setIsSaving] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [userRole, setUserRole] = useState<string>("guest");
   const router = useRouter();
 
-  console.log(formData.provided_id);
+  const { getPermission } = useKindeBrowserClient();
+
+  useEffect(() => {
+    if (user) {
+      const basicUserPermission = getPermission("basic::permission");
+      const adminUserPermission = getPermission("all::permission");
+
+      if (basicUserPermission?.isGranted) {
+        setUserRole("user");
+      } else if (adminUserPermission) {
+        setUserRole("admin");
+      } else {
+        setUserRole("guest");
+      }
+    }
+  }, [user, getPermission]);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -165,6 +182,33 @@ const UserProfileForm = ({
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       <div className="flex mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 sm:px-6 flex-col lg:px-8">
+        <div className="p-6 rounded-xl bg-gradient-to-r from-gray-800 via-gray-900 to-gray-700 shadow-xl flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="p-3 rounded-full bg-white text-indigo-600">
+              <UserGroupIcon className="h-8 w-8" aria-hidden="true" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-semibold text-white">Your Role</h3>
+              <p className="text-sm text-gray-200">
+                Your current access level in the system
+              </p>
+            </div>
+          </div>
+
+          <div
+            className={`px-4 py-2 rounded-full text-sm font-medium inline-flex items-center ${
+              userRole === "admin"
+                ? "bg-gradient-to-r from-green-400 to-green-600 text-white"
+                : userRole === "user"
+                ? "bg-gradient-to-r from-blue-400 to-blue-600 text-white"
+                : "bg-gradient-to-r from-gray-400 to-gray-600 text-white"
+            }`}
+          >
+            <span className="font-bold">
+              {userRole === "admin" ? "Admin" : "User"}
+            </span>
+          </div>
+        </div>
         <div className="col-span-full flex items-center gap-x-8">
           <span className="inline-block h-14 w-14 overflow-hidden rounded-full bg-gray-100">
             <svg
@@ -175,6 +219,7 @@ const UserProfileForm = ({
               <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
           </span>
+
           <div>
             <button
               type="button"
