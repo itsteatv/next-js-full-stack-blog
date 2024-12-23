@@ -49,12 +49,14 @@ const UserProfileForm = ({
 
   useEffect(() => {
     if (user) {
-      const basicUserPermission = getPermission("basic::permission");
-      const adminUserPermission = getPermission("all::permission");
+      const basicUserPermission = getPermission("basic::permissions");
+      const adminUserPermission = getPermission("all::permissions");
+
+      console.log(adminUserPermission?.isGranted);
 
       if (basicUserPermission?.isGranted) {
         setUserRole("user");
-      } else if (adminUserPermission) {
+      } else if (adminUserPermission?.isGranted) {
         setUserRole("admin");
       } else {
         setUserRole("guest");
