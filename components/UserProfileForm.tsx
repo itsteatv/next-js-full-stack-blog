@@ -225,12 +225,12 @@ const UserProfileForm = ({
           <div>
             <button
               type="button"
-              className="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+              className="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold dark:text-white shadow-sm hover:bg-white/20"
               aria-label="Change avatar"
             >
               Change avatar
             </button>
-            <p className="mt-2 text-xs leading-5 text-gray-400">
+            <p className="mt-2 text-xs leading-5 dark:text-gray-400">
               JPG, GIF or PNG. 1MB max.
             </p>
           </div>
@@ -239,7 +239,7 @@ const UserProfileForm = ({
         <div className="sm:col-span-3">
           <label
             htmlFor="first-name"
-            className="block text-sm font-medium leading-6 text-white"
+            className="block text-sm font-medium leading-6 dark:text-white"
           >
             First name
           </label>
@@ -256,14 +256,14 @@ const UserProfileForm = ({
             value={formData?.given_name || ""}
             onChange={handleChange}
             placeholder="Please enter your first name"
-            className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-10 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
 
         <div className="sm:col-span-3">
           <label
             htmlFor="last-name"
-            className="block text-sm font-medium leading-6 text-white"
+            className="block text-sm font-medium leading-6 dark:text-white"
           >
             Last name
           </label>
@@ -280,7 +280,7 @@ const UserProfileForm = ({
               value={formData?.family_name || ""}
               onChange={handleChange}
               placeholder="Please enter your last name"
-              className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-10 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -288,7 +288,7 @@ const UserProfileForm = ({
         <div className="col-span-full">
           <label
             htmlFor="email"
-            className="block text-sm font-medium leading-6 text-white"
+            className="block text-sm font-medium leading-6 dark:text-white"
           >
             Email address
           </label>
@@ -305,7 +305,7 @@ const UserProfileForm = ({
               value={formData?.email || ""}
               onChange={handleChange}
               placeholder="Please enter your email"
-              className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-10 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+              className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
         </div>
@@ -313,7 +313,7 @@ const UserProfileForm = ({
         <div className="col-span-full">
           <label
             htmlFor="username"
-            className="block text-sm font-medium leading-6 text-white"
+            className="block text-sm font-medium leading-6 dark:text-white"
           >
             Username
           </label>
@@ -331,8 +331,7 @@ const UserProfileForm = ({
                 value={user?.username || ""}
                 onChange={handleChange}
                 placeholder="Please enter your username"
-                className="flex-1 border-0 bg-transparent py-1.5 pl-10 text-white focus:ring-0 sm:text-sm sm:leading-6
-                cursor-not-allowed
+                className="flex-1 focus:ring-0 cursor-not-allowed block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6
                 "
                 disabled
               />
@@ -342,7 +341,7 @@ const UserProfileForm = ({
         <div className="col-span-full">
           <label
             htmlFor="bio"
-            className="block text-sm font-medium leading-6 text-white"
+            className="block text-sm font-medium leading-6 dark:text-white"
           >
             Bio
           </label>
@@ -352,14 +351,14 @@ const UserProfileForm = ({
             value={formData.bio}
             onChange={handleChange}
             placeholder="Tell us a bit about yourself..."
-            className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-1.5 pl-3 dark:text-white shadow-sm bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             rows={3}
           />
         </div>
         <div className="col-span-full">
           <label
             htmlFor="socialLinks"
-            className="block text-sm font-medium leading-6 text-white"
+            className="block text-sm font-medium leading-6 dark:text-white"
           >
             Social Links
           </label>
@@ -369,7 +368,7 @@ const UserProfileForm = ({
             value={formData.socialLinks}
             onChange={handleChange}
             placeholder="Provide your social media links (comma-separated)"
-            className="block w-full rounded-md border-0 bg-white/5 py-1.5 pl-3 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0  py-1.5 pl-3 bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             rows={2}
           />
         </div>
@@ -427,16 +426,16 @@ const UserProfileForm = ({
         <div>
           <h2
             id="export-data-heading"
-            className="text-2xl font-semibold text-white leading-tight"
+            className="text-2xl font-semibold dark:text-white leading-tight"
           >
             Export Your Account Data
           </h2>
-          <p className="mt-4 text-base text-gray-300 leading-relaxed">
+          <p className="mt-4 text-base dark:text-gray-300 leading-relaxed">
             Want a backup of your account details? Download all the information
             linked to your account, including personal settings, purchase
             history, and saved preferences, in just a few clicks.
           </p>
-          <p className="mt-2 text-sm text-gray-400">
+          <p className="mt-2 text-sm dark:text-gray-400">
             This download includes essential data, such as your account
             settings, preferences, and transaction history. For security, ensure
             that you store the file in a safe location to protect your
@@ -502,16 +501,16 @@ const UserProfileForm = ({
         <div>
           <h2
             id="delete-account-heading"
-            className="text-2xl font-semibold text-white leading-tight"
+            className="text-2xl font-semibold dark:text-white leading-tight"
           >
             Delete Your Account
           </h2>
-          <p className="mt-4 text-base text-gray-300 leading-relaxed">
+          <p className="mt-4 text-base dark:text-gray-300 leading-relaxed">
             Deleting your account will permanently remove all your personal
             data, preferences, and purchase history. Please make sure you really
             want to proceed.
           </p>
-          <p className="mt-2 text-sm text-gray-400">
+          <p className="mt-2 text-sm dark:text-gray-400">
             Once your account is deleted, it cannot be undone. Ensure you have a
             backup of any important data before proceeding.
           </p>

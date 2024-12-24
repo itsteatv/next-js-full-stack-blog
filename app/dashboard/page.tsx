@@ -22,10 +22,10 @@ const Dashboard = async () => {
     <div className="divide-y divide-white/5">
       <div className="flex mx-auto max-w-2xl gap-x-8 gap-y-10 py-16 px-4 sm:px-6 flex-col lg:px-8">
         <div className="px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-semibold text-white leading-tight">
+          <h2 className="text-2xl font-semibold dark:text-white leading-tight">
             Personal Information
           </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-400">
+          <p className="mt-1 text-sm leading-6 dark:text-gray-400">
             Use a permanent address where you can receive mail.
           </p>
         </div>
