@@ -221,13 +221,13 @@ const CreatePostForm = () => {
             previewMode ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
         >
-          <h1 className="text-xl font-bold dark:text-black text-white">
+          <h1 className="text-xl font-bold  dark:text-white">
             Post Title: {previewData.title || "Untitled Post"}{" "}
           </h1>
-          <p className="text-xl font-bold dark:text-black text-white">
+          <p className="text-xl font-bold dark:text-white">
             Post Body: {previewData.body || "No content available."}{" "}
           </p>
-          <h3 className="text-xl font-bold dark:text-black text-white">
+          <h3 className="text-xl font-bold dark:text-white">
             Category:{" "}
             {selectedCategories.length > 0
               ? selectedCategories
