@@ -507,6 +507,10 @@ Start the server
 
 ![Dashboard](public/images/Dashboard.png)
 
+`Dashboard Light Mode`
+
+![DashboardLightMode](public/images/DashboardLightMode.png)
+
 ## Appendix
 
 This project will get bigger and better, so i won't leave it without any update or new features.
