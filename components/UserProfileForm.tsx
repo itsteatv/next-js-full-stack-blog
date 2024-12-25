@@ -17,6 +17,7 @@ import { updateBioAndSocialLinks } from "@/actions/updateBioAndSocialLinks";
 import { downloadUserData } from "@/actions/downloadUserData";
 import { useRouter } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import Modal from "./Modal";
 
 interface UserProfileFormProps {
   user: KindeUser | null;
@@ -43,9 +44,13 @@ const UserProfileForm = ({
   const [isDownloading, setIsDownloading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [userRole, setUserRole] = useState<string>("guest");
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
 
   const { getPermission } = useKindeBrowserClient();
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     if (user) {
@@ -154,14 +159,6 @@ const UserProfileForm = ({
     let deletionSuccessful = false;
 
     try {
-      const confirmDeletion = window.confirm(
-        "Are you sure you want to delete your account? This action cannot be undone."
-      );
-
-      if (!confirmDeletion) {
-        return;
-      }
-
       setIsDeleting(true);
 
       await userDeleteAccount({ provided_id: formData.provided_id });
@@ -519,7 +516,7 @@ const UserProfileForm = ({
         <Button
           type="button"
           className="inline-flex items-center justify-center rounded-lg bg-red-600 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-red-500 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-red-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
-          onClick={handleDeleteAccount}
+          onClick={openModal}
           disabled={isDeleting}
           isLoading={isDeleting}
           label="Delete Account"
@@ -562,6 +559,37 @@ const UserProfileForm = ({
             isDeleting ? "Deleting your account" : "Delete your account"
           }
         />
+
+        {isModalOpen && (
+          <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <div className="text-center">
+              <h3 className="text-lg font-semibold dark:text-white">
+                Confirm Account Deletion
+              </h3>
+              <p className="mt-2 text-sm dark:text-gray-300">
+                Are you sure you want to delete your account? This action cannot
+                be undone.
+              </p>
+              <div className="mt-4 flex justify-center space-x-4">
+                <Button
+                  className="rounded-lg bg-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-400"
+                  onClick={closeModal}
+                  label="Cancel"
+                />
+                <Button
+                  className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500"
+                  onClick={async () => {
+                    await handleDeleteAccount();
+                    closeModal();
+                  }}
+                  label="Delete"
+                  disabled={isDeleting}
+                  isLoading={isDeleting}
+                />
+              </div>
+            </div>
+          </Modal>
+        )}
       </div>
     </form>
   );
