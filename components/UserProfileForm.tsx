@@ -18,6 +18,7 @@ import { downloadUserData } from "@/actions/downloadUserData";
 import { useRouter } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Modal from "./Modal";
+import Loading from "@/app/blog/loading";
 
 interface UserProfileFormProps {
   user: KindeUser | null;
@@ -379,40 +380,7 @@ const UserProfileForm = ({
           disabled={isSaving}
           isLoading={isSaving}
           pendingContent="Saving Account Info..."
-          loadingComponent={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 50 50"
-              width="24"
-              height="24"
-            >
-              <circle
-                cx="25"
-                cy="25"
-                r="20"
-                fill="none"
-                stroke="white"
-                stroke-width="4"
-                stroke-dasharray="125.6"
-                stroke-dashoffset="100"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  from="0 25 25"
-                  to="360 25 25"
-                  dur="0.8s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="stroke-dashoffset"
-                  values="100;125.6"
-                  dur="0.8s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </svg>
-          }
+          loadingComponent={<Loading />}
         />
       </div>
       <div
@@ -448,40 +416,7 @@ const UserProfileForm = ({
           isLoading={isDownloading}
           label="Download Account Data"
           pendingContent="Downloading..."
-          loadingComponent={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 50 50"
-              width="24"
-              height="24"
-            >
-              <circle
-                cx="25"
-                cy="25"
-                r="20"
-                fill="none"
-                stroke="white"
-                stroke-width="4"
-                stroke-dasharray="125.6"
-                stroke-dashoffset="100"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  from="0 25 25"
-                  to="360 25 25"
-                  dur="0.8s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="stroke-dashoffset"
-                  values="100;125.6"
-                  dur="0.8s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </svg>
-          }
+          loadingComponent={<Loading />}
           aria-label={
             isDownloading
               ? "Downloading your account data"
@@ -521,40 +456,7 @@ const UserProfileForm = ({
           isLoading={isDeleting}
           label="Delete Account"
           pendingContent="Deleting Account..."
-          loadingComponent={
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 50 50"
-              width="24"
-              height="24"
-            >
-              <circle
-                cx="25"
-                cy="25"
-                r="20"
-                fill="none"
-                stroke="white"
-                stroke-width="4"
-                stroke-dasharray="125.6"
-                stroke-dashoffset="100"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  from="0 25 25"
-                  to="360 25 25"
-                  dur="0.8s"
-                  repeatCount="indefinite"
-                />
-                <animate
-                  attributeName="stroke-dashoffset"
-                  values="100;125.6"
-                  dur="0.8s"
-                  repeatCount="indefinite"
-                />
-              </circle>
-            </svg>
-          }
+          loadingComponent={<Loading />}
           aria-label={
             isDeleting ? "Deleting your account" : "Delete your account"
           }
@@ -566,7 +468,7 @@ const UserProfileForm = ({
               <h3 className="text-lg font-semibold dark:text-white">
                 Confirm Account Deletion
               </h3>
-              <p className="mt-2 text-sm dark:text-gray-300">
+              <p className="mt-2 text-sm dark:text-white">
                 Are you sure you want to delete your account? This action cannot
                 be undone.
               </p>
