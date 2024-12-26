@@ -200,8 +200,8 @@ Start the server
 
 - [ ] **Meta Tags**
 
-  - [ ] Implement dynamic meta titles for each page/post.
-  - [ ] Create unique meta descriptions for each page/post.
+  - [x] Implement dynamic meta titles for each page/post.
+  - [x] Create unique meta descriptions for each page/post.
   - [ ] Optimize title tags for length and keyword relevance.
   - [ ] Implement meta robots tags to control indexation.
 
