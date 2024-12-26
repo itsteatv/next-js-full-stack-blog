@@ -1,11 +1,11 @@
 "use client";
 
-import { Spinner } from "@material-tailwind/react";
+import { Spinner } from "@/components/Spinner";
 
 const Loading = () => {
   return (
     <div className="flex items-center justify-center absolute inset-0">
-      <Spinner className="h-6 w-6" />
+      <Spinner width={24} height={24} color="white" />
     </div>
   );
 };
