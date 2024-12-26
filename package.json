@@ -13,7 +13,6 @@
     "@heroicons/react": "^2.1.5",
     "@hookform/resolvers": "^3.6.0",
     "@kinde-oss/kinde-auth-nextjs": "^2.3.6",
-    "@material-tailwind/react": "^2.1.9",
     "@prisma/client": "^5.22.0",
     "@react-email/components": "^0.0.19",
     "@react-email/tailwind": "^0.0.18",
