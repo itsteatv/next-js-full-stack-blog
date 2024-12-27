@@ -73,7 +73,11 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html
+        className="touch-pan-x touch-pan-y"
+        lang="en"
+        suppressHydrationWarning
+      >
         <body className={inter.className}>
           <ThemeProvider>
             <NextTopLoader showSpinner={false} color="#fff" />
