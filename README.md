@@ -189,7 +189,7 @@ Start the server
     - [ ] Two-factor authentication setup
     - [ ] Option to view recent account activity and log out from other sessions
 
-  - [ ] **Data Management**  
+  - [x] **Data Management**  
          Allow users to manage their data in compliance with privacy standards:
     - [x] Download account data as a JSON file
     - [x] Delete account (permanent deletion with confirmation)
@@ -202,7 +202,7 @@ Start the server
 
   - [x] Implement dynamic meta titles for each page/post.
   - [x] Create unique meta descriptions for each page/post.
-  - [ ] Optimize title tags for length and keyword relevance.
+  - [x] Optimize title tags for length and keyword relevance.
   - [ ] Implement meta robots tags to control indexation.
 
 - [x] **Open Graph & Twitter Cards**
