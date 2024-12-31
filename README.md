@@ -228,7 +228,7 @@ Start the server
 - [ ] **Sitemap and Robots.txt**
 
   - [x] Create and maintain a `sitemap.xml` file.
-  - [ ] Add a `robots.txt` file to control crawling.
+  - [x] Add a `robots.txt` file to control crawling.
   - [x] Ensure the sitemap includes all important pages and is updated regularly.
   - [ ] Submit the sitemap to Google Search Console.
 
