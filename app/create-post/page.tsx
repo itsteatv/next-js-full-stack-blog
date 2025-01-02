@@ -1,6 +1,11 @@
 import CreatePostForm from "@/components/CreatePostForm";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Create-Post",
+};
 
 const CreatePost = async () => {
   const { isAuthenticated, getUser, getPermission } = getKindeServerSession();
