@@ -2,6 +2,15 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import prisma from "@/lib/db";
 import UserProfileForm from "@/components/UserProfileForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const Dashboard = async () => {
   const { getUser, isAuthenticated } = getKindeServerSession();
