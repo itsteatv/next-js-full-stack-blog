@@ -1,9 +1,12 @@
-"use client";
-
 import Image from "next/image";
 import boyIllustration from "@/public/boyIllustration.svg";
 import Link from "next/link";
 import Button from "@/components/Button";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+};
 
 const About = () => {
   return (
