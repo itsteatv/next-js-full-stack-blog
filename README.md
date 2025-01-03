@@ -203,7 +203,7 @@ Start the server
   - [x] Implement dynamic meta titles for each page/post.
   - [x] Create unique meta descriptions for each page/post.
   - [x] Optimize title tags for length and keyword relevance.
-  - [ ] Implement meta robots tags to control indexation.
+  - [x] Implement meta robots tags to control indexation.
 
 - [x] **Open Graph & Twitter Cards**
 
