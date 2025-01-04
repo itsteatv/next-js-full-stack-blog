@@ -225,12 +225,12 @@ Start the server
   - [ ] Test structured data with Google’s Rich Results Test tool.
   - [ ] Implement schema for breadcrumbs for better navigation.
 
-- [ ] **Sitemap and Robots.txt**
+- [x] **Sitemap and Robots.txt**
 
   - [x] Create and maintain a `sitemap.xml` file.
   - [x] Add a `robots.txt` file to control crawling.
   - [x] Ensure the sitemap includes all important pages and is updated regularly.
-  - [ ] Submit the sitemap to Google Search Console.
+  - [x] Submit the sitemap to Google Search Console.
 
 - [ ] **Canonical Tags**
 
