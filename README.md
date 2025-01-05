@@ -326,7 +326,7 @@ Start the server
 
   - [ ] Include a privacy policy and cookie consent banner.
   - [ ] Implement user data protection measures.
-  - [ ] Allow users to request data deletion.
+  - [x] Allow users to request data deletion. (Available via dashboard)
 
 - [ ] **Accessibility Compliance**
 
