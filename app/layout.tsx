@@ -8,6 +8,7 @@ import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import { siteConfig } from "@/lib/siteConfig";
 import { AuthProvider } from "@/app/AuthProvider";
+import CookieConsentBanner from "@/components/CookieConsentBanner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -84,6 +85,7 @@ export default function RootLayout({
             <Toaster />
             <Navbar />
             {children}
+            <CookieConsentBanner />
           </ThemeProvider>
         </body>
       </html>
