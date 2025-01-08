@@ -324,7 +324,7 @@ Start the server
 
 - [ ] **GDPR Compliance**
 
-  - [ ] Include a privacy policy and cookie consent banner.
+  - [x] Include a privacy policy and cookie consent banner.
   - [ ] Implement user data protection measures.
   - [x] Allow users to request data deletion. (Available via dashboard)
 
@@ -446,7 +446,7 @@ Start the server
 - [ ] Legal and Compliance
   - [ ] Privacy policy and terms of service.
   - [ ] GDPR compliance features.
-  - [ ] Cookie consent.
+  - [x] Cookie consent.
   - [ ] Analytics and Reporting
   - [ ] Track page views, post views, and user engagement
 
