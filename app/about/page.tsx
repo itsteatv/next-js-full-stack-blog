@@ -1,47 +1,30 @@
-import Image from "next/image";
-import boyIllustration from "@/public/boyIllustration.svg";
-import Link from "next/link";
-import Button from "@/components/Button";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Us | Next.js Learning Hub",
 };
 
 const About = () => {
   return (
-    <section className="flex">
-      <div className="mt-16 1180>=:mt-28 lg:mr-28 lg:w-[30rem] 930>=:w-[25rem] 930>=:mt-[5.5rem] 768<=:hidden">
-        <Image src={boyIllustration} alt="blog image" />{" "}
-      </div>
-      <div className="mt-16 flex-grow">
-        <p className="dark:text-white mr-24 mt-20 font-Archivo font-extrabold text-sclamp 768<=:text-center 768<=:mr-auto 768<=:text-tclamp">
-          Next.js 14 Full Stack Blog
+    <div className="px-6 py-24 sm:py-32 lg:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <Link
+          href="https://github.com/itsteatv"
+          target="_blank"
+          className="text-base font-semibold leading-7 text-indigo-600"
+        >
+          Connect With Me
+        </Link>
+        <h2 className="mt-2 text-4xl font-bold tracking-tight dark:text-white sm:text-6xl">
+          About Our Mission
+        </h2>
+        <p className="mt-6 text-lg leading-8 dark:text-gray-300">
+          Our goal is to create a comprehensive learning resource by showcasing
+          Next.js features. Join us in exploring the future of web development.
         </p>
-        <div className="text-left mr-24 mb-10 768<=:mr-0 768<=:text-center mt-6">
-          <div className="">
-            <p className="dark:text-gray-400 font-Archivo font-extralight text-fclamp 768<=:text-foclamp 768<=:mx-2">
-              Welcome to our blog! We're passionate about exploring the world{" "}
-            </p>
-            <p className="dark:text-gray-400 font-Archivo font-extralight text-fclamp 768<=:text-foclamp 768<=:mx-2">
-              and sharing our discoveries with you.
-            </p>
-            <p className="dark:text-gray-400 font-Archivo font-extralight text-fclamp 768<=:text-foclamp 768<=:mx-2">
-              Join us as we journey through fascinating topics.
-            </p>
-          </div>
-          <Link href="/contact">
-            <Button
-              type="button"
-              className="rounded-md bg-white/10 px-3.5 duration-300 py-2.5 mt-6 text-sm font-semibold dark:text-white shadow-sm dark:hover:bg-white/20 hover:bg-gray-100 ring-1 ring-inset ring-gray-300 dark:ring-0"
-              label="Contact Us"
-            />
-          </Link>
-        </div>
       </div>
-
-      {/* <Footer /> */}
-    </section>
+    </div>
   );
 };
 
