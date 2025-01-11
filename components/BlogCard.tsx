@@ -1,136 +1,64 @@
-"use client";
-
-import Image from "next/image";
-import Button from "./Button";
+  import Image from "next/image";
 import Link from "next/link";
-import { truncateText } from "@/lib/truncateText";
 import { BlogPost } from "@/lib/types";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import toast from "react-hot-toast";
-import userPostDeletion from "@/actions/userPostDeletion";
-import adminPostDeletion from "@/actions/adminPostDeletion";
-import Dropdown from "./Dropdown";
-import { TrashIcon, PencilIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
-import { forwardRef } from "react";
+import { truncateText } from "@/lib/truncateText";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
-const BlogCard = forwardRef<HTMLDivElement, BlogCardProps>(({ post }, ref) => {
-  console.log(post);
-
-  const { user, isAuthenticated, getPermission } = useKindeBrowserClient();
-  const router = useRouter();
-
-  const isAuthor = isAuthenticated && user && user.id === post.userId;
-
-  const adminDeletePermission = getPermission("all::permissions");
-  const canAdminDelete =
-    isAuthenticated && user && adminDeletePermission?.isGranted;
-
-  const handleAdminDeletePost = async () => {
-    if (confirm("Are you sure you want to delete your post?")) {
-      try {
-        await adminPostDeletion(post.id);
-        toast.success("Post deleted successfully!");
-      } catch (error) {
-        toast.error("Failed to delete the post.");
-        console.error("Delete post error:", error);
-      }
-    }
-  };
-
-  const handleUserDeletePost = async () => {
-    if (confirm("Are you sure you want to delete your post?")) {
-      try {
-        await userPostDeletion(post.id);
-        toast.success("Post deleted successfully!");
-      } catch (error) {
-        toast.error("Failed to delete the post.");
-        console.error("Delete post error:", error);
-      }
-    }
-  };
-
-  const handleEditPost = () => {
-    router.push(`/blog/${post.id}/edit`);
-  };
-
-  const dropdownItems = [];
-  if (canAdminDelete) {
-    dropdownItems.push(
-      {
-        label: "Admin Delete Post",
-        onClick: handleAdminDeletePost,
-        icon: TrashIcon,
-      },
-      {
-        label: "Admin Edit Post",
-        onClick: handleEditPost,
-        icon: PencilIcon,
-      }
-    );
-  } else if (isAuthor) {
-    dropdownItems.push(
-      {
-        label: "Delete Your Post",
-        onClick: handleUserDeletePost,
-        icon: TrashIcon,
-      },
-      {
-        label: "Edit Your Post",
-        onClick: handleEditPost,
-        icon: PencilIcon,
-      }
-    );
-  }
-
+export default function BlogCard({ post }: BlogCardProps) {
   return (
-    <div ref={ref} className="max-w-[24rem] bg-transparent">
-      <div>
-        <div className="relative w-full h-[250px] overflow-hidden">
-          <Image
-            src="https://placehold.co/600x320.svg?text=fallback"
-            alt="fallback image"
-            fill
-          />
-        </div>
-      </div>
-      <div className="flex-grow overflow-hidden">
-        <p className="dark:text-white font-Archivo">
-          {post.author ? post.author : "Unknown Author"}
-        </p>
-        <p className="dark:text-white font-Archivo">{post.title}</p>
-        <p className="dark:text-gray-400 font-Archivo">
-          Categories:{" "}
-          {post.categories?.length
-            ? post.categories.map((category) => category.name).join(", ")
-            : "Uncategorized"}
-        </p>
-        <p className="mt-3 font-light font-FiraSans dark:text-white">
-          {truncateText(post.body, 100)}
-        </p>
-      </div>
-      <div className="flex items-center justify-between">
-        <Link href={`/blog/${post.id}`}>
-          <Button
-            label="Read More"
-            type="button"
-            className="rounded-md dark:bg-white/10 bg-gray-100 px-3.5 py-2.5 mt-6 text-sm font-semibold dark:text-white"
-          />
-        </Link>
-        {(isAuthor || canAdminDelete) && (
-          <div className="flex items-center flex-col justify-center mb-16">
-            <Dropdown buttonLabel="Actions" items={dropdownItems} />
-          </div>
+    <article className="flex max-w-xl flex-col items-start justify-between">
+      <div className="flex items-center gap-x-4 text-xs">
+        <time dateTime={post.createdAt || ""} className="text-gray-500">
+          {new Date(post.createdAt || "").toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </time>
+        {post.categories?.length ? (
+          <p className="relative z-10 rounded-full dark:bg-gray-50 bg-gray-200 px-3 py-1.5 font-medium dark:text-black dark:hover:bg-gray-300 hover:bg-gray-300 duration-300">
+            {post.categories[0].name}
+          </p>
+        ) : (
+          <span className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600">
+            Uncategorized
+          </span>
         )}
       </div>
-    </div>
+
+      <div className="group relative">
+        <h3 className="mt-3 text-lg font-semibold leading-6 dark:text-white group-hover:text-gray-300 duration-300">
+          <Link href={`/blog/${post.id}`}>
+            <span className="absolute inset-0" />
+            {post.title}
+          </Link>
+        </h3>
+        <p className="mt-5 line-clamp-3 text-sm leading-6 dark:text-gray-200">
+          {truncateText(post.body, 150)}
+        </p>
+      </div>
+
+      <div className="relative mt-8 flex items-center gap-x-4">
+        <Image
+          src="https://placehold.co/40x40.svg?text=Author"
+          alt={post.author || "Unknown Author"}
+          width={40}
+          height={40}
+          className="h-8 w-8 rounded-full bg-gray-50"
+        />
+        <div className="text-sm leading-6">
+          <p className="font-semibold dark:text-white">
+            <Link href={`/authors/${post.userId}`}>
+              <span className="absolute inset-0" />
+              {post.author || "Unknown Author"}
+            </Link>
+          </p>
+          {/* <p className="text-gray-600">{post.authorRole || "Contributor"}</p> */}
+        </div>
+      </div>
+    </article>
   );
-});
-
-BlogCard.displayName = "BlogCard";
-
-export default BlogCard;
+}
