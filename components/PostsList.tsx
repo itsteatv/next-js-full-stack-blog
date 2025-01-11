@@ -17,6 +17,7 @@ const PostsList = () => {
   const [error, setError] = useState<boolean>(false);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [skip, setSkip] = useState<number>(0);
+  const [isSearching, setIsSearching] = useState(false);
   const take = 10;
 
   const initialLoad = useRef(true);
@@ -61,10 +62,12 @@ const PostsList = () => {
   }, [loadPosts, searchQuery]);
 
   const handleSearch = () => {
+    setIsSearching(true);
     setSkip(0);
     setPosts([]);
     setHasMore(true);
     loadPosts();
+    setIsSearching(false);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,27 +104,39 @@ const PostsList = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <div className="mt-24 max-w-2xl mx-auto flex items-center gap-6">
+      <div className="mt-24 mb-14 max-w-2xl mx-auto flex items-center gap-2 justify-center 450>=:flex 450>=:flex-col">
         <Input
           type="text"
           placeholder="Search posts..."
           value={searchQuery}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          className="w-full px-5 py-3 border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="block rounded-md border-0 px-5 py-2 pl-3 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
         />
-        <Button
-          onClick={handleSearch}
-          className="px-6 py-3 bg-blue-500 text-white font-bold rounded"
-          label="Search"
-        />
-        {searchQuery && (
+
+        <div className="flex 450>=:flex gap-2">
           <Button
-            onClick={handleClear}
-            className="px-6 py-3 bg-gray-500 text-white font-bold rounded"
-            label="Clear"
+            className="inline-flex 
+          rounded-lg bg-blue-500 px-5 py-[0.6rem] text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-blue-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
+            onClick={handleSearch}
+            label="Search"
+            disabled={isSearching}
+            isLoading={isSearching}
+            pendingContent="Searching..."
+            loadingComponent={<Loading />}
           />
-        )}
+          {searchQuery && (
+            <Button
+              className="inline-flex items-center justify-center rounded-lg bg-gray-500 px-5 py-[0.6rem] text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-gray-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-gray-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
+              onClick={handleClear}
+              label="Clear"
+              // disabled={isSaving}
+              // isLoading={isSaving}
+              pendingContent="Clearing..."
+              loadingComponent={<Loading />}
+            />
+          )}
+        </div>
       </div>
 
       {loading && posts.length === 0 && (
@@ -138,7 +153,7 @@ const PostsList = () => {
 
       {!error && posts.length > 0 && (
         <main className="px-16 py-16 sm:max-w-lg md:max-w-4xl mx-auto">
-          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="flex items-center flex-col gap-y-16">
             {posts.map((post, index) => (
               <BlogCard
                 ref={index === posts.length - 1 ? lastPostRef : null}
@@ -162,7 +177,7 @@ const PostsList = () => {
       )}
 
       {!hasMore && !loading && !error && (
-        <p className="text-center mt-8">No more posts available.</p>
+        <p className="text-center mt-8 mb-8">No more posts available.</p>
       )}
     </div>
   );
