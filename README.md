@@ -479,10 +479,6 @@ Start the server
 
 ![HomeSignedIn](public/images/Home.png)
 
-`Home Page (Signed-Out)`
-
-![HomeSignedOut](public/images/HomeSignedOut.png)
-
 `Blog Page`
 
 ![Blog](public/images/Blog.png)
