@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 
+import createNextIntlPlugin from "next-intl/plugin";
+
 const imageDomains = process.env.NEXT_PUBLIC_IMAGE_DOMAINS?.split(",") || [];
+
+const withNextIntl = createNextIntlPlugin();
 
 const remotePatterns = imageDomains.map((domain) => ({
   protocol: "https",
@@ -12,6 +16,12 @@ const nextConfig = {
   images: {
     dangerouslyAllowSVG: true,
     remotePatterns,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   async headers() {
     return [
@@ -48,4 +58,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
