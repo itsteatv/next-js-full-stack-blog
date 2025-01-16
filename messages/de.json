@@ -1,0 +1,18 @@
+{
+  "navbar": {
+    "homeTitle": "Lernen Sie Next.js | Feature-Demonstration",
+    "home": "Startseite",
+    "blog": "Blog",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "createPost": "Beitrag erstellen",
+    "profileDropdown": {
+      "profile": "Ihr Profil",
+      "logout": "Abmelden"
+    }
+  },
+  "home": {
+    "header": "Beherrschen Sie Next.js",
+    "description": "Tauchen Sie in einen umfassenden Leitfaden ein, der die Möglichkeiten von Next.js zeigt. Lernen und implementieren Sie modernste Funktionen, um Ihre Entwicklungskompetenzen zu verbessern."
+  }
+}
