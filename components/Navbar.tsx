@@ -13,9 +13,9 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/20/solid";
 
 import Link from "next/link";
-import Loading from "@/app/blog/loading";
+import Loading from "@/app/[locale]/blog/loading";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LoginLink,
   RegisterLink,
@@ -24,26 +24,37 @@ import {
 import Image from "next/image";
 import Button from "./Button";
 import ThemeSwitcher from "./ThemeSwitcher";
-
-const navigation = [
-  { name: "Home", href: "/", current: false },
-  { name: "Blog", href: "/blog", current: false },
-  { name: "About", href: "/about", current: false },
-  { name: "Contact", href: "/contact", current: false },
-];
-const userNavigation = [{ name: "Your Profile", href: "/dashboard" }];
+import { useTranslations } from "next-intl";
+import { ChangeEvent } from "react";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function Navbar({ locale }: { locale: string }) {
+  const t = useTranslations("navbar");
+  const navigation = [
+    { name: t("home"), href: `/${locale}/`, current: false },
+    { name: t("blog"), href: `/${locale}/blog`, current: false },
+    { name: t("about"), href: `/${locale}/about`, current: false },
+    { name: t("contact"), href: `/${locale}/contact`, current: false },
+  ];
+
+  const userNavigation = [
+    { name: "Your Profile", href: `/${locale}/dashboard` },
+  ];
+
   const { user, isAuthenticated, isLoading, getPermission } =
     useKindeBrowserClient();
 
-  console.log(user);
-
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newLocale = e.target.value;
+    const path = pathname.split("/").slice(2).join("/");
+    router.push(`/${newLocale}/${path}`);
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -109,7 +120,7 @@ export default function Navbar() {
                     <Button
                       type="button"
                       className="relative duration-300 inline-flex items-center gap-x-1.5 rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                      label="Create Post"
+                      label={t("createPost")}
                       icon={
                         <PlusIcon
                           aria-hidden="true"
@@ -149,13 +160,14 @@ export default function Navbar() {
                     </div>
                     <MenuItems
                       transition
-                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md dark:bg-dark py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                      className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md dark:bg-[#121212] bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                     >
                       {userNavigation.map((item) => (
                         <MenuItem key={item.name}>
                           <Link
                             href={item.href}
-                            className="block px-4 py-2 text-sm duration-300 dark:text-white text-black hover:text-white data-[focus]:bg-gray-700 rounded-md"
+                            className="block px-3 py-2 text-sm duration-300
+                            dark:text-white text-black hover:text-white data-[focus]:bg-gray-700 rounded-md"
                           >
                             {item.name}
                           </Link>
@@ -164,6 +176,26 @@ export default function Navbar() {
                       <LogoutLink className="block rounded-md px-3 py-2 text-base font-medium duration-300 text-red-600 hover:bg-red-700 hover:text-white ">
                         Logout
                       </LogoutLink>
+                      <div className="px-3 py-2">
+                        <label
+                          htmlFor="language"
+                          className="block text-sm font-medium dark:text-gray-400 mb-2"
+                        >
+                          Language
+                        </label>
+                        <select
+                          id="language"
+                          value={locale}
+                          onChange={handleLanguageChange}
+                          className="block w-full rounded-md border border-gray-300 bg-white dark:bg-gray-700 dark:text-gray-300 px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm duration-300"
+                        >
+                          <option value="en">English</option>
+                          <option value="fr">Français</option>
+                          <option value="de">Deutsch</option>
+                          <option value="ru">Русский</option>
+                          <option value="zh">中文</option>
+                        </select>
+                      </div>
                       <div className="px-3 py-2 ">
                         <ThemeSwitcher />
                       </div>
@@ -248,7 +280,7 @@ export default function Navbar() {
                 </div>
               </div>
             </div>
-            <div className="mt-4 space-y-1 px-2 sm:px-3">
+            <div className="mt-4 space-y-3 px-2 sm:px-3">
               {userNavigation.map((item) => (
                 <Link
                   key={item.name}
@@ -261,6 +293,23 @@ export default function Navbar() {
               <LogoutLink className="block rounded-md px-3 py-2 text-base font-medium text-red-600 hover:bg-red-700 hover:text-white">
                 Logout
               </LogoutLink>
+              <div className="relative">
+                <label htmlFor="language" className="sr-only">
+                  Select Language
+                </label>
+                <select
+                  id="language"
+                  value={locale}
+                  onChange={handleLanguageChange}
+                  className="block w-full rounded-md border border-gray-300 bg-white dark:bg-gray-700 dark:text-gray-300 px-3 py-2 text-base shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm duration-300"
+                >
+                  <option value="en">English</option>
+                  <option value="fr">Français</option>
+                  <option value="de">Deutsch</option>
+                  <option value="ru">Русский</option>
+                  <option value="zh">中文</option>
+                </select>
+              </div>
             </div>
             <div className="px-4 py-2 mt-4">
               <ThemeSwitcher />

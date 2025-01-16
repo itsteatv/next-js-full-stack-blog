@@ -1,0 +1,18 @@
+{
+  "navbar": {
+    "homeTitle": "学习 Next.js | 功能展示",
+    "home": "首页",
+    "blog": "博客",
+    "about": "关于",
+    "contact": "联系我们",
+    "createPost": "创建文章",
+    "profileDropdown": {
+      "profile": "您的个人资料",
+      "logout": "退出登录"
+    }
+  },
+  "home": {
+    "header": "掌握 Next.js",
+    "description": "深入了解展示 Next.js 功能的全面指南。学习并实现尖端功能以提升您的开发技能。"
+  }
+}

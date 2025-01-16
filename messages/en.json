@@ -1,0 +1,17 @@
+{
+  "navbar": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact",
+    "createPost": "Create Post",
+    "profileDropdown": {
+      "profile": "Your Profile",
+      "logout": "Logout"
+    }
+  },
+  "home": {
+    "header": "Learn Next.js | Feature Showcase",
+    "description": "Dive into a comprehensive guide showcasing Next.js capabilities. Learn and implement cutting-edge features to elevate your development skills."
+  }
+}
