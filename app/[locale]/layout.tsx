@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/providers/ThemeProvider";
@@ -9,6 +9,8 @@ import { Toaster } from "react-hot-toast";
 import { siteConfig } from "@/lib/siteConfig";
 import { AuthProvider } from "@/app/AuthProvider";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
+import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -67,26 +69,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+  const messages = await getMessages();
   return (
     <AuthProvider>
       <html
         className="touch-pan-x touch-pan-y"
-        lang="en"
+        lang={locale}
         suppressHydrationWarning
       >
         <body className={inter.className}>
-          <ThemeProvider>
-            <NextTopLoader showSpinner={false} color="#fff" />
-            <Toaster />
-            <Navbar />
-            {children}
-            <CookieConsentBanner />
-          </ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <ThemeProvider>
+              <NextTopLoader showSpinner={false} color="#fff" />
+              <Toaster />
+              <Navbar locale={locale} />
+              {children}
+              <CookieConsentBanner />
+            </ThemeProvider>
+          </NextIntlClientProvider>
         </body>
       </html>
     </AuthProvider>
