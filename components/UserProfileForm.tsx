@@ -18,7 +18,7 @@ import { downloadUserData } from "@/actions/downloadUserData";
 import { useRouter } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Modal from "./Modal";
-import Loading from "@/app/blog/loading";
+import Loading from "@/app/[locale]/blog/loading";
 
 interface UserProfileFormProps {
   user: KindeUser | null;

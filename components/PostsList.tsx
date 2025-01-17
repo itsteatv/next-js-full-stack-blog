@@ -5,7 +5,7 @@ import BlogCard from "@/components/BlogCard";
 import { BlogPost } from "@/lib/types";
 import Input from "./Input";
 import { fetchPosts } from "@/actions/fetchPosts";
-import Loading from "@/app/blog/loading";
+import Loading from "@/app/[locale]/blog/loading";
 import Button from "./Button";
 import { searchPosts } from "@/actions/searchPosts";
 import toast from "react-hot-toast";
