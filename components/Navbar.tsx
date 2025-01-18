@@ -115,7 +115,7 @@ export default function Navbar({ locale }: { locale: string }) {
           <div className="flex items-center">
             {isAuthenticated ? (
               <>
-                <Link href="/create-post">
+                <Link href={`/${locale}/create-post`}>
                   <div className="flex flex-row">
                     <Button
                       type="button"
