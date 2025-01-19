@@ -18,6 +18,7 @@ const PostsList = () => {
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [skip, setSkip] = useState<number>(0);
   const [isSearching, setIsSearching] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
   const take = 10;
 
   const initialLoad = useRef(true);
@@ -82,13 +83,21 @@ const PostsList = () => {
     }
   };
 
-  const handleClear = () => {
-    setSearchQuery("");
-    setSkip(0);
-    setPosts([]);
-    setHasMore(true);
-    initialLoad.current = true;
-    loadPosts();
+  const handleClear = async () => {
+    setIsClearing(true);
+    try {
+      setSearchQuery("");
+      setSkip(0);
+      setPosts([]);
+      setHasMore(true);
+      initialLoad.current = true;
+      await loadPosts();
+    } catch (error) {
+      console.error("Error clearing posts:", error);
+      toast.error("Failed to clear posts. Please try again.");
+    } finally {
+      setIsClearing(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -123,17 +132,25 @@ const PostsList = () => {
             disabled={isSearching}
             isLoading={isSearching}
             pendingContent="Searching..."
-            loadingComponent={<Loading />}
+            loadingComponent={
+              <div className="relative w-6 h-6">
+                <Loading />
+              </div>
+            }
           />
           {searchQuery && (
             <Button
               className="inline-flex items-center justify-center rounded-lg bg-gray-500 px-5 py-[0.6rem] text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-gray-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-gray-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
               onClick={handleClear}
               label="Clear"
-              // disabled={isSaving}
-              // isLoading={isSaving}
+              disabled={isClearing}
+              isLoading={isClearing}
               pendingContent="Clearing..."
-              loadingComponent={<Loading />}
+              loadingComponent={
+                <div className="relative w-6 h-6">
+                  <Loading />
+                </div>
+              }
             />
           )}
         </div>

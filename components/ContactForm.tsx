@@ -13,6 +13,7 @@ import { sendEmail } from "@/actions/sendEmail";
 import Textarea from "./Textarea";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { InboxIcon } from "@heroicons/react/24/outline";
+import Loading from "@/app/[locale]/blog/loading";
 
 const ContactPostForm = () => {
   const {
@@ -139,11 +140,16 @@ const ContactPostForm = () => {
           </div>
           <div className="flex items-center justify-between">
             <Button
+              label="Send"
               usePendingStatus={true}
               pendingContent="Sending..."
-              className="inline-block w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed dark:bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline dark:hover:bg-gray-300 hover:bg-gray-200 ring-1 ring-inset ring-gray-300"
+              loadingComponent={
+                <div className="relative w-6 h-6">
+                  <Loading color="black" />
+                </div>
+              }
+              className="flex items-center justify-center w-full cursor-pointer rounded-xl disabled:bg-gray-500 disabled:cursor-not-allowed dark:bg-white px-8 py-4 mt-4 text-center duration-300 font-semibold text-black no-underline dark:hover:bg-gray-300 hover:bg-gray-200 ring-1 ring-inset ring-gray-300"
               type="submit"
-              label="Send"
             />
           </div>
         </form>

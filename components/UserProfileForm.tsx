@@ -380,7 +380,11 @@ const UserProfileForm = ({
           disabled={isSaving}
           isLoading={isSaving}
           pendingContent="Saving Account Info..."
-          loadingComponent={<Loading />}
+          loadingComponent={
+            <div className="relative w-6 h-6">
+              <Loading color="white" />
+            </div>
+          }
         />
       </div>
       <div
@@ -416,7 +420,11 @@ const UserProfileForm = ({
           isLoading={isDownloading}
           label="Download Account Data"
           pendingContent="Downloading..."
-          loadingComponent={<Loading />}
+          loadingComponent={
+            <div className="relative w-6 h-6">
+              <Loading color="white" />
+            </div>
+          }
           aria-label={
             isDownloading
               ? "Downloading your account data"
@@ -456,7 +464,11 @@ const UserProfileForm = ({
           isLoading={isDeleting}
           label="Delete Account"
           pendingContent="Deleting Account..."
-          loadingComponent={<Loading />}
+          loadingComponent={
+            <div className="relative w-6 h-6">
+              <Loading color="white" />
+            </div>
+          }
           aria-label={
             isDeleting ? "Deleting your account" : "Delete your account"
           }
