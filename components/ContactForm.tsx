@@ -14,6 +14,7 @@ import Textarea from "./Textarea";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { InboxIcon } from "@heroicons/react/24/outline";
 import Loading from "@/app/[locale]/blog/loading";
+import { useTranslations } from "next-intl";
 
 const ContactPostForm = () => {
   const {
@@ -24,6 +25,8 @@ const ContactPostForm = () => {
   } = useForm<TEmailContactSchema>({
     resolver: zodResolver(emailContactSchema),
   });
+
+  const t = useTranslations("contact");
 
   const handleFormSubmit = async (formData: FormData) => {
     const data = {
@@ -63,10 +66,10 @@ const ContactPostForm = () => {
         >
           <div className="mb-4">
             <label
-              htmlFor="name"
+              htmlFor={t("name.label")}
               className="block text-sm font-medium leading-6 dark:text-white"
             >
-              Name
+              {t("name.label")}
             </label>
             <div>
               <div className="relative mt-2 rounded-md shadow-sm">
@@ -80,7 +83,7 @@ const ContactPostForm = () => {
               <Input
                 className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 type="text"
-                placeholder="Your name"
+                placeholder={t("name.placeholder")}
                 {...register("authorName")}
                 name="authorName"
               />
@@ -93,9 +96,9 @@ const ContactPostForm = () => {
           <div className="mb-4">
             <label
               className="block dark:text-white text-sm font-bold mb-2"
-              htmlFor="email"
+              htmlFor={t("email.label")}
             >
-              Email
+              {t("email.label")}
             </label>
             <div>
               <div className="relative mt-2 rounded-md shadow-sm">
@@ -109,7 +112,7 @@ const ContactPostForm = () => {
               <Input
                 className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 type="email"
-                placeholder="Your email"
+                placeholder={t("email.placeholder")}
                 {...register("authorEmail")}
                 name="authorEmail"
               />
@@ -124,7 +127,7 @@ const ContactPostForm = () => {
               className="block dark:text-white text-sm font-bold mb-2"
               htmlFor="message"
             >
-              Message
+              {t("message.label")}
             </label>
             <Textarea
               className="block w-full rounded-md border-0 py-1.5 px-1.5 dark:text-white bg-transparent shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -140,7 +143,7 @@ const ContactPostForm = () => {
           </div>
           <div className="flex items-center justify-between">
             <Button
-              label="Send"
+              label={t("sendButton")}
               usePendingStatus={true}
               pendingContent="Sending..."
               loadingComponent={
