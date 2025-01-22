@@ -436,8 +436,8 @@ Start the server
   - [ ] Alt text for images.
   - [ ] Keyboard navigation support.
   - [ ] Screen reader compatibility.
-- [ ] Localization and Internationalization
-  - [ ] Multi-language support.
+- [] Localization and Internationalization
+  - [x] Multi-language support.
   - [ ] Regional settings (date formats, currency).
   - [ ] Auto-translate or integrate with translation services like Google Translate.
 - [ ] Notifications
