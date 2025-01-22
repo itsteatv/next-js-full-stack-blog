@@ -7,11 +7,123 @@
     "createPost": "Create Post",
     "profileDropdown": {
       "profile": "Your Profile",
-      "logout": "Logout"
+      "logout": "Logout",
+      "language": "Language"
     }
   },
   "home": {
     "header": "Learn Next.js | Feature Showcase",
     "description": "Dive into a comprehensive guide showcasing Next.js capabilities. Learn and implement cutting-edge features to elevate your development skills."
+  },
+  "about": {
+    "social": "Social",
+    "title": "About Our Mission",
+    "description": "Our goal is to create a comprehensive learning resource by showcasing Next.js features. Join us in exploring the future of web development."
+  },
+  "contact": {
+    "name": {
+      "label": "Name",
+      "placeholder": "Your name"
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Your email"
+    },
+    "message": {
+      "label": "Message"
+    },
+    "sendButton": "Send"
+  },
+  "footer": {
+    "copyright": "© 2020 Your Company, Inc. All rights reserved."
+  },
+  "dashboard": {
+    "personalInfo": {
+      "title": "Personal Information",
+      "description": "Use a permanent address where you can receive mail."
+    },
+    "role": {
+      "title": "Your Role",
+      "description": "Your current access level in the system"
+    },
+    "avatar": {
+      "title": "Change Avatar",
+      "description": "JPG, GIF or PNG. 1MB max."
+    },
+    "inputs": {
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Please enter your first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Please enter your last name"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Please enter your email"
+      },
+      "username": {
+        "label": "Username",
+        "placeholder": "Please enter your username"
+      },
+      "bio": {
+        "label": "Bio",
+        "placeholder": "Tell us a bit about yourself"
+      },
+      "socialLinks": {
+        "label": "Social Links",
+        "placeholder": "Provide your social media links (comma-separated)"
+      }
+    },
+    "SaveInfo": {
+      "saveButton": "Save Account Info",
+      "saveLoading": "Saving Account Info..."
+    },
+    "exportData": {
+      "title": "Export Your Account Data",
+      "description": "Want a backup of your account details? Download all the information linked to your account, including personal settings, purchase history, and saved preferences, in just a few clicks.",
+      "details": "This download includes essential data, such as your account settings, preferences, and transaction history. For security, ensure that you store the file in a safe location to protect your information.",
+      "button": "Download Account Data",
+      "downloadLoading": "Downloading..."
+    },
+    "deleteAccount": {
+      "title": "Delete Your Account",
+      "description": "Deleting your account will permanently remove all your personal data, preferences, and purchase history. Please make sure you really want to proceed.",
+      "warning": "Once your account is deleted, it cannot be undone. Ensure you have a backup of any important data before proceeding.",
+      "button": "Delete Account",
+      "deleteLoading": "Deleting Account..."
+    },
+    "modal": {
+      "title": "Confirm Account Deletion",
+      "description": "Are you sure you want to delete your account? This action cannot be undone.",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "deleteLoading": "Deleting..."
+    }
+  },
+  "createPost": {
+    "title": {
+      "label": "Title",
+      "placeholder": "Your title"
+    },
+    "body": {
+      "label": "Body"
+    },
+    "category": {
+      "label": "Category"
+    },
+    "preview": {
+      "postTitle": "Post Title",
+      "postBody": "Post Body",
+      "category": "Category"
+    },
+    "createButton": "Create",
+    "createButtonLoading": "Creating..."
+  },
+  "search": {
+    "placeholder": "Search posts...",
+    "searchButton": "Search",
+    "clearButton": "Clear"
   }
 }

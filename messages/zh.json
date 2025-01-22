@@ -1,18 +1,129 @@
 {
   "navbar": {
-    "homeTitle": "学习 Next.js | 功能展示",
     "home": "首页",
     "blog": "博客",
     "about": "关于",
-    "contact": "联系我们",
-    "createPost": "创建文章",
+    "contact": "联系",
+    "createPost": "创建帖子",
     "profileDropdown": {
       "profile": "您的个人资料",
-      "logout": "退出登录"
+      "logout": "登出",
+      "language": "语言"
     }
   },
   "home": {
-    "header": "掌握 Next.js",
-    "description": "深入了解展示 Next.js 功能的全面指南。学习并实现尖端功能以提升您的开发技能。"
+    "header": "学习 Next.js | 功能展示",
+    "description": "深入了解展示 Next.js 功能的综合指南。学习并实施尖端功能，以提升您的开发技能。"
+  },
+  "about": {
+    "social": "社交",
+    "title": "关于我们的使命",
+    "description": "我们的目标是通过展示 Next.js 的功能，创建一个全面的学习资源。加入我们，共同探索 Web 开发的未来。"
+  },
+  "contact": {
+    "name": {
+      "label": "姓名",
+      "placeholder": "您的姓名"
+    },
+    "email": {
+      "label": "电子邮件",
+      "placeholder": "您的电子邮件"
+    },
+    "message": {
+      "label": "消息"
+    },
+    "sendButton": "发送"
+  },
+  "footer": {
+    "copyright": "© 2020 您的公司, Inc. 保留所有权利。"
+  },
+  "dashboard": {
+    "personalInfo": {
+      "title": "个人信息",
+      "description": "请使用您可以接收邮件的永久地址。"
+    },
+    "role": {
+      "title": "您的角色",
+      "description": "您在系统中的当前访问级别"
+    },
+    "avatar": {
+      "title": "更改头像",
+      "description": "JPG、GIF 或 PNG。最大 1MB。"
+    },
+    "inputs": {
+      "firstName": {
+        "label": "名字",
+        "placeholder": "请输入您的名字"
+      },
+      "lastName": {
+        "label": "姓氏",
+        "placeholder": "请输入您的姓氏"
+      },
+      "email": {
+        "label": "电子邮件地址",
+        "placeholder": "请输入您的电子邮件"
+      },
+      "username": {
+        "label": "用户名",
+        "placeholder": "请输入您的用户名"
+      },
+      "bio": {
+        "label": "个人简介",
+        "placeholder": "请告诉我们一些关于您的事情"
+      },
+      "socialLinks": {
+        "label": "社交链接",
+        "placeholder": "提供您的社交媒体链接（用逗号分隔）"
+      }
+    },
+    "SaveInfo": {
+      "saveButton": "保存账户信息",
+      "saveLoading": "正在保存账户信息..."
+    },
+    "exportData": {
+      "title": "导出您的账户数据",
+      "description": "想要备份您的账户详细信息吗？只需点击几下即可下载与您账户相关的所有信息，包括个人设置、购买历史和保存的偏好。",
+      "details": "此下载包括重要数据，例如您的账户设置、偏好和交易历史。为了安全起见，请确保将文件存储在安全的位置以保护您的信息。",
+      "button": "下载账户数据",
+      "downloadLoading": "正在下载..."
+    },
+    "deleteAccount": {
+      "title": "删除您的账户",
+      "description": "删除您的账户将永久删除所有个人数据、偏好和购买历史。请确保您真的要继续。",
+      "warning": "一旦您的账户被删除，将无法恢复。请确保在继续之前备份所有重要数据。",
+      "button": "删除账户",
+      "deleteLoading": "正在删除账户..."
+    },
+    "modal": {
+      "title": "确认删除账户",
+      "description": "您确定要删除您的账户吗？此操作无法撤消。",
+      "cancel": "取消",
+      "delete": "删除",
+      "deleteLoading": "正在删除..."
+    }
+  },
+  "createPost": {
+    "title": {
+      "label": "标题",
+      "placeholder": "您的标题"
+    },
+    "body": {
+      "label": "内容"
+    },
+    "category": {
+      "label": "类别"
+    },
+    "preview": {
+      "postTitle": "帖子标题",
+      "postBody": "帖子内容",
+      "category": "类别"
+    },
+    "createButton": "创建",
+    "createButtonLoading": "正在创建..."
+  },
+  "search": {
+    "placeholder": "搜索帖子...",
+    "searchButton": "搜索",
+    "clearButton": "清除"
   }
 }
