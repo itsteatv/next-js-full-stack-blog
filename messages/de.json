@@ -1,18 +1,129 @@
 {
   "navbar": {
-    "homeTitle": "Lernen Sie Next.js | Feature-Demonstration",
     "home": "Startseite",
     "blog": "Blog",
     "about": "Über uns",
     "contact": "Kontakt",
     "createPost": "Beitrag erstellen",
     "profileDropdown": {
-      "profile": "Ihr Profil",
-      "logout": "Abmelden"
+      "profile": "Dein Profil",
+      "logout": "Abmelden",
+      "language": "Sprache"
     }
   },
   "home": {
-    "header": "Beherrschen Sie Next.js",
-    "description": "Tauchen Sie in einen umfassenden Leitfaden ein, der die Möglichkeiten von Next.js zeigt. Lernen und implementieren Sie modernste Funktionen, um Ihre Entwicklungskompetenzen zu verbessern."
+    "header": "Lerne Next.js | Funktionsshowcase",
+    "description": "Tauchen Sie ein in einen umfassenden Leitfaden, der die Fähigkeiten von Next.js zeigt. Lernen und implementieren Sie modernste Funktionen, um Ihre Entwicklungskenntnisse zu verbessern."
+  },
+  "about": {
+    "social": "Sozial",
+    "title": "Über unsere Mission",
+    "description": "Unser Ziel ist es, eine umfassende Lernressource zu schaffen, indem wir die Funktionen von Next.js präsentieren. Begleiten Sie uns bei der Erforschung der Zukunft der Webentwicklung."
+  },
+  "contact": {
+    "name": {
+      "label": "Name",
+      "placeholder": "Ihr Name"
+    },
+    "email": {
+      "label": "E-Mail",
+      "placeholder": "Ihre E-Mail"
+    },
+    "message": {
+      "label": "Nachricht"
+    },
+    "sendButton": "Senden"
+  },
+  "footer": {
+    "copyright": "© 2020 Ihre Firma, Inc. Alle Rechte vorbehalten."
+  },
+  "dashboard": {
+    "personalInfo": {
+      "title": "Persönliche Informationen",
+      "description": "Verwenden Sie eine permanente Adresse, an der Sie Post empfangen können."
+    },
+    "role": {
+      "title": "Ihre Rolle",
+      "description": "Ihr aktueller Zugriffslevel im System"
+    },
+    "avatar": {
+      "title": "Avatar ändern",
+      "description": "JPG, GIF oder PNG. Maximal 1 MB."
+    },
+    "inputs": {
+      "firstName": {
+        "label": "Vorname",
+        "placeholder": "Bitte geben Sie Ihren Vornamen ein"
+      },
+      "lastName": {
+        "label": "Nachname",
+        "placeholder": "Bitte geben Sie Ihren Nachnamen ein"
+      },
+      "email": {
+        "label": "E-Mail-Adresse",
+        "placeholder": "Bitte geben Sie Ihre E-Mail-Adresse ein"
+      },
+      "username": {
+        "label": "Benutzername",
+        "placeholder": "Bitte geben Sie Ihren Benutzernamen ein"
+      },
+      "bio": {
+        "label": "Biografie",
+        "placeholder": "Erzählen Sie uns etwas über sich"
+      },
+      "socialLinks": {
+        "label": "Soziale Links",
+        "placeholder": "Geben Sie Ihre Social-Media-Links ein (durch Kommas getrennt)"
+      }
+    },
+    "SaveInfo": {
+      "saveButton": "Kontoinformationen speichern",
+      "saveLoading": "Kontoinformationen werden gespeichert..."
+    },
+    "exportData": {
+      "title": "Exportieren Sie Ihre Kontodaten",
+      "description": "Möchten Sie eine Sicherung Ihrer Kontodaten? Laden Sie alle mit Ihrem Konto verknüpften Informationen, einschließlich persönlicher Einstellungen, Kaufhistorie und gespeicherter Präferenzen, mit nur wenigen Klicks herunter.",
+      "details": "Dieser Download enthält wichtige Daten wie Ihre Kontoeinstellungen, Präferenzen und Transaktionshistorie. Speichern Sie die Datei aus Sicherheitsgründen an einem sicheren Ort, um Ihre Informationen zu schützen.",
+      "button": "Kontodaten herunterladen",
+      "downloadLoading": "Wird heruntergeladen..."
+    },
+    "deleteAccount": {
+      "title": "Ihr Konto löschen",
+      "description": "Das Löschen Ihres Kontos entfernt dauerhaft alle Ihre persönlichen Daten, Präferenzen und Ihre Kaufhistorie. Bitte stellen Sie sicher, dass Sie fortfahren möchten.",
+      "warning": "Sobald Ihr Konto gelöscht ist, kann dies nicht rückgängig gemacht werden. Stellen Sie sicher, dass Sie ein Backup aller wichtigen Daten haben, bevor Sie fortfahren.",
+      "button": "Konto löschen",
+      "deleteLoading": "Konto wird gelöscht..."
+    },
+    "modal": {
+      "title": "Kontolöschung bestätigen",
+      "description": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "deleteLoading": "Wird gelöscht..."
+    }
+  },
+  "createPost": {
+    "title": {
+      "label": "Titel",
+      "placeholder": "Ihr Titel"
+    },
+    "body": {
+      "label": "Inhalt"
+    },
+    "category": {
+      "label": "Kategorie"
+    },
+    "preview": {
+      "postTitle": "Beitragstitel",
+      "postBody": "Beitragsinhalt",
+      "category": "Kategorie"
+    },
+    "createButton": "Erstellen",
+    "createButtonLoading": "Wird erstellt..."
+  },
+  "search": {
+    "placeholder": "Beiträge suchen...",
+    "searchButton": "Suchen",
+    "clearButton": "Löschen"
   }
 }
