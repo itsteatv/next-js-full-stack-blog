@@ -1,6 +1,5 @@
 {
   "navbar": {
-    "homeTitle": "Apprenez Next.js | Démonstration des fonctionnalités",
     "home": "Accueil",
     "blog": "Blog",
     "about": "À propos",
@@ -8,11 +7,123 @@
     "createPost": "Créer un article",
     "profileDropdown": {
       "profile": "Votre profil",
-      "logout": "Déconnexion"
+      "logout": "Déconnexion",
+      "language": "Langue"
     }
   },
   "home": {
-    "header": "Maîtrisez Next.js",
-    "description": "Plongez dans un guide complet mettant en avant les capacités de Next.js. Apprenez et implémentez des fonctionnalités de pointe pour améliorer vos compétences en développement."
+    "header": "Apprendre Next.js | Démonstration des fonctionnalités",
+    "description": "Plongez dans un guide complet présentant les capacités de Next.js. Apprenez et mettez en œuvre des fonctionnalités de pointe pour améliorer vos compétences en développement."
+  },
+  "about": {
+    "social": "Social",
+    "title": "À propos de notre mission",
+    "description": "Notre objectif est de créer une ressource d'apprentissage complète en mettant en avant les fonctionnalités de Next.js. Rejoignez-nous pour explorer l'avenir du développement web."
+  },
+  "contact": {
+    "name": {
+      "label": "Nom",
+      "placeholder": "Votre nom"
+    },
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Votre e-mail"
+    },
+    "message": {
+      "label": "Message"
+    },
+    "sendButton": "Envoyer"
+  },
+  "footer": {
+    "copyright": "© 2020 Votre entreprise, Inc. Tous droits réservés."
+  },
+  "dashboard": {
+    "personalInfo": {
+      "title": "Informations personnelles",
+      "description": "Utilisez une adresse permanente où vous pouvez recevoir du courrier."
+    },
+    "role": {
+      "title": "Votre rôle",
+      "description": "Votre niveau d'accès actuel dans le système"
+    },
+    "avatar": {
+      "title": "Changer d'avatar",
+      "description": "JPG, GIF ou PNG. 1 Mo max."
+    },
+    "inputs": {
+      "firstName": {
+        "label": "Prénom",
+        "placeholder": "Veuillez entrer votre prénom"
+      },
+      "lastName": {
+        "label": "Nom de famille",
+        "placeholder": "Veuillez entrer votre nom de famille"
+      },
+      "email": {
+        "label": "Adresse e-mail",
+        "placeholder": "Veuillez entrer votre adresse e-mail"
+      },
+      "username": {
+        "label": "Nom d'utilisateur",
+        "placeholder": "Veuillez entrer votre nom d'utilisateur"
+      },
+      "bio": {
+        "label": "Biographie",
+        "placeholder": "Parlez-nous un peu de vous"
+      },
+      "socialLinks": {
+        "label": "Liens sociaux",
+        "placeholder": "Fournissez vos liens de médias sociaux (séparés par des virgules)"
+      }
+    },
+    "SaveInfo": {
+      "saveButton": "Enregistrer les informations du compte",
+      "saveLoading": "Enregistrement des informations du compte..."
+    },
+    "exportData": {
+      "title": "Exporter vos données de compte",
+      "description": "Vous souhaitez une sauvegarde de vos informations de compte ? Téléchargez toutes les informations liées à votre compte, y compris les paramètres personnels, l'historique des achats et les préférences enregistrées, en quelques clics.",
+      "details": "Ce téléchargement inclut des données essentielles, telles que vos paramètres de compte, préférences et historique de transactions. Pour des raisons de sécurité, assurez-vous de stocker le fichier dans un endroit sûr pour protéger vos informations.",
+      "button": "Télécharger les données du compte",
+      "downloadLoading": "Téléchargement en cours..."
+    },
+    "deleteAccount": {
+      "title": "Supprimer votre compte",
+      "description": "La suppression de votre compte supprimera définitivement toutes vos données personnelles, préférences et historique d'achats. Veuillez vous assurer que vous souhaitez vraiment continuer.",
+      "warning": "Une fois votre compte supprimé, cette action ne peut pas être annulée. Assurez-vous d'avoir une sauvegarde de toutes les données importantes avant de continuer.",
+      "button": "Supprimer le compte",
+      "deleteLoading": "Suppression du compte..."
+    },
+    "modal": {
+      "title": "Confirmer la suppression du compte",
+      "description": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action ne peut pas être annulée.",
+      "cancel": "Annuler",
+      "delete": "Supprimer",
+      "deleteLoading": "Suppression en cours..."
+    }
+  },
+  "createPost": {
+    "title": {
+      "label": "Titre",
+      "placeholder": "Votre titre"
+    },
+    "body": {
+      "label": "Contenu"
+    },
+    "category": {
+      "label": "Catégorie"
+    },
+    "preview": {
+      "postTitle": "Titre de l'article",
+      "postBody": "Contenu de l'article",
+      "category": "Catégorie"
+    },
+    "createButton": "Créer",
+    "createButtonLoading": "Création en cours..."
+  },
+  "search": {
+    "placeholder": "Rechercher des articles...",
+    "searchButton": "Rechercher",
+    "clearButton": "Effacer"
   }
 }
