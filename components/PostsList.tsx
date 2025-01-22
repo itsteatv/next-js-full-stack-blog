@@ -9,6 +9,7 @@ import Loading from "@/app/[locale]/blog/loading";
 import Button from "./Button";
 import { searchPosts } from "@/actions/searchPosts";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const PostsList = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -23,6 +24,7 @@ const PostsList = () => {
 
   const initialLoad = useRef(true);
   const lastPostRef = useRef<HTMLDivElement | null>(null);
+  const t = useTranslations("search");
 
   const loadPosts = useCallback(async () => {
     setLoading(true);
@@ -116,7 +118,7 @@ const PostsList = () => {
       <div className="mt-24 mb-14 max-w-2xl mx-auto flex items-center gap-2 justify-center 450>=:flex 450>=:flex-col">
         <Input
           type="text"
-          placeholder="Search posts..."
+          placeholder={t("placeholder")}
           value={searchQuery}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -128,7 +130,7 @@ const PostsList = () => {
             className="inline-flex 
           rounded-lg bg-blue-500 px-5 py-[0.6rem] text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-blue-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
             onClick={handleSearch}
-            label="Search"
+            label={t("searchButton")}
             disabled={isSearching}
             isLoading={isSearching}
             pendingContent="Searching..."
@@ -142,7 +144,7 @@ const PostsList = () => {
             <Button
               className="inline-flex items-center justify-center rounded-lg bg-gray-500 px-5 py-[0.6rem] text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-gray-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-gray-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
               onClick={handleClear}
-              label="Clear"
+              label={t("clearButton")}
               disabled={isClearing}
               isLoading={isClearing}
               pendingContent="Clearing..."

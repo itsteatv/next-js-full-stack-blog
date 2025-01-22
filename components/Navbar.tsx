@@ -41,7 +41,7 @@ export default function Navbar({ locale }: { locale: string }) {
   ];
 
   const userNavigation = [
-    { name: "Your Profile", href: `/${locale}/dashboard` },
+    { name: t("profileDropdown.profile"), href: `/${locale}/dashboard` },
   ];
 
   const { user, isAuthenticated, isLoading, getPermission } =
@@ -174,14 +174,14 @@ export default function Navbar({ locale }: { locale: string }) {
                         </MenuItem>
                       ))}
                       <LogoutLink className="block rounded-md px-3 py-2 text-base font-medium duration-300 text-red-600 hover:bg-red-700 hover:text-white ">
-                        Logout
+                        {t("profileDropdown.logout")}
                       </LogoutLink>
                       <div className="px-3 py-2">
                         <label
                           htmlFor="language"
                           className="block text-sm font-medium dark:text-gray-400 mb-2"
                         >
-                          Language
+                          {t("profileDropdown.language")}
                         </label>
                         <select
                           id="language"
@@ -291,7 +291,7 @@ export default function Navbar({ locale }: { locale: string }) {
                 </Link>
               ))}
               <LogoutLink className="block rounded-md px-3 py-2 text-base font-medium text-red-600 hover:bg-red-700 hover:text-white">
-                Logout
+                {t("profileDropdown.logout")}
               </LogoutLink>
               <div className="relative">
                 <label htmlFor="language" className="sr-only">

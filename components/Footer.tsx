@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 const navigation = [
   {
@@ -18,6 +21,8 @@ const navigation = [
 ];
 
 const Footer = () => {
+  const t = useTranslations("footer");
+
   return (
     <footer className="dark:bg-[#121212]">
       <div className="mx-auto max-w-7xl px-6 pt-24 pb-6 md:flex md:items-center md:justify-between lg:px-8">
@@ -36,7 +41,7 @@ const Footer = () => {
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
           <p className="text-center text-xs leading-5 dark:text-gray-500">
-            &copy; 2020 Your Company, Inc. All rights reserved.
+            {t("copyright")}
           </p>
         </div>
       </div>
