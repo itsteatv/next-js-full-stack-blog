@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Modal from "./Modal";
 import Loading from "@/app/[locale]/blog/loading";
+import { useTranslations } from "next-intl";
 
 interface UserProfileFormProps {
   user: KindeUser | null;
@@ -47,6 +48,8 @@ const UserProfileForm = ({
   const [userRole, setUserRole] = useState<string>("guest");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
+
+  const t = useTranslations("dashboard");
 
   const { getPermission } = useKindeBrowserClient();
 
@@ -188,10 +191,10 @@ const UserProfileForm = ({
               <UserGroupIcon className="h-8 w-8" aria-hidden="true" />
             </div>
             <div>
-              <h3 className="text-2xl font-semibold text-white">Your Role</h3>
-              <p className="text-sm text-gray-200">
-                Your current access level in the system
-              </p>
+              <h3 className="text-2xl font-semibold text-white">
+                {t("role.title")}
+              </h3>
+              <p className="text-sm text-gray-200">{t("role.description")}</p>
             </div>
           </div>
 
@@ -224,22 +227,22 @@ const UserProfileForm = ({
             <button
               type="button"
               className="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold dark:text-white shadow-sm hover:bg-white/20"
-              aria-label="Change avatar"
+              aria-label={t("avatar.title")}
             >
-              Change avatar
+              {t("avatar.title")}
             </button>
             <p className="mt-2 text-xs leading-5 dark:text-gray-400">
-              JPG, GIF or PNG. 1MB max.
+              {t("avatar.description")}
             </p>
           </div>
         </div>
 
         <div className="sm:col-span-3">
           <label
-            htmlFor="first-name"
+            htmlFor={t("inputs.firstName.label")}
             className="block text-sm font-medium leading-6 dark:text-white"
           >
-            First name
+            {t("inputs.firstName.label")}{" "}
           </label>
 
           <div className="relative mt-2 rounded-md shadow-sm">
@@ -253,17 +256,17 @@ const UserProfileForm = ({
             type="text"
             value={formData?.given_name || ""}
             onChange={handleChange}
-            placeholder="Please enter your first name"
+            placeholder={t("inputs.firstName.placeholder")}
             className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
 
         <div className="sm:col-span-3">
           <label
-            htmlFor="last-name"
+            htmlFor={t("inputs.lastName.label")}
             className="block text-sm font-medium leading-6 dark:text-white"
           >
-            Last name
+            {t("inputs.lastName.label")}
           </label>
           <div className="mt-2">
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -277,7 +280,7 @@ const UserProfileForm = ({
               type="text"
               value={formData?.family_name || ""}
               onChange={handleChange}
-              placeholder="Please enter your last name"
+              placeholder={t("inputs.lastName.placeholder")}
               className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -285,10 +288,10 @@ const UserProfileForm = ({
 
         <div className="col-span-full">
           <label
-            htmlFor="email"
+            htmlFor={t("inputs.email.label")}
             className="block text-sm font-medium leading-6 dark:text-white"
           >
-            Email address
+            {t("inputs.email.label")}{" "}
           </label>
           <div className="mt-2">
             <div className="relative mt-2 rounded-md shadow-sm">
@@ -302,7 +305,7 @@ const UserProfileForm = ({
               type="email"
               value={formData?.email || ""}
               onChange={handleChange}
-              placeholder="Please enter your email"
+              placeholder={t("inputs.email.label")}
               className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
@@ -310,10 +313,10 @@ const UserProfileForm = ({
 
         <div className="col-span-full">
           <label
-            htmlFor="username"
+            htmlFor={t("inputs.username.label")}
             className="block text-sm font-medium leading-6 dark:text-white"
           >
-            Username
+            {t("inputs.username.label")}{" "}
           </label>
           <div className="mt-2">
             <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
@@ -328,7 +331,7 @@ const UserProfileForm = ({
                 type="text"
                 value={user?.username || ""}
                 onChange={handleChange}
-                placeholder="Please enter your username"
+                placeholder={t("inputs.username.placeholder")}
                 className="flex-1 focus:ring-0 cursor-not-allowed block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6
                 "
                 disabled
@@ -338,34 +341,34 @@ const UserProfileForm = ({
         </div>
         <div className="col-span-full">
           <label
-            htmlFor="bio"
+            htmlFor={t("inputs.bio.label")}
             className="block text-sm font-medium leading-6 dark:text-white"
           >
-            Bio
+            {t("inputs.bio.label")}
           </label>
           <textarea
             id="bio"
             name="bio"
             value={formData.bio}
             onChange={handleChange}
-            placeholder="Tell us a bit about yourself..."
+            placeholder={t("inputs.bio.placeholder")}
             className="block w-full rounded-md border-0 py-1.5 pl-3 dark:text-white shadow-sm bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             rows={3}
           />
         </div>
         <div className="col-span-full">
           <label
-            htmlFor="socialLinks"
+            htmlFor={t("inputs.socialLinks.label")}
             className="block text-sm font-medium leading-6 dark:text-white"
           >
-            Social Links
+            {t("inputs.socialLinks.label")}{" "}
           </label>
           <textarea
             id="socialLinks"
             name="socialLinks"
             value={formData.socialLinks}
             onChange={handleChange}
-            placeholder="Provide your social media links (comma-separated)"
+            placeholder={t("inputs.socialLinks.placeholder")}
             className="block w-full rounded-md border-0  py-1.5 pl-3 bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
             rows={2}
           />
@@ -376,10 +379,10 @@ const UserProfileForm = ({
         <Button
           className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-blue-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
           onClick={handleSubmit}
-          label="Save Account Info"
+          label={t("SaveInfo.saveButton")}
           disabled={isSaving}
           isLoading={isSaving}
-          pendingContent="Saving Account Info..."
+          pendingContent={t("SaveInfo.saveLoading")}
           loadingComponent={
             <div className="relative w-6 h-6">
               <Loading color="white" />
@@ -397,18 +400,13 @@ const UserProfileForm = ({
             id="export-data-heading"
             className="text-2xl font-semibold dark:text-white leading-tight"
           >
-            Export Your Account Data
+            {t("exportData.title")}{" "}
           </h2>
           <p className="mt-4 text-base dark:text-gray-300 leading-relaxed">
-            Want a backup of your account details? Download all the information
-            linked to your account, including personal settings, purchase
-            history, and saved preferences, in just a few clicks.
+            {t("exportData.description")}{" "}
           </p>
           <p className="mt-2 text-sm dark:text-gray-400">
-            This download includes essential data, such as your account
-            settings, preferences, and transaction history. For security, ensure
-            that you store the file in a safe location to protect your
-            information.
+            {t("exportData.details")}{" "}
           </p>
         </div>
 
@@ -418,8 +416,8 @@ const UserProfileForm = ({
           onClick={handleDownloadData}
           disabled={isDownloading}
           isLoading={isDownloading}
-          label="Download Account Data"
-          pendingContent="Downloading..."
+          label={t("exportData.button")}
+          pendingContent={t("exportData.downloadLoading")}
           loadingComponent={
             <div className="relative w-6 h-6">
               <Loading color="white" />
@@ -443,16 +441,13 @@ const UserProfileForm = ({
             id="delete-account-heading"
             className="text-2xl font-semibold dark:text-white leading-tight"
           >
-            Delete Your Account
+            {t("deleteAccount.title")}
           </h2>
           <p className="mt-4 text-base dark:text-gray-300 leading-relaxed">
-            Deleting your account will permanently remove all your personal
-            data, preferences, and purchase history. Please make sure you really
-            want to proceed.
+            {t("deleteAccount.description")}
           </p>
           <p className="mt-2 text-sm dark:text-gray-400">
-            Once your account is deleted, it cannot be undone. Ensure you have a
-            backup of any important data before proceeding.
+            {t("deleteAccount.warning")}
           </p>
         </div>
 
@@ -462,8 +457,8 @@ const UserProfileForm = ({
           onClick={openModal}
           disabled={isDeleting}
           isLoading={isDeleting}
-          label="Delete Account"
-          pendingContent="Deleting Account..."
+          label={t("deleteAccount.button")}
+          pendingContent={t("deleteAccount.deleteLoading")}
           loadingComponent={
             <div className="relative w-6 h-6">
               <Loading color="white" />
@@ -478,17 +473,16 @@ const UserProfileForm = ({
           <Modal isOpen={isModalOpen} onClose={closeModal}>
             <div className="text-center">
               <h3 className="text-lg font-semibold dark:text-white">
-                Confirm Account Deletion
+                {t("modal.title")}
               </h3>
               <p className="mt-2 text-sm dark:text-white">
-                Are you sure you want to delete your account? This action cannot
-                be undone.
+                {t("modal.description")}
               </p>
               <div className="mt-4 flex justify-center space-x-4">
                 <Button
                   className="rounded-lg bg-gray-300 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-400"
                   onClick={closeModal}
-                  label="Cancel"
+                  label={t("modal.cancel")}
                 />
                 <Button
                   className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500"
@@ -496,7 +490,9 @@ const UserProfileForm = ({
                     await handleDeleteAccount();
                     closeModal();
                   }}
-                  label="Delete"
+                  label={
+                    isDeleting ? t("modal.deleteLoading") : t("modal.delete")
+                  }
                   disabled={isDeleting}
                   isLoading={isDeleting}
                 />
