@@ -54,7 +54,7 @@ const config: Config = {
         fadeOut: "fadeOut 0.3s ease-out",
         slideUp: "slideUp 0.3s ease-out",
         slideDown: "slideDown 0.3s ease-out",
-      }
+      },
     },
   },
   darkMode: "class",
