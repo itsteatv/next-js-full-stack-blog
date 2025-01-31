@@ -1,15 +1,17 @@
 {
   "navbar": {
     "home": "Startseite",
-    "blog": "Blog",
     "about": "Über uns",
     "contact": "Kontakt",
-    "createPost": "Beitrag erstellen",
-    "profileDropdown": {
-      "profile": "Dein Profil",
-      "logout": "Abmelden",
-      "language": "Sprache"
-    }
+    "signIn": "Anmelden",
+    "register": "Registrieren",
+    "account": "Konto",
+    "miscellaneous": "Verschiedenes",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsOfUse": "Nutzungsbedingungen",
+    "supportOurWork": "Unterstützen Sie unsere Arbeit",
+    "supportDescription": "Helfen Sie, die Entwicklung aufrechtzuerhalten, es kostenlos zu halten und neue Funktionen zu entwickeln!",
+    "supportNow": "Jetzt unterstützen"
   },
   "home": {
     "header": "Lerne Next.js | Funktionsshowcase",
