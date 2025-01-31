@@ -11,6 +11,7 @@ import { AuthProvider } from "@/app/AuthProvider";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import FlyonuiScript from "@/components/FlyonuiScript";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -86,13 +87,12 @@ export default async function RootLayout({
       >
         <body className={inter.className}>
           <NextIntlClientProvider messages={messages}>
-            <ThemeProvider>
-              <NextTopLoader showSpinner={false} color="#fff" />
-              <Toaster />
-              <Navbar locale={locale} />
-              {children}
-              <CookieConsentBanner />
-            </ThemeProvider>
+            <NextTopLoader showSpinner={false} color="#fff" />
+            <Toaster />
+            <Navbar locale={locale} />
+            {children}
+            <CookieConsentBanner />
+            <FlyonuiScript />
           </NextIntlClientProvider>
         </body>
       </html>
