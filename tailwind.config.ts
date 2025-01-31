@@ -1,10 +1,13 @@
 import type { Config } from "tailwindcss";
 
+const { addDynamicIconSelectors } = require("@iconify/tailwind");
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/flyonui/dist/js/*.js",
   ],
   theme: {
     extend: {
@@ -58,6 +61,16 @@ const config: Config = {
     },
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [
+    require("flyonui"),
+    require("flyonui/plugin"),
+    addDynamicIconSelectors(),
+  ],
+  flyonui: {
+    themes: ["dark"],
+    base: true,
+    darkTheme: "dark",
+    styled: true,
+  },
 };
 export default config;
