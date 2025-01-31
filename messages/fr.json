@@ -1,15 +1,17 @@
 {
   "navbar": {
     "home": "Accueil",
-    "blog": "Blog",
     "about": "À propos",
     "contact": "Contact",
-    "createPost": "Créer un article",
-    "profileDropdown": {
-      "profile": "Votre profil",
-      "logout": "Déconnexion",
-      "language": "Langue"
-    }
+    "signIn": "Se connecter",
+    "register": "S'inscrire",
+    "account": "Compte",
+    "miscellaneous": "Divers",
+    "privacyPolicy": "Politique de confidentialité",
+    "termsOfUse": "Conditions d'utilisation",
+    "supportOurWork": "Soutenez notre travail",
+    "supportDescription": "Aidez à soutenir le développement, gardez-le gratuit et développez des fonctionnalités!",
+    "supportNow": "Soutenir maintenant"
   },
   "home": {
     "header": "Apprendre Next.js | Démonstration des fonctionnalités",

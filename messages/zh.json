@@ -1,15 +1,17 @@
 {
   "navbar": {
-    "home": "首页",
-    "blog": "博客",
+    "home": "主页",
     "about": "关于",
     "contact": "联系",
-    "createPost": "创建帖子",
-    "profileDropdown": {
-      "profile": "您的个人资料",
-      "logout": "登出",
-      "language": "语言"
-    }
+    "signIn": "登录",
+    "register": "注册",
+    "account": "账户",
+    "miscellaneous": "其他",
+    "privacyPolicy": "隐私政策",
+    "termsOfUse": "使用条款",
+    "supportOurWork": "支持我们的工作",
+    "supportDescription": "帮助支持开发，保持免费，并扩展功能！",
+    "supportNow": "立即支持"
   },
   "home": {
     "header": "学习 Next.js | 功能展示",

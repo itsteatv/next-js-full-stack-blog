@@ -1,10 +1,17 @@
 {
   "navbar": {
     "home": "Home",
-    "blog": "Blog",
     "about": "About",
     "contact": "Contact",
-    "createPost": "Create Post",
+    "signIn": "Sign In",
+    "register": "Register",
+    "account": "Account",
+    "miscellaneous": "Miscellaneous",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfUse": "Terms of Use",
+    "supportOurWork": "Support Our Work",
+    "supportDescription": "Help sustain development, keep it free, and grow features!",
+    "supportNow": "Support Now",
     "profileDropdown": {
       "profile": "Your Profile",
       "logout": "Logout",
