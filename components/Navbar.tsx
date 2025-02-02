@@ -5,7 +5,7 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 
 function Navbar({ locale }: { locale: string }) {
@@ -17,11 +17,26 @@ function Navbar({ locale }: { locale: string }) {
 
   const pathname = usePathname();
   const router = useRouter();
+  const [theme, setTheme] = useState<string>(() => {
+    return typeof window !== "undefined"
+      ? localStorage.getItem("theme") || "light"
+      : "light";
+  });
+
+  useEffect(() => {
+    // Apply the theme stored in localStorage
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value;
     const path = pathname.split("/").slice(2).join("/");
     router.push(`/${newLocale}/${path}`);
+  };
+
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme);
   };
 
   if (isLoading) {
@@ -171,61 +186,26 @@ function Navbar({ locale }: { locale: string }) {
                 aria-orientation="vertical"
                 aria-labelledby="dropdown-default"
               >
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    className="theme-controller btn btn-text w-full justify-start"
-                    aria-label="Default"
-                    value="light"
-                    defaultChecked
-                  />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    className="theme-controller btn btn-text w-full justify-start"
-                    aria-label="Dark"
-                    value="dark"
-                  />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    className="theme-controller btn btn-text w-full justify-start"
-                    aria-label="Gourmet"
-                    value="gourmet"
-                  />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    className="theme-controller btn btn-text w-full justify-start"
-                    aria-label="Corporate"
-                    value="corporate"
-                  />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    className="theme-controller btn btn-text w-full justify-start"
-                    aria-label="Luxury"
-                    value="luxury"
-                  />
-                </li>
-                <li>
-                  <input
-                    type="radio"
-                    name="theme-dropdown"
-                    className="theme-controller btn btn-text w-full justify-start"
-                    aria-label="Soft"
-                    value="soft"
-                  />
-                </li>
+                {[
+                  "light",
+                  "dark",
+                  "gourmet",
+                  "corporate",
+                  "luxury",
+                  "soft",
+                ].map((themeOption) => (
+                  <li key={themeOption}>
+                    <input
+                      type="radio"
+                      name="theme-dropdown"
+                      className="theme-controller btn btn-text w-full justify-start"
+                      aria-label={themeOption}
+                      value={themeOption}
+                      checked={theme === themeOption}
+                      onChange={() => handleThemeChange(themeOption)}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
           </ul>
