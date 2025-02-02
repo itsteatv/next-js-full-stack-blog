@@ -67,7 +67,7 @@ const config: Config = {
     addDynamicIconSelectors(),
   ],
   flyonui: {
-    themes: ["dark"],
+    themes: ["light", "dark", "gourmet", "corporate", "luxury", "soft"],
     base: true,
     darkTheme: "dark",
     styled: true,

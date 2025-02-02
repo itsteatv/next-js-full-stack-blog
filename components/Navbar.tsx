@@ -6,9 +6,11 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ChangeEvent } from "react";
+import { themeChange } from "theme-change";
 
 function Navbar({ locale }: { locale: string }) {
   const t = useTranslations("navbar");
+  themeChange();
 
   const { user, isAuthenticated, isLoading, getPermission } =
     useKindeBrowserClient();
@@ -37,7 +39,7 @@ function Navbar({ locale }: { locale: string }) {
 
   return (
     <>
-      <nav className="navbar rounded-box justify-between gap-4 shadow bg-[#272332]">
+      <nav className="navbar rounded-box justify-between gap-4 shadow">
         <div className="navbar-start">
           {/* Drawer Button */}
           <button
@@ -150,6 +152,82 @@ function Navbar({ locale }: { locale: string }) {
                 {t("termsOfUse")}
               </Link>
             </li>
+            <div className="dropdown relative inline-flex rtl:[--placement:bottom-end] mx-5 pt-3">
+              <button
+                id="dropdown-default"
+                type="button"
+                className="dropdown-toggle btn btn-primary btn-outline max-sm:btn-square"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-label="Dropdown"
+              >
+                <span className="max-sm:hidden">Theme</span>
+                <span className="icon-[tabler--aperture] block size-6 sm:hidden"></span>
+                <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-5 max-sm:hidden"></span>
+              </button>
+              <ul
+                className="dropdown-menu dropdown-open:opacity-100 hidden min-w-40"
+                role="menu"
+                aria-orientation="vertical"
+                aria-labelledby="dropdown-default"
+              >
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller btn btn-text w-full justify-start"
+                    aria-label="Default"
+                    value="light"
+                    defaultChecked
+                  />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller btn btn-text w-full justify-start"
+                    aria-label="Dark"
+                    value="dark"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller btn btn-text w-full justify-start"
+                    aria-label="Gourmet"
+                    value="gourmet"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller btn btn-text w-full justify-start"
+                    aria-label="Corporate"
+                    value="corporate"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller btn btn-text w-full justify-start"
+                    aria-label="Luxury"
+                    value="luxury"
+                  />
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller btn btn-text w-full justify-start"
+                    aria-label="Soft"
+                    value="soft"
+                  />
+                </li>
+              </ul>
+            </div>
           </ul>
           <div className="bg-base-200/30 border-base-content/10 mt-4 rounded-md border p-3">
             <div className="avatar placeholder">
