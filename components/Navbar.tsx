@@ -24,7 +24,6 @@ function Navbar({ locale }: { locale: string }) {
   });
 
   useEffect(() => {
-    // Apply the theme stored in localStorage
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
@@ -54,9 +53,10 @@ function Navbar({ locale }: { locale: string }) {
 
   return (
     <>
+      {/* Navbar Section */}
       <nav className="navbar rounded-box justify-between gap-4 shadow">
         <div className="navbar-start">
-          {/* Drawer Button */}
+          {/* Drawer (Sidebar) Toggle Button */}
           <button
             type="button"
             className="btn btn-sm btn-text btn-circle swap swap-rotate"
@@ -71,25 +71,135 @@ function Navbar({ locale }: { locale: string }) {
           </button>
         </div>
 
-        {/* Auth */}
-        <div className="join">
-          <button className="btn btn-outline btn-primary join-item waves waves-primary btn-sm">
-            {t("signIn")}
-          </button>
-          <button className="btn btn-gradient btn-primary join-item waves waves-primary btn-sm">
-            {t("register")}
-          </button>
+        <div className="flex gap-4 items-center">
+          <div className="dropdown relative inline-flex rtl:[--placement:bottom-end]">
+            <button
+              id="dropdown-menu-icon"
+              type="button"
+              className="dropdown-toggle btn btn-text btn-primary"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-label="Dropdown"
+            >
+              <span className="icon-[solar--planet-bold-duotone] size-6"></span>
+            </button>
+            <div
+              className="dropdown-menu dropdown-open:opacity-100 hidden"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="dropdown-transportation"
+            >
+              {/* Language Selection Dropdown */}
+              <div className="dropdown-item gap-4">
+                <input
+                  id="dropdown-radio-en"
+                  name="language-radio"
+                  type="radio"
+                  className="radio radio-primary"
+                  value="en"
+                  checked={locale === "en"}
+                  onChange={handleLanguageChange}
+                />
+                <label
+                  htmlFor="dropdown-radio-en"
+                  className="text-base-content block text-sm font-semibold"
+                >
+                  English
+                </label>
+              </div>
+              <div className="dropdown-item gap-4">
+                <input
+                  id="dropdown-radio-fr"
+                  name="language-radio"
+                  type="radio"
+                  className="radio radio-primary"
+                  value="fr"
+                  checked={locale === "fr"}
+                  onChange={handleLanguageChange}
+                />
+                <label
+                  htmlFor="dropdown-radio-fr"
+                  className="text-base-content text-sm font-semibold"
+                >
+                  Français
+                </label>
+              </div>
+              <div className="dropdown-item gap-4">
+                <input
+                  id="dropdown-radio-de"
+                  name="language-radio"
+                  type="radio"
+                  className="radio radio-primary"
+                  value="de"
+                  checked={locale === "de"}
+                  onChange={handleLanguageChange}
+                />
+                <label
+                  htmlFor="dropdown-radio-de"
+                  className="text-base-content text-sm font-semibold"
+                >
+                  Deutsch
+                </label>
+              </div>
+              <div className="dropdown-item gap-4">
+                <input
+                  id="dropdown-radio-zh"
+                  name="language-radio"
+                  type="radio"
+                  className="radio radio-primary"
+                  value="zh"
+                  checked={locale === "zh"}
+                  onChange={handleLanguageChange}
+                />
+                <label
+                  htmlFor="dropdown-radio-zh"
+                  className="text-base-content text-sm font-semibold"
+                >
+                  中文
+                </label>
+              </div>
+              <div className="dropdown-item gap-4">
+                <input
+                  id="dropdown-radio-ru"
+                  name="language-radio"
+                  type="radio"
+                  className="radio radio-primary"
+                  value="ru"
+                  checked={locale === "ru"}
+                  onChange={handleLanguageChange}
+                />
+                <label
+                  htmlFor="dropdown-radio-ru"
+                  className="text-base-content text-sm font-semibold"
+                >
+                  Русский
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {/* Authentication Buttons (Sign In & Register) */}
+          <div className="join">
+            <button className="btn btn-outline btn-primary join-item waves waves-primary btn-sm">
+              {t("signIn")}
+            </button>
+            <button className="btn btn-gradient btn-primary join-item waves waves-primary btn-sm">
+              {t("register")}
+            </button>
+          </div>
         </div>
       </nav>
 
-      {/* Drawer Sidebar */}
+      {/* Sidebar (Drawer Navigation) */}
       <aside
         id="overlay-navigation-example"
         className="overlay overlay-open:translate-x-0 drawer drawer-start hidden max-w-72"
         tabIndex="-1"
       >
+        {/* Sidebar Header */}
         <div className="drawer-header">
           <h3 className="drawer-title">itsteatv</h3>
+          {/* Close Button for Sidebar */}
           <button
             type="button"
             className="btn btn-text btn-circle btn-sm absolute end-3 top-3"
@@ -99,14 +209,18 @@ function Navbar({ locale }: { locale: string }) {
             <span className="icon-[solar--close-circle-bold-duotone] size-[1.375rem]"></span>
           </button>
         </div>
+
+        {/* Sidebar Menu */}
         <div className="drawer-body justify-start pb-6">
           <ul className="menu space-y-0.5 p-0 [&_.nested-collapse-wrapper]:space-y-0.5 [&_ul]:space-y-0.5">
+            {/* Home Link */}
             <li>
               <Link href={`/${locale}/`} className="flex items-center gap-2">
                 <span className="icon-[solar--home-bold-duotone] size-5"></span>
                 {t("home")}
               </Link>
             </li>
+            {/* About Link */}
             <li>
               <Link
                 href={`/${locale}/about`}
@@ -116,6 +230,7 @@ function Navbar({ locale }: { locale: string }) {
                 {t("about")}
               </Link>
             </li>
+            {/* Contact Link */}
             <li>
               <Link
                 href={`/${locale}/contact`}
@@ -125,9 +240,13 @@ function Navbar({ locale }: { locale: string }) {
                 {t("contact")}
               </Link>
             </li>
+
+            {/* Account Section Divider */}
             <div className="divider text-base-content/50 py-6 after:border-0">
               {t("account")}
             </div>
+
+            {/* Sign In & Register Links */}
             <li>
               <Link
                 href={`/${locale}/sign-in`}
@@ -146,9 +265,13 @@ function Navbar({ locale }: { locale: string }) {
                 {t("register")}
               </Link>
             </li>
+
+            {/* Miscellaneous Section Divider */}
             <div className="divider text-base-content/50 py-6 after:border-0">
               {t("miscellaneous")}
             </div>
+
+            {/* Privacy Policy & Terms of Use Links */}
             <li>
               <Link
                 href={`/${locale}/privacy-policy`}
@@ -167,6 +290,8 @@ function Navbar({ locale }: { locale: string }) {
                 {t("termsOfUse")}
               </Link>
             </li>
+
+            {/* Theme Selection Dropdown */}
             <div className="dropdown relative inline-flex rtl:[--placement:bottom-end] mx-5 pt-3">
               <button
                 id="dropdown-default"
@@ -180,6 +305,7 @@ function Navbar({ locale }: { locale: string }) {
                 <span className="icon-[tabler--aperture] block size-6 sm:hidden"></span>
                 <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-5 max-sm:hidden"></span>
               </button>
+              {/* Theme Options */}
               <ul
                 className="dropdown-menu dropdown-open:opacity-100 hidden min-w-40"
                 role="menu"
@@ -209,12 +335,9 @@ function Navbar({ locale }: { locale: string }) {
               </ul>
             </div>
           </ul>
+
+          {/* Support Section */}
           <div className="bg-base-200/30 border-base-content/10 mt-4 rounded-md border p-3">
-            <div className="avatar placeholder">
-              <div className="bg-neutral text-neutral-content w-10 rounded-full">
-                <span className="icon-[solar--star-angle-bold-duotone] size-7 shrink-0"></span>
-              </div>
-            </div>
             <h5 className="text-base-content mt-4 text-lg font-semibold">
               {t("supportOurWork")}
             </h5>
