@@ -2,20 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { BlogPost } from "@/lib/types";
 import { truncateText } from "@/lib/truncateText";
+import { calculateReadingTime } from "@/lib/calculateReadingTime";
 
 interface BlogCardProps {
   post: BlogPost;
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
-  console.log(post);
+  const readingTime = calculateReadingTime(post.body || "");
 
   return (
-    <article className="flex max-w-xl flex-col items-start justify-between">
-      <div className="card sm:max-w-sm mb-10">
+    <article className="flex max-w-xl flex-col  justify-between">
+      <div className="card drop-shadow-2xl sm:max-w-sm mb-10">
         <div className="card-body">
           <Link href={`/blog/${post.id}`}>
-            <h5 className="text-white card-title mb-2.5 font-extrabold">
+            <h5 className="dark:text-primary-content text-base-content card-title mb-2.5 font-extrabold">
               {post.title}
             </h5>
           </Link>
@@ -29,14 +30,14 @@ export default function BlogCard({ post }: BlogCardProps) {
                 alt="avatar"
               />
             </div>
-            <p className="font-bold text-white">
+            <p className="font-bold dark:text-primary-content text-base-content">
               {post.author || "Unknown Author"}
             </p>
           </div>
-          <div className="mb-4">
+          <div className="mb-4 flex gap-7">
             <time
               dateTime={post.createdAt || ""}
-              className="text-gray-500 text-[0.75rem] relative -top-1"
+              className="text-gray-500 text-[0.75rem]"
             >
               {new Date(post.createdAt || "").toLocaleDateString("en-US", {
                 year: "numeric",
@@ -44,6 +45,10 @@ export default function BlogCard({ post }: BlogCardProps) {
                 day: "numeric",
               })}
             </time>
+            <div className="flex items-center gap-1">
+              <span className="icon-[solar--book-2-bold-duotone]"></span>
+              <p className="text-gray-500 text-[0.75rem]">{readingTime}</p>
+            </div>
           </div>{" "}
           <p>{truncateText(post.body, 150)}</p>
         </div>
@@ -53,7 +58,6 @@ export default function BlogCard({ post }: BlogCardProps) {
             alt="headphone"
             width={1000}
             height={1000}
-            className="w-auto"
           />
         </figure>
       </div>
