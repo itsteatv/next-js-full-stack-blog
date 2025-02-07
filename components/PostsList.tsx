@@ -52,7 +52,7 @@ const PostsList = () => {
       )}
 
       {!loading && !error && posts.length > 0 && (
-        <main className="px-16 py-16 sm:max-w-lg md:max-w-4xl mx-auto">
+        <main className="px-2 sm:px-16 py-16 sm:max-w-lg md:max-w-4xl mx-auto">
           <div className="flex items-center flex-col gap-y-16">
             <div className="gap-y-2">
               {posts.map((post) => (
