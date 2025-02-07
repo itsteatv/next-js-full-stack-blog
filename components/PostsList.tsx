@@ -57,15 +57,6 @@ const PostsList = () => {
             <div className="gap-y-2">
               {posts.map((post) => (
                 <div key={post.id}>
-                  <div className="relative w-full h-64 mb-5">
-                    <Image
-                      src="https://placehold.co/100x200?text=NextJs+Blog&font=source-sans-pro"
-                      alt="title"
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-lg"
-                    />
-                  </div>
                   <BlogCard post={post} />
                 </div>
               ))}
