@@ -17,8 +17,6 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
   description,
   onClick,
 }) => {
-  console.log(title);
-
   return (
     <div className="flex items-center gap-x-8">
       {/* Avatar */}
