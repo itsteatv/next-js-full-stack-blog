@@ -11,10 +11,10 @@ import {
   createPostSchema,
   TCreatePostSchema,
 } from "@/schemas/createPostSchema";
-import { ItalicIcon } from "@heroicons/react/24/outline";
+
 import Modal from "./Modal";
 import { useEffect, useState } from "react";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
+
 import { Category } from "@/lib/types";
 import { getCategories } from "@/actions/categories";
 import { useTranslations } from "next-intl";
@@ -126,22 +126,12 @@ const CreatePostForm = () => {
             >
               {t("title.label")}
             </label>
-            <InformationCircleIcon
-              onClick={handlePreview}
-              className={`mb-2 h-5 w-5 cursor-pointer dark:text-white duration-300 ${
-                isHovered ? "text-blue-500 duration-300" : ""
-              }`}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            />
+           
           </div>
           <div>
             <div className="relative mt-2 rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
-                <ItalicIcon
-                  aria-hidden="true"
-                  className="h-5 w-5 text-gray-400"
-                />
+               
               </div>
             </div>
             <Input
