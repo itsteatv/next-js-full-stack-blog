@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-
-import Input from "@/components/Input";
 import { useTranslations } from "next-intl";
 
 interface UserProfileInputsProps {
@@ -23,139 +21,109 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
   const t = useTranslations("dashboard");
 
   return (
-    <div className="flex flex-col gap-y-6">
-      <div className="sm:col-span-3">
-        <label
-          htmlFor="given_name"
-          className="block text-sm font-medium leading-6 dark:text-white"
-        >
-          {t("inputs.firstName.label")}
-        </label>
-        <div className="relative mt-2 rounded-md shadow-sm">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 ">
-           
-          </div>
-          <Input
+    <div className="flex flex-col gap-y-6 w-full">
+      <div className="w-full">
+        <div className="input-group w-full">
+          <span className="input-group-text">
+            <span className="icon-[solar--user-hand-up-bold-duotone] text-base-content/80 size-5"></span>
+          </span>
+          <input
+            type="text"
+            className="input max-w-sm"
             id="given_name"
             name="given_name"
-            type="text"
             value={formData?.given_name || ""}
             onChange={onChange}
             placeholder={t("inputs.firstName.placeholder")}
-            className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
       </div>
 
-      <div className="sm:col-span-3">
-        <label
-          htmlFor="family_name"
-          className="block text-sm font-medium leading-6 dark:text-white"
-        >
-          {t("inputs.lastName.label")}
-        </label>
-        <div className="relative mt-2 rounded-md shadow-sm">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 ">
-          
-          </div>
-          <Input
+      <div className="w-full">
+        <div className="input-group w-full">
+          <span className="input-group-text">
+            <span className="icon-[solar--users-group-two-rounded-bold-duotone] text-base-content/80 size-5"></span>
+          </span>
+          <input
+            type="text"
+            className="input max-w-sm"
             id="family_name"
             name="family_name"
-            type="text"
             value={formData?.family_name || ""}
             onChange={onChange}
             placeholder={t("inputs.lastName.placeholder")}
-            className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
       </div>
 
-      <div className="col-span-full">
-        <label
-          htmlFor="email"
-          className="block text-sm font-medium leading-6 dark:text-white"
-        >
-          {t("inputs.email.label")}
-        </label>
-        <div className="relative mt-2 rounded-md shadow-sm bg-white/5 ring-1 ring-inset ring-white/10">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 ">
-           
-          </div>
-          <Input
+      <div className="w-full">
+        <div className="input-group w-full">
+          <span className="input-group-text">
+            <span className="icon-[solar--mention-square-bold-duotone] text-base-content/80 size-5"></span>
+          </span>
+          <input
+            type="email"
+            className="input max-w-sm cursor-not-allowed"
             id="email"
             name="email"
-            type="email"
             value={formData?.email || ""}
             onChange={onChange}
             placeholder={t("inputs.email.placeholder")}
-            className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-not-allowed"
             disabled
           />
         </div>
       </div>
 
-      <div className="col-span-full">
-        <label
-          htmlFor={t("inputs.username.label")}
-          className="block text-sm font-medium leading-6 dark:text-white"
-        >
-          {t("inputs.username.label")}{" "}
-        </label>
-        <div className="mt-2">
-          <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
-            <div className="relative mt-2 rounded-md shadow-sm">
-              <div className="pointer-events-none absolute left-0 flex items-center pl-3">
-                
-              </div>
-            </div>
-            <Input
-              id="username"
-              name="username"
-              type="text"
-              value={formData.username || ""}
-              onChange={onChange}
-              placeholder={t("inputs.username.placeholder")}
-              className="block w-full rounded-md border-0 py-1.5 pl-10 dark:text-white bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6 cursor-not-allowed"
-              disabled
-            />
-          </div>
+      <div className="w-full">
+        <div className="input-group w-full">
+          <span className="input-group-text">
+            <span className="icon-[solar--user-speak-bold-duotone] text-base-content/80 size-5"></span>
+          </span>
+          <input
+            type="text"
+            className="input max-w-sm cursor-not-allowed"
+            id="username"
+            name="username"
+            value={formData.username || ""}
+            onChange={onChange}
+            placeholder={t("inputs.username.placeholder")}
+            disabled
+          />
         </div>
       </div>
 
-      <div className="col-span-full">
-        <label
-          htmlFor="bio"
-          className="block text-sm font-medium leading-6 dark:text-white"
-        >
-          {t("inputs.bio.label")}
-        </label>
-        <textarea
-          id="bio"
-          name="bio"
-          value={formData.bio}
-          onChange={onChange}
-          placeholder={t("inputs.bio.placeholder")}
-          className="block w-full rounded-md border-0 py-1.5 pl-3 dark:text-white shadow-sm bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          rows={3}
-        />
+      <div className="w-full">
+        <div className="input-group w-full">
+          <span className="input-group-text">
+            <span className="icon-[solar--pen-bold-duotone] text-base-content/80 size-5"></span>
+          </span>
+          <textarea
+            className="textarea w-full"
+            id="bio"
+            name="bio"
+            value={formData.bio}
+            onChange={onChange}
+            placeholder={t("inputs.bio.placeholder")}
+            rows={3}
+          />
+        </div>
       </div>
 
-      <div className="col-span-full">
-        <label
-          htmlFor="socialLinks"
-          className="block text-sm font-medium leading-6 dark:text-white"
-        >
-          {t("inputs.socialLinks.label")}
-        </label>
-        <textarea
-          id="socialLinks"
-          name="socialLinks"
-          value={formData.socialLinks}
-          onChange={onChange}
-          placeholder={t("inputs.socialLinks.placeholder")}
-          className="block w-full rounded-md border-0 py-1.5 pl-3 bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 dark:focus:ring-2 dark:focus:ring-inset dark:focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          rows={2}
-        />
+      <div className="w-full">
+        <div className="input-group w-full">
+          <span className="input-group-text">
+            <span className="icon-[solar--paperclip-bold-duotone] text-base-content/80 size-5"></span>
+          </span>
+          <textarea
+            className="textarea w-full"
+            id="socialLinks"
+            name="socialLinks"
+            value={formData.socialLinks}
+            onChange={onChange}
+            placeholder={t("inputs.socialLinks.placeholder")}
+            rows={2}
+          />
+        </div>
       </div>
     </div>
   );
