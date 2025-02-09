@@ -9,20 +9,18 @@ type RoleCardProps = {
 
 const RoleCard = ({ title, description, role }: RoleCardProps) => {
   const roleStyles = {
-    admin: "bg-gradient-to-r from-green-400 to-green-600 text-white",
-    user: "bg-gradient-to-r from-blue-400 to-blue-600 text-white",
-    guest: "bg-gradient-to-r from-gray-400 to-gray-600 text-white",
+    admin: "bg-primary text-white",
+    user: "bg-primary text-white",
+    guest: "bg-primary text-white",
   };
 
   return (
-    <div className="p-6 rounded-xl bg-gradient-to-r from-gray-800 via-gray-900 to-gray-700 shadow-xl flex items-center justify-between">
+    <div className="p-6 rounded-xl bg-gradient-to-r from-primary to-neutral-content shadow-xl flex items-center justify-between">
       <div className="flex items-center space-x-4">
-        <div className="p-3 rounded-full bg-white text-indigo-600">
-       
-        </div>
+        <span className="icon-[solar--shield-user-bold-duotone] text-white size-12"></span>
         <div>
           <h3 className="text-2xl font-semibold text-white">{title}</h3>
-          <p className="text-sm text-gray-200">{description}</p>
+          <p className="text-sm text-white">{description}</p>
         </div>
       </div>
 
