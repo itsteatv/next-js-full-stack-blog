@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 export default function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -26,19 +25,13 @@ export default function ThemeSwitcher() {
 
   if (resolvedTheme === "dark") {
     return (
-      <SunIcon
-        className="w-4 h-4 cursor-pointer"
-        onClick={() => setTheme("light")}
-      />
+     <></>
     );
   }
 
   if (resolvedTheme === "light") {
     return (
-      <MoonIcon
-        className="w-4 h-4 cursor-pointer"
-        onClick={() => setTheme("dark")}
-      />
+     <></>
     );
   }
 }

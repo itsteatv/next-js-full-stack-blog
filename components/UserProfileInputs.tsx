@@ -1,12 +1,7 @@
 "use client";
 
 import React from "react";
-import {
-  UserCircleIcon,
-  UserGroupIcon,
-  AtSymbolIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+
 import Input from "@/components/Input";
 import { useTranslations } from "next-intl";
 
@@ -38,7 +33,7 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
         </label>
         <div className="relative mt-2 rounded-md shadow-sm">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 ">
-            <UserCircleIcon aria-hidden="true" className="h-5 w-5" />
+           
           </div>
           <Input
             id="given_name"
@@ -61,7 +56,7 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
         </label>
         <div className="relative mt-2 rounded-md shadow-sm">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 ">
-            <UserGroupIcon aria-hidden="true" className="h-5 w-5" />
+          
           </div>
           <Input
             id="family_name"
@@ -84,7 +79,7 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
         </label>
         <div className="relative mt-2 rounded-md shadow-sm bg-white/5 ring-1 ring-inset ring-white/10">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 ">
-            <AtSymbolIcon aria-hidden="true" className="h-5 w-5" />
+           
           </div>
           <Input
             id="email"
@@ -110,7 +105,7 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
           <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
             <div className="relative mt-2 rounded-md shadow-sm">
               <div className="pointer-events-none absolute left-0 flex items-center pl-3">
-                <UserIcon aria-hidden="true" className="h-5 w-5" />
+                
               </div>
             </div>
             <Input
