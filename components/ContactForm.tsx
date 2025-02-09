@@ -11,8 +11,6 @@ import {
 } from "@/schemas/emailContactSchema";
 import { sendEmail } from "@/actions/sendEmail";
 import Textarea from "./Textarea";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
-import { InboxIcon } from "@heroicons/react/24/outline";
 import Loading from "@/app/[locale]/blog/loading";
 import { useTranslations } from "next-intl";
 
@@ -74,10 +72,7 @@ const ContactPostForm = () => {
             <div>
               <div className="relative mt-2 rounded-md shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
-                  <InboxIcon
-                    aria-hidden="true"
-                    className="h-5 w-5 text-gray-400"
-                  />
+                 
                 </div>
               </div>
               <Input
@@ -103,10 +98,7 @@ const ContactPostForm = () => {
             <div>
               <div className="relative mt-2 rounded-md shadow-sm">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
-                  <EnvelopeIcon
-                    aria-hidden="true"
-                    className="h-5 w-5 text-gray-400"
-                  />
+                
                 </div>
               </div>
               <Input

@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { UserGroupIcon } from "@heroicons/react/24/solid";
 
 type RoleCardProps = {
   title: string;
@@ -19,7 +18,7 @@ const RoleCard = ({ title, description, role }: RoleCardProps) => {
     <div className="p-6 rounded-xl bg-gradient-to-r from-gray-800 via-gray-900 to-gray-700 shadow-xl flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <div className="p-3 rounded-full bg-white text-indigo-600">
-          <UserGroupIcon className="h-8 w-8" aria-hidden="true" />
+       
         </div>
         <div>
           <h3 className="text-2xl font-semibold text-white">{title}</h3>

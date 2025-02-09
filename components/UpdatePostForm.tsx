@@ -10,7 +10,6 @@ import {
   TUpdatePostSchema,
   updatePostSchema,
 } from "@/schemas/updatePostSchema";
-import { ItalicIcon } from "@heroicons/react/24/outline";
 import userUpdatePost from "@/actions/userUpdatePost";
 import { BlogPost, Category } from "@/lib/types";
 import { redirect } from "next/navigation";
@@ -101,10 +100,7 @@ const UpdatePostForm = ({ post }: UpdatePostFormProps) => {
           <div>
             <div className="relative mt-2 rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 mt-[1.2rem]">
-                <ItalicIcon
-                  aria-hidden="true"
-                  className="h-5 w-5 text-gray-400"
-                />
+               
               </div>
             </div>
             <Input
