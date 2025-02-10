@@ -462,37 +462,15 @@ Start the server
 
 ## Screenshots
 
-`Home Page (Signed-In)`
+`Blog Page (Updated)`
 
-![HomeSignedIn](public/images/Home.png)
+![Blog](public/images/Blog.jpeg)
 
-`Blog Page`
+`Dashboard Page (Updated)`
+![Blog](public/images/Dashboard.jpeg)
 
-![Blog](public/images/Blog.png)
-
-`About Page`
-
-![About](public/images/About.png)
-
-`Single Post Page`
-
-![SinglePost](public/images/SinglePost.png)
-
-`Contact Page`
-
-![Contact](public/images/Contact.png)
-
-`Create Post Page`
-
-![CreatePost](public/images/CreatePost.png)
-
-`Dashboard`
-
-![Dashboard](public/images/Dashboard.png)
-
-`Dashboard Light Mode`
-
-![DashboardLightMode](public/images/DashboardLightMode.png)
+`Sidebar (Updated)`
+![Blog](public/images/Sidebar.png)
 
 ## Appendix
 
