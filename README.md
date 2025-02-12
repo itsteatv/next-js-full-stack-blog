@@ -39,7 +39,6 @@ This project uses a modern tech stack that ensures high performance, security, a
 - **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework that allows for rapid, custom styling with a responsive design.
 - **[Zod](https://github.com/colinhacks/zod)** - A schema validation library for TypeScript, ensuring safe and validated data handling.
 - **[React Hook Form](https://react-hook-form.com/)** - A performant library for managing forms with minimal re-renders, making forms fast and easy to handle.
-- **[Kinde Auth](https://kinde.com/)** - An authentication library for user management, providing login, registration, and security features.
 - **[Prisma](https://www.prisma.io/)** - An ORM that provides an intuitive way to work with databases, simplifying data access.
 - **[SQLite](https://www.sqlite.org/)** - A lightweight, file-based database ideal for local development.
 - **[Resend & React Email](https://resend.com/)** - Tools for sending and managing emails directly from the app, used for notifications and user communication.
@@ -53,17 +52,6 @@ To run this project, you will need to create a `.env` file in the root directory
 ### General Configuration
 
 - **`NEXT_PUBLIC_IMAGE_DOMAINS`**: A comma-separated list of domains allowed to host images used in the application (e.g., `example.com,cdn.example.com`).
-
-### Authentication (Kinde Auth)
-
-For user authentication and session management, configure the following Kinde Auth settings:
-
-- **`KINDE_CLIENT_ID`**: Your client ID from Kinde, uniquely identifying the app.
-- **`KINDE_CLIENT_SECRET`**: The secret key for client authorization.
-- **`KINDE_ISSUER_URL`**: The issuer URL provided by Kinde for token validation.
-- **`KINDE_SITE_URL`**: Base URL of your application, used for redirecting and validating sessions.
-- **`KINDE_POST_LOGOUT_REDIRECT_URL`**: The URL to which users are redirected after logging out.
-- **`KINDE_POST_LOGIN_REDIRECT_URL`**: The URL to which users are redirected after logging in.
 
 ### Database (Prisma)
 
