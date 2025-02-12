@@ -5,7 +5,6 @@ import Modal from "./Modal";
 import Button from "@/components/Button";
 import Loading from "@/app/[locale]/blog/loading";
 import { useTranslations } from "next-intl";
-import { handleDeleteAccount } from "@/lib/handleDeleteAccount";
 import { useRouter } from "next/navigation";
 
 interface DeleteAccountSectionProps {
@@ -77,10 +76,6 @@ const DeleteAccountSection = ({ userId }: DeleteAccountSectionProps) => {
               />
               <Button
                 className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500"
-                onClick={async () => {
-                  await handleDeleteAccount(userId, setIsDeleting, router);
-                  closeModal();
-                }}
                 label={
                   isDeleting ? t("modal.deleteLoading") : t("modal.delete")
                 }

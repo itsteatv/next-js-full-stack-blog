@@ -3,11 +3,9 @@ import { Inter } from "next/font/google";
 import "../globals.css";
 
 import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "@/providers/ThemeProvider";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "react-hot-toast";
 import { siteConfig } from "@/lib/siteConfig";
-import { AuthProvider } from "@/app/AuthProvider";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
@@ -79,23 +77,21 @@ export default async function RootLayout({
 }>) {
   const messages = await getMessages();
   return (
-    <AuthProvider>
-      <html
-        className="touch-pan-x touch-pan-y"
-        lang={locale}
-        suppressHydrationWarning
-      >
-        <body className={inter.className}>
-          <NextIntlClientProvider messages={messages}>
-            <NextTopLoader showSpinner={false} color="#fff" />
-            <Toaster />
-            <Navbar locale={locale} />
-            {children}
-            <CookieConsentBanner />
-            <FlyonuiScript />
-          </NextIntlClientProvider>
-        </body>
-      </html>
-    </AuthProvider>
+    <html
+      className="touch-pan-x touch-pan-y"
+      lang={locale}
+      suppressHydrationWarning
+    >
+      <body className={inter.className}>
+        <NextIntlClientProvider messages={messages}>
+          <NextTopLoader showSpinner={false} color="#fff" />
+          <Toaster />
+          <Navbar locale={locale} />
+          {children}
+          <CookieConsentBanner />
+          <FlyonuiScript />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

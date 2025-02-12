@@ -1,7 +1,5 @@
 "use client";
 
-import Loading from "@/app/[locale]/blog/loading";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -11,9 +9,6 @@ import { themeChange } from "theme-change";
 function Navbar({ locale }: { locale: string }) {
   const t = useTranslations("navbar");
   themeChange();
-
-  const { user, isAuthenticated, isLoading, getPermission } =
-    useKindeBrowserClient();
 
   const pathname = usePathname();
   const router = useRouter();
@@ -36,19 +31,6 @@ function Navbar({ locale }: { locale: string }) {
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme);
-  };
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  const requiredPermission = getPermission("all::permissions");
-  const isAdmin = requiredPermission?.isGranted;
-
-  const userProfile = {
-    name: user?.given_name,
-    email: user?.email,
-    imageUrl: user?.picture,
   };
 
   return (
