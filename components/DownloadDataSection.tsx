@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button";
 import Loading from "@/app/[locale]/blog/loading";
-import { handleDownloadData } from "@/lib/handleDownloadData";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -34,7 +33,6 @@ const DownloadDataSection = () => {
       <Button
         type="button"
         className="inline-flex items-center justify-center rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-green-500 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-green-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
-        onClick={() => handleDownloadData(setIsDownloading)}
         disabled={isDownloading}
         isLoading={isDownloading}
         label={t("exportData.button")}

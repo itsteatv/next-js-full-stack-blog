@@ -1,6 +1,5 @@
 "use client";
 
-import createPost from "@/actions/createPost";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Textarea from "./Textarea";
@@ -99,7 +98,7 @@ const CreatePostForm = () => {
     }
 
     try {
-      await createPost(parsed.data);
+      // await createPost(parsed.data);
       reset();
       setSelectedCategories([]);
       toast.success("Post created successfully");
