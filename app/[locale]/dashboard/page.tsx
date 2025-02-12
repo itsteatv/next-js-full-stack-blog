@@ -1,6 +1,3 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { redirect } from "next/navigation";
-import prisma from "@/lib/db";
 import UserProfileForm from "@/components/UserProfileForm";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -14,21 +11,8 @@ export const metadata: Metadata = {
 };
 
 const Dashboard = async () => {
-  const { getUser, isAuthenticated } = getKindeServerSession();
-  const user = await getUser();
-
+  
   const t = await getTranslations("dashboard");
-
-  const isLoggedIn = await isAuthenticated();
-
-  if (!isLoggedIn) {
-    redirect("/api/auth/login");
-  }
-
-  const localUser = await prisma.user.findUnique({
-    where: { id: user?.id },
-    select: { bio: true, socialLinks: true },
-  });
 
   return (
     <div className="divide-y divide-white/5">
@@ -44,9 +28,9 @@ const Dashboard = async () => {
 
         <div className="md:col-span-2">
           <UserProfileForm
-            user={user}
-            bio={localUser?.bio || ""}
-            socialLinks={localUser?.socialLinks || ""}
+            user="test"
+            bio="test"
+            socialLinks="test"
           />
         </div>
       </div>
