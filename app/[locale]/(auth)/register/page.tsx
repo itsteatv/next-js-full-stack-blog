@@ -1,9 +1,21 @@
-const SignIn = () => {
+const Register = () => {
   return (
     <div className="sm:max-w-smd mx-auto flex items-center justify-center min-h-screen ">
       <div className="p-8 rounded-lg shadow-lg w-full max-w-sm">
-        <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
         <form>
+          <div className="w-full mb-4">
+            <div className="input-group w-full">
+              <span className="input-group-text">
+                <span className="icon-[solar--user-rounded-bold-duotone] text-base-content/80 size-5"></span>
+              </span>
+              <input
+                type="text"
+                className="input max-w-sm"
+                placeholder="Enter your username"
+              />
+            </div>
+          </div>
           <div className="w-full mb-4">
             <div className="input-group w-full">
               <span className="input-group-text">
@@ -28,6 +40,15 @@ const SignIn = () => {
               />
             </div>
           </div>
+          <div className="w-full mb-4 flex items-center gap-1">
+            <input type="checkbox" className="checkbox" id="defaultCheckbox1" />
+            <label
+              className="label label-text text-base"
+              for="defaultCheckbox1"
+            >
+              Remember me
+            </label>
+          </div>
           <button
             type="submit"
             className="btn btn-primary btn-block transition"
@@ -36,12 +57,12 @@ const SignIn = () => {
           </button>
         </form>
         <p className="mt-4 bg-gradient-to-r from-primary to-neutral bg-clip-text text-transparent font-bold w-fit">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <a
-            href="/signup"
+            href="/login"
             className="text-primary hover:text-primary-content duration-300"
           >
-            Sign up
+            Log in
           </a>
         </p>
       </div>
@@ -49,4 +70,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Register;
