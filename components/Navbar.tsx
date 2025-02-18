@@ -163,10 +163,10 @@ function Navbar({ locale }: { locale: string }) {
           {/* Authentication Buttons (Sign In & Register) */}
           <div className="join">
             <button className="btn btn-outline btn-primary join-item waves waves-primary btn-sm">
-              {t("signIn")}
+              <Link href={`/${locale}/signIn`}>{t("signIn")}</Link>
             </button>
             <button className="btn btn-gradient btn-primary join-item waves waves-primary btn-sm">
-              {t("register")}
+              <Link href={`/${locale}/register`}>{t("register")}</Link>
             </button>
           </div>
         </div>
@@ -231,7 +231,7 @@ function Navbar({ locale }: { locale: string }) {
             {/* Sign In & Register Links */}
             <li>
               <Link
-                href={`/${locale}/sign-in`}
+                href={`/${locale}/signIn`}
                 className="flex items-center gap-2"
               >
                 <span className="icon-[solar--user-check-bold-duotone] size-5"></span>
