@@ -1,17 +1,39 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+import { register } from "@/actions/auth";
 
 const RegisterForm = () => {
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const pathname = usePathname();
   const locale = pathname.split("/")[1] || "en";
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData(event.currentTarget);
+    const result = await register(formData);
+
+    if (result.status === "success") {
+      router.push(`/${locale}/signIn`);
+    } else {
+      setError(result.status);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className="sm:max-w-smd mx-auto flex items-center justify-center min-h-screen ">
       <div className="p-8 rounded-lg shadow-lg w-full max-w-sm">
         <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="w-full mb-4">
             <div className="input-group w-full">
               <span className="input-group-text">
@@ -58,7 +80,7 @@ const RegisterForm = () => {
             <input type="checkbox" className="checkbox" id="defaultCheckbox1" />
             <label
               className="label label-text text-base"
-              for="defaultCheckbox1"
+              htmlFor="defaultCheckbox1"
             >
               Remember me
             </label>
@@ -73,10 +95,10 @@ const RegisterForm = () => {
         <p className="mt-4 bg-gradient-to-r from-primary to-neutral bg-clip-text text-transparent font-bold w-fit">
           Already have an account?{" "}
           <Link
-            href={`/${locale}/signIn`}
+            href={`/${locale}/login`}
             className="text-primary hover:text-primary-content duration-300"
           >
-            Sign In
+            Log in
           </Link>
         </p>
       </div>
