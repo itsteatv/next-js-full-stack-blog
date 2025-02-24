@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function register(formData: FormData) {
   console.log(formData);
@@ -40,7 +41,7 @@ export async function register(formData: FormData) {
     };
   }
 
-  revalidatePath("/en", "layout");
+  revalidatePath("/en/blog");
 
   console.log(data.user);
 
@@ -66,9 +67,23 @@ export async function signIn(formData: FormData) {
 
   console.log(error);
 
-  revalidatePath("/en", "layout");
+  revalidatePath("/en/blog");
 
   console.log(data.user);
 
   return { status: "success", user: data.user };
+}
+
+export async function signOut() {
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    redirect("/en/error");
+  }
+
+  revalidatePath("en/blog");
+
+  redirect("/en/signIn");
 }
