@@ -5,8 +5,14 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ChangeEvent, useEffect, useState } from "react";
 import { themeChange } from "theme-change";
+import { createClient } from "@/utils/supabase/client";
+import Image from "next/image";
+import { signOut } from "@/actions/auth";
 
 function Navbar({ locale }: { locale: string }) {
+  const supabase = createClient();
+  const [user, setUser] = useState<any>(null);
+
   const t = useTranslations("navbar");
   themeChange();
 
@@ -22,6 +28,35 @@ function Navbar({ locale }: { locale: string }) {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data, error } = await supabase.auth.getUser();
+      console.log(data);
+      if (data?.user) {
+        setUser(data.user);
+      } else {
+        setUser(null);
+      }
+    };
+
+    fetchUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(supabase.auth.getUser() || null);
+      }
+    );
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, [supabase.auth]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setUser(null);
+    router.push(`/${locale}/signIn`);
+  };
 
   const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newLocale = e.target.value;
@@ -53,7 +88,7 @@ function Navbar({ locale }: { locale: string }) {
           </button>
         </div>
 
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-2 shrink-0 items-center">
           <div className="dropdown relative inline-flex rtl:[--placement:bottom-end]">
             <button
               id="dropdown-menu-icon"
@@ -161,14 +196,104 @@ function Navbar({ locale }: { locale: string }) {
           </div>
 
           {/* Authentication Buttons (Sign In & Register) */}
-          <div className="join">
-            <button className="btn btn-outline btn-primary join-item waves waves-primary btn-sm">
-              <Link href={`/${locale}/signIn`}>{t("signIn")}</Link>
-            </button>
-            <button className="btn btn-gradient btn-primary join-item waves waves-primary btn-sm">
-              <Link href={`/${locale}/register`}>{t("register")}</Link>
-            </button>
-          </div>
+          {user ? (
+            <div className="flex gap-2 items-center">
+              <div className="dropdown relative inline-flex rtl:[--placement:bottom-end]">
+                <button
+                  id="dropdown-avatar"
+                  type="button"
+                  className="dropdown-toggle btn btn-outline btn-primary flex items-center gap-2 rounded-full"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  aria-label="Dropdown"
+                >
+                  <div className="avatar">
+                    <div className="size-6 rounded-full">
+                      <Image
+                        src={`https://placehold.co/100x100/EEE/31343C?font=oswald&text=${
+                          user?.user_metadata?.username || ""
+                        }`}
+                        alt={`${user?.user_metadata?.username || ""}`}
+                        className="rounded-full"
+                        fill
+                      />
+                    </div>
+                  </div>
+                  {user?.user_metadata?.username || "User"}
+                  <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
+                </button>
+
+                <ul
+                  className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60"
+                  role="menu"
+                  aria-orientation="vertical"
+                  aria-labelledby="dropdown-avatar"
+                >
+                  <li className="dropdown-header gap-3">
+                    <div className="avatar">
+                      <div className="w-10 rounded-full">
+                        <Image
+                          src={`https://placehold.co/100x100/EEE/31343C?font=oswald&text=${
+                            user?.user_metadata?.username || ""
+                          }`}
+                          alt={`${user?.user_metadata?.username || ""}`}
+                          className="rounded-full"
+                          fill
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <h6 className="text-base-content text-base font-semibold">
+                        {user?.user_metadata?.username || "John Doe"}
+                      </h6>
+                      <small className="text-base-content/50 text-sm font-normal">
+                        {user.email}
+                      </small>
+                    </div>
+                  </li>
+
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      My Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Settings
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      Billing
+                    </a>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      FAQs
+                    </a>
+                  </li>
+
+                  <li>
+                    <button
+                      className="dropdown-item text-red-500"
+                      onClick={handleSignOut}
+                    >
+                      Sign Out
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <div className="join">
+              <button className="btn btn-outline btn-primary join-item waves waves-primary btn-sm">
+                <Link href={`/${locale}/signIn`}>{t("signIn")}</Link>
+              </button>
+              <button className="btn btn-gradient btn-primary join-item waves waves-primary btn-sm">
+                <Link href={`/${locale}/register`}>{t("register")}</Link>
+              </button>
+            </div>
+          )}
         </div>
       </nav>
 
