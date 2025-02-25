@@ -12,6 +12,7 @@ import { signOut } from "@/actions/auth";
 function Navbar({ locale }: { locale: string }) {
   const supabase = createClient();
   const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   const t = useTranslations("navbar");
   themeChange();
@@ -31,20 +32,26 @@ function Navbar({ locale }: { locale: string }) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser();
-      console.log(data);
-      if (data?.user) {
-        setUser(data.user);
+      setLoading(true);
+      const { data: sessionData } = await supabase.auth.getSession();
+
+      if (sessionData?.session?.user) {
+        setUser(sessionData.session.user);
       } else {
         setUser(null);
       }
+      setLoading(false);
     };
 
     fetchUser();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(supabase.auth.getUser() || null);
+      async (_event, session) => {
+        if (session?.user) {
+          setUser(session.user);
+        } else {
+          setUser(null);
+        }
       }
     );
     return () => {
@@ -196,7 +203,11 @@ function Navbar({ locale }: { locale: string }) {
           </div>
 
           {/* Authentication Buttons (Sign In & Register) */}
-          {user ? (
+          {loading ? (
+            <div className="flex flex-col items-center gap-2">
+              <div className="skeleton skeleton-animated animate-pulse h-8 w-24 rounded-full"></div>{" "}
+            </div>
+          ) : user ? (
             <div className="flex gap-2 items-center">
               <div className="dropdown relative inline-flex rtl:[--placement:bottom-end]">
                 <button
@@ -244,7 +255,7 @@ function Navbar({ locale }: { locale: string }) {
                     </div>
                     <div>
                       <h6 className="text-base-content text-base font-semibold">
-                        {user?.user_metadata?.username || "John Doe"}
+                        {user?.user_metadata?.username || "User"}
                       </h6>
                       <small className="text-base-content/50 text-sm font-normal">
                         {user.email}
@@ -253,26 +264,13 @@ function Navbar({ locale }: { locale: string }) {
                   </li>
 
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link
+                      className="dropdown-item"
+                      href={`/${locale}/dashboard`}
+                    >
                       My Profile
-                    </a>
+                    </Link>
                   </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Billing
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      FAQs
-                    </a>
-                  </li>
-
                   <li>
                     <button
                       className="dropdown-item text-red-500"
