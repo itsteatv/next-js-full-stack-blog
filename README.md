@@ -3,7 +3,7 @@
 #### _Powered By Next.js 14_
 
 Full stack, feature rich, modern blogging
-web application built with Next.js 14 .
+web application built with Next.js 14
 
 ## Table of Contents
 
@@ -40,6 +40,7 @@ This project uses a modern tech stack that ensures high performance, security, a
 - **[Zod](https://github.com/colinhacks/zod)** - A schema validation library for TypeScript, ensuring safe and validated data handling.
 - **[React Hook Form](https://react-hook-form.com/)** - A performant library for managing forms with minimal re-renders, making forms fast and easy to handle.
 - **[Prisma](https://www.prisma.io/)** - An ORM that provides an intuitive way to work with databases, simplifying data access.
+- **[Supabase (Auth)](https://supabase.com/)** - A backend-as-a-service providing authentication, database management, and real-time subscriptions, making user authentication seamless.
 - **[SQLite](https://www.sqlite.org/)** - A lightweight, file-based database ideal for local development.
 - **[Resend & React Email](https://resend.com/)** - Tools for sending and managing emails directly from the app, used for notifications and user communication.
 
@@ -52,6 +53,13 @@ To run this project, you will need to create a `.env` file in the root directory
 ### General Configuration
 
 - **`NEXT_PUBLIC_IMAGE_DOMAINS`**: A comma-separated list of domains allowed to host images used in the application (e.g., `example.com,cdn.example.com`).
+
+### Supabase Configuration
+
+For authentication and database management, add the following Supabase environment variables:
+
+- **`NEXT_PUBLIC_SUPABASE_URL`**: The URL of your Supabase project.
+- **`NEXT_PUBLIC_SUPABASE_ANON_KEY`**: The public anonymous key for accessing Supabase services.
 
 ### Database (Prisma)
 
