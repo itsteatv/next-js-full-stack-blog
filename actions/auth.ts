@@ -27,23 +27,13 @@ export async function register(formData: FormData) {
     },
   });
 
-  console.log(error);
-
   if (error) {
-    return {
-      status: error.message,
-      user: null,
-    };
+    return { status: error.message, user: null };
   } else if (data.user?.identities?.length === 0) {
-    return {
-      status: "User with this email already exists",
-      user: null,
-    };
+    return { status: "User with this email already exists", user: null };
   }
 
   revalidatePath("/en/blog");
-
-  console.log(data.user);
 
   return { status: "success", user: data.user };
 }
@@ -59,17 +49,33 @@ export async function signIn(formData: FormData) {
   const { error, data } = await supabase.auth.signInWithPassword(credentials);
 
   if (error) {
-    return {
-      status: error.message,
-      user: null,
-    };
+    return { status: error.message, user: null };
   }
 
-  console.log(error);
+  const username = data?.user?.user_metadata?.username;
+  if (!username || typeof username !== "string") {
+    return { status: "Invalid username", user: null };
+  }
+
+  const { data: existingUser } = await supabase
+    .from("user_profiles")
+    .select("id")
+    .eq("email", credentials.email)
+    .limit(1)
+    .single();
+
+  if (!existingUser) {
+    const { error: insertError } = await supabase.from("user_profiles").insert({
+      email: data.user.email,
+      username: username,
+    });
+
+    if (insertError) {
+      return { status: insertError.message, user: null };
+    }
+  }
 
   revalidatePath("/en/blog");
-
-  console.log(data.user);
 
   return { status: "success", user: data.user };
 }
