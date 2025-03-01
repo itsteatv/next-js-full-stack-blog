@@ -1,6 +1,9 @@
 import UserProfileForm from "@/components/UserProfileForm";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { createClient } from "@/utils/supabase/server";
+import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -11,8 +14,17 @@ export const metadata: Metadata = {
 };
 
 const Dashboard = async () => {
-  
   const t = await getTranslations("dashboard");
+
+  const supabase = await createClient();
+  const headersList = headers();
+  const pathname = headersList.get("next-url") || "/en";
+  const locale = pathname.split("/")[1] || "en";
+
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data?.user) {
+    redirect(`/${locale}/signIn`);
+  }
 
   return (
     <div className="divide-y divide-white/5">
@@ -27,11 +39,7 @@ const Dashboard = async () => {
         </div>
 
         <div className="md:col-span-2">
-          <UserProfileForm
-            user="test"
-            bio="test"
-            socialLinks="test"
-          />
+          <UserProfileForm user="test" bio="test" socialLinks="test" />
         </div>
       </div>
     </div>
