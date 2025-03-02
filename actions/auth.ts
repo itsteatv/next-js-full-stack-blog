@@ -2,11 +2,10 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export async function register(formData: FormData) {
-  console.log(formData);
-
   const supabase = await createClient();
 
   const credentials = {
@@ -92,4 +91,29 @@ export async function signOut() {
   revalidatePath("en/blog");
 
   redirect("/en/signIn");
+}
+
+export async function signInWithGithub() {
+  const headersList = headers();
+  const pathname = headersList.get("next-url") || "/en";
+  const locale = pathname.split("/")[1] || "en";
+
+  const origin = await headers().get("origin");
+
+  const redirectUrl = `${origin}/${locale}/auth/callback?next=${pathname}`;
+
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: redirectUrl,
+    },
+  });
+
+  if (error) {
+    redirect(`${locale}/error`);
+  } else if (data.url) {
+    return redirect(data.url);
+  }
 }
