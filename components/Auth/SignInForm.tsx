@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "@/actions/auth";
+import GithubLogin from "./GithubLogin";
 
 const SignInForm = () => {
   const [error, setError] = useState(null);
@@ -72,6 +73,7 @@ const SignInForm = () => {
             Sign In
           </button>
         </form>
+        <GithubLogin />
         <p className="mt-4 bg-gradient-to-r from-primary to-neutral bg-clip-text text-transparent font-bold w-fit">
           Don't have an account?{" "}
           <Link
