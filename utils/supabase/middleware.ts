@@ -43,7 +43,7 @@ export async function updateSession(request: NextRequest) {
   const locale = pathnameParts[1];
 
   const publicRoutes = [
-    "/login",
+    "/signIn",
     "/register",
     "/forgot-password",
     "/reset-password",
@@ -56,7 +56,7 @@ export async function updateSession(request: NextRequest) {
 
   if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone();
-    url.pathname = `/${locale}/login`;
+    url.pathname = `/${locale}/signIn`;
     return NextResponse.redirect(url);
   }
 
