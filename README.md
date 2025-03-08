@@ -181,7 +181,8 @@ Start the server
   - [ ] **Password and Security**  
          Include options for updating passwords and enhancing account security:
 
-    - [ ] Change password feature with current password verification
+    - [x] Forgot password functionality to reset the password via email or phone verification
+    - [x] Reset password feature allowing users to set a new password after identity verification
     - [ ] Two-factor authentication setup
     - [ ] Option to view recent account activity and log out from other sessions
 
