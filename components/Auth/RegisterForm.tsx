@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { register } from "@/actions/auth";
+import { createClient } from "@/utils/supabase/client";
 
 const RegisterForm = () => {
   const [error, setError] = useState(null);
@@ -11,6 +12,8 @@ const RegisterForm = () => {
   const router = useRouter();
   const pathname = usePathname();
   const locale = pathname.split("/")[1] || "en";
+
+  const supabase = createClient();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,6 +24,7 @@ const RegisterForm = () => {
     const result = await register(formData);
 
     if (result.status === "success") {
+      await supabase.auth.signOut();
       router.push(`/${locale}/signIn`);
     } else {
       setError(result.status);
@@ -88,14 +92,18 @@ const RegisterForm = () => {
           <button
             type="submit"
             className="btn btn-primary btn-block transition"
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Processing..." : "Sign Up"}
           </button>
         </form>
+
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+
         <p className="mt-4 bg-gradient-to-r from-primary to-neutral bg-clip-text text-transparent font-bold w-fit">
           Already have an account?{" "}
           <Link
-            href={`/${locale}/login`}
+            href={`/${locale}/signIn`}
             className="text-primary hover:text-primary-content duration-300"
           >
             Log in
