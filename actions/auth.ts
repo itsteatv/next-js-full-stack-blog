@@ -1,5 +1,6 @@
 "use server";
 
+import { registerSchema, TRegisterSchema } from "@/schemas/registerSchema";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
@@ -10,36 +11,39 @@ const forgotPasswordSchema = z.object({
   email: z.string().email(),
 });
 
-export async function register(formData: FormData) {
+export async function register(credentials: TRegisterSchema) {
   const supabase = await createClient();
 
-  const credentials = {
-    username: formData.get("username") as string,
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-  };
+  const validation = registerSchema.safeParse(credentials);
 
-  console.log(credentials);
+  if (!validation.success) {
+    return {
+      status: "error",
+      message: validation.error.issues[0]?.message || "Invalid input data",
+    };
+  }
 
   const { error, data } = await supabase.auth.signUp({
     email: credentials.email,
     password: credentials.password,
     options: {
-      data: {
-        username: credentials.username,
-      },
+      data: { username: credentials.username },
     },
   });
 
   if (error) {
-    return { status: error.message, user: null };
+    return { status: "error", message: error.message };
   } else if (data.user?.identities?.length === 0) {
-    return { status: "User with this email already exists", user: null };
+    return { status: "error", message: "User with this email already exists" };
   }
 
   revalidatePath("/en/blog");
 
-  return { status: "success", user: data.user };
+  return {
+    status: "success",
+    message: "Check your email for confirmation",
+    user: data.user,
+  };
 }
 
 export async function signIn(formData: FormData) {
