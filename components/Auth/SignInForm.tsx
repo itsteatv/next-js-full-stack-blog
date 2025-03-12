@@ -5,39 +5,48 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "@/actions/auth";
 import GithubLogin from "./GithubLogin";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signInSchema, TSignInSchema } from "@/schemas/signInSchema";
 
 const SignInForm = () => {
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const locale = pathname.split("/")[1] || "en";
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const {
+    register: formRegister,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TSignInSchema>({
+    resolver: zodResolver(signInSchema),
+  });
+
+  const handleFormSubmit = async (data: TSignInSchema) => {
     setLoading(true);
-    setError(null);
+    try {
+      const result = await signIn(data);
 
-    const formData = new FormData(event.currentTarget);
-    console.log(formData);
-    const result = await signIn(formData);
-
-    console.log(result);
-
-    if (result.status === "success") {
-      router.push(`/${locale}/blog`);
-    } else {
-      setError(result.status);
+      if (result.status === "success") {
+        toast.success("Successfully signed in! Redirecting...");
+        router.push(`/${locale}/blog`);
+      } else {
+        toast.error(result.message || "Sign-in failed. Please try again.");
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
-    <div className="sm:max-w-smd mx-auto flex items-center justify-center min-h-screen ">
+    <div className="sm:max-w-smd mx-auto flex items-center justify-center min-h-screen">
       <div className="p-8 rounded-lg shadow-lg w-full max-w-sm">
         <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="w-full mb-4">
             <div className="input-group w-full">
               <span className="input-group-text">
@@ -45,35 +54,50 @@ const SignInForm = () => {
               </span>
               <input
                 id="email"
-                name="email"
                 type="email"
                 className="input max-w-sm"
                 placeholder="Enter your email"
+                {...formRegister("email")}
               />
             </div>
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
+
           <div className="w-full mb-4">
             <div className="input-group w-full">
               <span className="input-group-text">
                 <span className="icon-[solar--lock-password-bold-duotone] text-base-content/80 size-5"></span>
               </span>
               <input
-                name="password"
                 id="password"
                 type="password"
                 className="input max-w-sm"
                 placeholder="Enter your password"
+                {...formRegister("password")}
               />
             </div>
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
           </div>
+
           <button
             type="submit"
             className="btn btn-primary btn-block transition"
+            disabled={loading}
           >
-            Sign In
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
+
         <GithubLogin />
+
         <p className="mt-4 bg-gradient-to-r from-primary to-neutral bg-clip-text text-transparent font-bold w-fit">
           Don't have an account?{" "}
           <Link
