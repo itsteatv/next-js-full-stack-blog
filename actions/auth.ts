@@ -1,6 +1,7 @@
 "use server";
 
 import { registerSchema, TRegisterSchema } from "@/schemas/registerSchema";
+import { signInSchema, TSignInSchema } from "@/schemas/signInSchema";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
@@ -46,23 +47,29 @@ export async function register(credentials: TRegisterSchema) {
   };
 }
 
-export async function signIn(formData: FormData) {
+export async function signIn(credentials: TSignInSchema) {
   const supabase = await createClient();
 
-  const credentials = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-  };
+  console.log(credentials);
+
+  const validation = signInSchema.safeParse(credentials);
+  if (!validation.success) {
+    return {
+      status: "error",
+      message: validation.error.issues[0]?.message ?? "Invalid input",
+      user: null,
+    };
+  }
 
   const { error, data } = await supabase.auth.signInWithPassword(credentials);
 
   if (error) {
-    return { status: error.message, user: null };
+    return { status: "error", message: error.message, user: null };
   }
 
   const username = data?.user?.user_metadata?.username;
   if (!username || typeof username !== "string") {
-    return { status: "Invalid username", user: null };
+    return { status: "error", message: "Invalid username", user: null };
   }
 
   const { data: existingUser } = await supabase
@@ -79,7 +86,7 @@ export async function signIn(formData: FormData) {
     });
 
     if (insertError) {
-      return { status: insertError.message, user: null };
+      return { status: "error", message: insertError.message, user: null };
     }
   }
 
