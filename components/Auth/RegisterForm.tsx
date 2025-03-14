@@ -4,14 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { register } from "@/actions/auth";
 import { createClient } from "@/utils/supabase/client";
 import toast from "react-hot-toast";
 import { registerSchema, TRegisterSchema } from "@/schemas/registerSchema";
-
-type FormData = z.infer<typeof registerSchema>;
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +21,7 @@ const RegisterForm = () => {
     register: formRegister,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TRegisterSchema>({
     resolver: zodResolver(registerSchema),
   });
@@ -36,6 +34,7 @@ const RegisterForm = () => {
       if (result.status === "success") {
         await supabase.auth.signOut();
         toast.success("Successfully registered! Redirecting to sign in...");
+        reset();
         router.push(`/${locale}/signIn`);
       } else {
         toast.error(result.message || "Registration failed. Please try again.");
