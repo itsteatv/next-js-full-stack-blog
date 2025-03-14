@@ -1,7 +1,7 @@
 "use client";
 
 import { forgotPassword } from "@/actions/auth";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -12,28 +12,31 @@ const formSchema = z.object({
   email: z.string().email(),
 });
 
+type TFormSchema = z.infer<typeof formSchema>;
+
 const ForgotPassword = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
-
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const {
+    register: formRegister,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<TFormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: decodeURIComponent(searchParams.get("email") ?? ""),
     },
   });
 
-  const handleSubmit = async (data: z.infer<typeof formSchema>) => {
+  const handleFormSubmit = async (data: TFormSchema) => {
     setError(null);
     setLoading(true);
 
     try {
-      const response = await forgotPassword({
-        email: data.email,
-      });
+      const response = await forgotPassword({ email: data.email });
 
       if (response.error) {
         setError(response.message);
@@ -41,6 +44,7 @@ const ForgotPassword = () => {
         toast.success(
           "We've sent a password reset link to your email address."
         );
+        reset();
       }
     } catch (error) {
       setError("An unexpected error occurred. Please try again.");
@@ -50,10 +54,10 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="sm:max-w-smd mx-auto flex items-center justify-center min-h-screen ">
+    <div className="sm:max-w-smd mx-auto flex items-center justify-center min-h-screen">
       <div className="p-8 rounded-lg shadow-lg w-full max-w-sm">
         <h2 className="text-2xl font-bold text-center mb-6">Forgot Password</h2>
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <form onSubmit={handleSubmit(handleFormSubmit)}>
           <div className="w-full mb-4">
             <div className="input-group w-full">
               <span className="input-group-text">
@@ -64,13 +68,12 @@ const ForgotPassword = () => {
                 type="email"
                 className="input max-w-sm"
                 placeholder="Enter your email"
-                {...form.register("email")}
+                {...formRegister("email")}
               />
             </div>
-            {/* Show validation errors */}
-            {form.formState.errors.email && (
+            {errors.email && (
               <p className="text-red-500 text-sm mt-1">
-                {form.formState.errors.email.message}
+                {errors.email.message}
               </p>
             )}
           </div>
@@ -82,7 +85,6 @@ const ForgotPassword = () => {
             {loading ? "Processing..." : "Forgot Password"}
           </button>
         </form>
-        {/* Show API error message */}
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
       </div>
     </div>

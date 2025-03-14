@@ -20,6 +20,7 @@ const SignInForm = () => {
     register: formRegister,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<TSignInSchema>({
     resolver: zodResolver(signInSchema),
   });
@@ -31,6 +32,7 @@ const SignInForm = () => {
 
       if (result.status === "success") {
         toast.success("Successfully signed in! Redirecting...");
+        reset();
         router.push(`/${locale}/blog`);
       } else {
         toast.error(result.message || "Sign-in failed. Please try again.");
