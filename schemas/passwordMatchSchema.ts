@@ -15,3 +15,5 @@ export const passwordMatchSchema = z
       });
     }
   });
+
+export type TPasswordMatchSchema = z.infer<typeof passwordMatchSchema>;
