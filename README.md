@@ -183,6 +183,7 @@ Start the server
 
     - [x] Forgot password functionality to reset the password via email or phone verification
     - [x] Reset password feature allowing users to set a new password after identity verification
+    - [x] hCaptcha protection on the Forgot Password page to prevent automated abuse
     - [ ] Two-factor authentication setup
     - [ ] Option to view recent account activity and log out from other sessions
 
