@@ -2,11 +2,12 @@
 
 import { forgotPassword } from "@/actions/auth";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -18,6 +19,8 @@ const ForgotPassword = () => {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [captchaToken, setCaptchaToken] = useState("");
+  const captchaRef = useRef<HCaptcha | null>(null);
 
   const {
     register: formRegister,
@@ -32,6 +35,11 @@ const ForgotPassword = () => {
   });
 
   const handleFormSubmit = async (data: TFormSchema) => {
+    if (!captchaToken) {
+      toast.error("Please complete the CAPTCHA");
+      return;
+    }
+    
     setError(null);
     setLoading(true);
 
@@ -79,11 +87,16 @@ const ForgotPassword = () => {
           </div>
           <button
             type="submit"
-            className="btn btn-primary btn-block transition"
+            className="btn btn-primary btn-block transition mb-4"
             disabled={loading}
           >
             {loading ? "Processing..." : "Forgot Password"}
           </button>
+          <HCaptcha
+            sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY!}
+            onVerify={(token) => setCaptchaToken(token)}
+            ref={captchaRef}
+          />
         </form>
         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
       </div>
