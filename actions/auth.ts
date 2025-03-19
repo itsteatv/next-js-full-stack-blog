@@ -16,11 +16,27 @@ export async function register(credentials: TRegisterSchema) {
   const supabase = await createClient();
 
   const validation = registerSchema.safeParse(credentials);
-
   if (!validation.success) {
     return {
       status: "error",
       message: validation.error.issues[0]?.message || "Invalid input data",
+    };
+  }
+
+  const { data: existingUsers, error: usernameError } = await supabase
+    .from("user_profiles")
+    .select("id")
+    .eq("username", credentials.username)
+    .limit(1);
+
+  if (usernameError) {
+    return { status: "error", message: "Error checking username availability" };
+  }
+
+  if (existingUsers && existingUsers.length > 0) {
+    return {
+      status: "error",
+      message: "Username already taken. Please choose another one.",
     };
   }
 
@@ -37,8 +53,6 @@ export async function register(credentials: TRegisterSchema) {
   } else if (data.user?.identities?.length === 0) {
     return { status: "error", message: "User with this email already exists" };
   }
-
-  revalidatePath("/en/blog");
 
   return {
     status: "success",
