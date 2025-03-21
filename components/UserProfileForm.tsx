@@ -14,26 +14,56 @@ import DownloadDataSection from "./DownloadDataSection";
 import DeleteAccountSection from "./DeleteAccountSection";
 import UserProfileInputs from "./UserProfileInputs";
 import { User } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabase/client";
+import { Spinner } from "./Spinner";
 
 interface UserProfileFormProps {
   user: User;
-  bio?: string;
-  socialLinks?: string;
+  // bio?: string;
+  // socialLinks?: string;
 }
 
 const UserProfileForm = ({
   user,
-  bio = "",
-  socialLinks = "",
-}: UserProfileFormProps) => {
+}: // bio = "",
+// socialLinks = "",
+UserProfileFormProps) => {
   const t = useTranslations("dashboard");
-  const userRole = "user";
-
-  const handleSubmit = async () => {
-    console.log("Saving user profile...");
-  };
+  const [userData, setUserData] = useState({
+    email: user.email || "",
+    username: user?.user_metadata?.username || "",
+  });
+  const [loading, setLoading] = useState(false);
 
   console.log(user);
+
+  useEffect(() => {
+    setUserData({
+      email: user.email || "",
+      username: user?.user_metadata?.username || "",
+    });
+  }, [user]);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    const supabase = createClient();
+    try {
+      const { data, error } = await supabase.from("user_profiles").upsert({
+        email: userData.email,
+        username: userData.username,
+      });
+
+      if (error) {
+        toast.error("Error updating profile: " + error.message);
+        return;
+      }
+
+      toast.success("Profile updated successfully!");
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    }
+    setLoading(false);
+  };
 
   return (
     <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
@@ -41,24 +71,28 @@ const UserProfileForm = ({
         <RoleCard
           title={t("role.title")}
           description={t("role.description")}
-          role={userRole}
+          role="user"
         />
         <AvatarUpload
           title={t("avatar.title")}
           description={t("avatar.description")}
         />
-        <UserProfileInputs user={user} bio={bio} socialLinks={socialLinks} />
+        <UserProfileInputs userData={userData} setUserData={setUserData} />
       </div>
 
       <div className="mt-10 sm:px-6 lg:px-8 px-4 flex flex-col items-start gap-y-5">
         <Button
-          className="bg-blue-500 text-white px-5 py-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
+          className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-blue-500 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-blue-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
           onClick={handleSubmit}
           label={t("SaveInfo.saveButton")}
-          disabled={false}
-          isLoading={false}
+          disabled={loading}
+          isLoading={loading}
           pendingContent={t("SaveInfo.saveLoading")}
-          loadingComponent={<Loading color="white" />}
+          loadingComponent={
+            <div className="flex">
+              <Spinner width={24} height={24} color="white" />
+            </div>
+          }
         />
       </div>
 

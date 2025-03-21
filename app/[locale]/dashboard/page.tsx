@@ -39,7 +39,7 @@ const Dashboard = async () => {
         </div>
 
         <div className="md:col-span-2">
-          <UserProfileForm user={data?.user} bio="" socialLinks="" />
+          <UserProfileForm user={data?.user} />
         </div>
       </div>
     </div>
