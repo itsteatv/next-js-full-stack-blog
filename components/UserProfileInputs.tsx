@@ -5,37 +5,23 @@ import { useTranslations } from "next-intl";
 import { User } from "@supabase/supabase-js";
 
 interface UserProfileInputsProps {
-  user: User;
-  bio?: string;
-  socialLinks?: string;
+  userData: { email: string; username: string };
+  setUserData: React.Dispatch<
+    React.SetStateAction<{ email: string; username: string }>
+  >;
+  // bio?: string;
+  // socialLinks?: string;
 }
 
 const UserProfileInputs = ({
-  user,
-  bio = "",
-  socialLinks = "",
+  userData,
+  setUserData,
 }: UserProfileInputsProps) => {
   const t = useTranslations("dashboard");
 
   return (
     <div className="flex flex-col gap-y-6 w-full">
-      <div className="w-full">
-        <div className="input-group w-full">
-          <span className="input-group-text">
-            <span className="icon-[solar--user-hand-up-bold-duotone] text-base-content/80 size-5"></span>
-          </span>
-          <input
-            type="text"
-            className="input max-w-sm"
-            id="given_name"
-            name="given_name"
-            value=""
-            placeholder={t("inputs.firstName.placeholder")}
-          />
-        </div>
-      </div>
-
-      <div className="w-full">
+      {/* <div className="w-full">
         <div className="input-group w-full">
           <span className="input-group-text">
             <span className="icon-[solar--users-group-two-rounded-bold-duotone] text-base-content/80 size-5"></span>
@@ -49,7 +35,7 @@ const UserProfileInputs = ({
             placeholder={t("inputs.lastName.placeholder")}
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="w-full">
         <div className="input-group w-full">
@@ -61,8 +47,9 @@ const UserProfileInputs = ({
             className="input max-w-sm cursor-not-allowed"
             id="email"
             name="email"
-            value={user.email || "Unknown"}
+            value={userData.email}
             placeholder={t("inputs.email.placeholder")}
+            disabled
           />
         </div>
       </div>
@@ -74,16 +61,19 @@ const UserProfileInputs = ({
           </span>
           <input
             type="text"
-            className="input max-w-sm cursor-not-allowed"
+            className="input max-w-sm"
             id="username"
             name="username"
-            value={user?.user_metadata?.username || "Unknown"}
+            value={userData.username}
             placeholder={t("inputs.username.placeholder")}
+            onChange={(e) =>
+              setUserData({ ...userData, username: e.target.value })
+            }
           />
         </div>
       </div>
 
-      <div className="w-full">
+      {/* <div className="w-full">
         <div className="input-group w-full">
           <span className="input-group-text">
             <span className="icon-[solar--pen-bold-duotone] text-base-content/80 size-5"></span>
@@ -97,9 +87,9 @@ const UserProfileInputs = ({
             rows={3}
           />
         </div>
-      </div>
+      </div> */}
 
-      <div className="w-full">
+      {/* <div className="w-full">
         <div className="input-group w-full">
           <span className="input-group-text">
             <span className="icon-[solar--paperclip-bold-duotone] text-base-content/80 size-5"></span>
@@ -113,7 +103,7 @@ const UserProfileInputs = ({
             rows={2}
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
