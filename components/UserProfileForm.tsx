@@ -13,9 +13,10 @@ import AvatarUpload from "./AvatarUpload";
 import DownloadDataSection from "./DownloadDataSection";
 import DeleteAccountSection from "./DeleteAccountSection";
 import UserProfileInputs from "./UserProfileInputs";
+import { User } from "@supabase/supabase-js";
 
 interface UserProfileFormProps {
-  user: string | null;
+  user: User;
   bio?: string;
   socialLinks?: string;
 }
@@ -25,76 +26,44 @@ const UserProfileForm = ({
   bio = "",
   socialLinks = "",
 }: UserProfileFormProps) => {
-  const [formData, setFormData] = useState({
-    given_name: "",
-    family_name: "",
-    email: "",
-    picture: "",
-    provided_id: "",
-    bio: bio || "",
-    socialLinks: socialLinks || "",
-  });
-
-  const [isSaving, setIsSaving] = useState(false);
-
-  const [userRole, setUserRole] = useState<string>("guest");
-
   const t = useTranslations("dashboard");
+  const userRole = "user";
 
   const handleSubmit = async () => {
-    setIsSaving(true);
-
-    const { given_name, family_name, picture, bio, socialLinks, email } =
-      formData;
-
-    const needsPrismaUpdate = bio !== "" || socialLinks !== "";
+    console.log("Saving user profile...");
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  console.log(user);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
       <div className="flex mx-auto max-w-2xl gap-x-8 gap-y-10 px-4 sm:px-6 flex-col lg:px-8">
         <RoleCard
           title={t("role.title")}
           description={t("role.description")}
-          role={userRole as "admin" | "user" | "guest"}
+          role={userRole}
         />
         <AvatarUpload
           title={t("avatar.title")}
           description={t("avatar.description")}
-          // onClick={handleAvatarClick}
-          // avatarUrl="https://via.placeholder.com/150"
         />
-        <UserProfileInputs formData={formData} onChange={handleInputChange} />
+        <UserProfileInputs user={user} bio={bio} socialLinks={socialLinks} />
       </div>
 
       <div className="mt-10 sm:px-6 lg:px-8 px-4 flex flex-col items-start gap-y-5">
         <Button
-          className="inline-flex items-center justify-center rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white shadow-lg transition duration-300 ease-in-out transform hover:bg-blue-600 hover:scale-105 focus:outline-none focus-visible:ring focus-visible:ring-blue-400 focus-visible:ring-opacity-75 disabled:cursor-not-allowed disabled:bg-gray-400"
+          className="bg-blue-500 text-white px-5 py-3 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
           onClick={handleSubmit}
           label={t("SaveInfo.saveButton")}
-          disabled={isSaving}
-          isLoading={isSaving}
+          disabled={false}
+          isLoading={false}
           pendingContent={t("SaveInfo.saveLoading")}
-          loadingComponent={
-            <div className="relative w-6 h-6">
-              <Loading color="white" />
-            </div>
-          }
+          loadingComponent={<Loading color="white" />}
         />
       </div>
 
       <DownloadDataSection />
-      <DeleteAccountSection userId={formData.provided_id} />
+      <DeleteAccountSection userId={user.id} />
     </form>
   );
 };

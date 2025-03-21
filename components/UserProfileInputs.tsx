@@ -2,22 +2,19 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
+import { User } from "@supabase/supabase-js";
 
 interface UserProfileInputsProps {
-  formData: {
-    given_name: string;
-    family_name: string;
-    email: string;
-    bio: string;
-    socialLinks: string;
-    username?: string;
-  };
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
+  user: User;
+  bio?: string;
+  socialLinks?: string;
 }
 
-const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
+const UserProfileInputs = ({
+  user,
+  bio = "",
+  socialLinks = "",
+}: UserProfileInputsProps) => {
   const t = useTranslations("dashboard");
 
   return (
@@ -32,8 +29,7 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
             className="input max-w-sm"
             id="given_name"
             name="given_name"
-            value={formData?.given_name || ""}
-            onChange={onChange}
+            value=""
             placeholder={t("inputs.firstName.placeholder")}
           />
         </div>
@@ -49,8 +45,7 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
             className="input max-w-sm"
             id="family_name"
             name="family_name"
-            value={formData?.family_name || ""}
-            onChange={onChange}
+            value=""
             placeholder={t("inputs.lastName.placeholder")}
           />
         </div>
@@ -66,10 +61,8 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
             className="input max-w-sm cursor-not-allowed"
             id="email"
             name="email"
-            value={formData?.email || ""}
-            onChange={onChange}
+            value={user.email || "Unknown"}
             placeholder={t("inputs.email.placeholder")}
-            disabled
           />
         </div>
       </div>
@@ -84,10 +77,8 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
             className="input max-w-sm cursor-not-allowed"
             id="username"
             name="username"
-            value={formData.username || ""}
-            onChange={onChange}
+            value={user?.user_metadata?.username || "Unknown"}
             placeholder={t("inputs.username.placeholder")}
-            disabled
           />
         </div>
       </div>
@@ -101,9 +92,8 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
             className="textarea w-full"
             id="bio"
             name="bio"
-            value={formData.bio}
-            onChange={onChange}
-            placeholder={t("inputs.bio.placeholder")}
+            value=""
+            placeholder={t("inputs.socialLinks.placeholder")}
             rows={3}
           />
         </div>
@@ -118,8 +108,7 @@ const UserProfileInputs = ({ formData, onChange }: UserProfileInputsProps) => {
             className="textarea w-full"
             id="socialLinks"
             name="socialLinks"
-            value={formData.socialLinks}
-            onChange={onChange}
+            value=""
             placeholder={t("inputs.socialLinks.placeholder")}
             rows={2}
           />
