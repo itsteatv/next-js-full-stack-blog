@@ -28,6 +28,8 @@ const UserProfileForm = ({
 }: // bio = "",
 // socialLinks = "",
 UserProfileFormProps) => {
+  const supabase = createClient();
+
   const t = useTranslations("dashboard");
   const [userData, setUserData] = useState({
     email: user.email || "",
@@ -46,23 +48,34 @@ UserProfileFormProps) => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const supabase = createClient();
     try {
-      const { data, error } = await supabase.from("user_profiles").upsert({
-        email: userData.email,
-        username: userData.username,
+      const { data, error: profileError } = await supabase
+        .from("user_profiles")
+        .upsert({
+          email: userData.email,
+          username: userData.username,
+        });
+
+      if (profileError) {
+        toast.error("Error updating profile: " + profileError.message);
+        return;
+      }
+
+      const { error: updateError } = await supabase.auth.updateUser({
+        data: { username: userData.username },
       });
 
-      if (error) {
-        toast.error("Error updating profile: " + error.message);
+      if (updateError) {
+        toast.error("Error updating user metadata: " + updateError.message);
         return;
       }
 
       toast.success("Profile updated successfully!");
     } catch (error) {
       toast.error("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
