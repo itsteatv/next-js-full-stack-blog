@@ -5,9 +5,19 @@ import { useTranslations } from "next-intl";
 import { User } from "@supabase/supabase-js";
 
 interface UserProfileInputsProps {
-  userData: { email: string; username: string };
+  userData: {
+    email: string;
+    username: string;
+    first_name: string;
+    last_name: string;
+  };
   setUserData: React.Dispatch<
-    React.SetStateAction<{ email: string; username: string }>
+    React.SetStateAction<{
+      email: string;
+      username: string;
+      first_name: string;
+      last_name: string;
+    }>
   >;
   // bio?: string;
   // socialLinks?: string;
@@ -21,7 +31,26 @@ const UserProfileInputs = ({
 
   return (
     <div className="flex flex-col gap-y-6 w-full">
-      {/* <div className="w-full">
+      <div className="w-full">
+        <div className="input-group w-full">
+          <span className="input-group-text">
+            <span className="icon-[solar--user-hand-up-bold-duotone] text-base-content/80 size-5"></span>
+          </span>
+          <input
+            type="text"
+            className="input max-w-sm"
+            id="given_name"
+            name="given_name"
+            value={userData.first_name}
+            onChange={(e) =>
+              setUserData({ ...userData, first_name: e.target.value })
+            }
+            placeholder={t("inputs.firstName.placeholder")}
+          />
+        </div>
+      </div>
+
+      <div className="w-full">
         <div className="input-group w-full">
           <span className="input-group-text">
             <span className="icon-[solar--users-group-two-rounded-bold-duotone] text-base-content/80 size-5"></span>
@@ -31,11 +60,14 @@ const UserProfileInputs = ({
             className="input max-w-sm"
             id="family_name"
             name="family_name"
-            value=""
+            value={userData.last_name}
             placeholder={t("inputs.lastName.placeholder")}
+            onChange={(e) =>
+              setUserData({ ...userData, last_name: e.target.value })
+            }
           />
         </div>
-      </div> */}
+      </div>
 
       <div className="w-full">
         <div className="input-group w-full">
