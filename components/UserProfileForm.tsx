@@ -34,15 +34,18 @@ UserProfileFormProps) => {
   const [userData, setUserData] = useState({
     email: user.email || "",
     username: user?.user_metadata?.username || "",
+    first_name: user?.user_metadata?.first_name,
+    last_name: user?.user_metadata?.last_name,
   });
   const [loading, setLoading] = useState(false);
 
-  console.log(user);
 
   useEffect(() => {
     setUserData({
       email: user.email || "",
       username: user?.user_metadata?.username || "",
+      first_name: user?.user_metadata?.first_name,
+      last_name: user?.user_metadata?.last_name,
     });
   }, [user]);
 
@@ -54,6 +57,8 @@ UserProfileFormProps) => {
         .upsert({
           email: userData.email,
           username: userData.username,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
         });
 
       if (profileError) {
@@ -62,7 +67,11 @@ UserProfileFormProps) => {
       }
 
       const { error: updateError } = await supabase.auth.updateUser({
-        data: { username: userData.username },
+        data: {
+          username: userData.username,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+        },
       });
 
       if (updateError) {
