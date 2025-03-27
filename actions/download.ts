@@ -2,6 +2,7 @@
 
 import { maskEmail } from "@/lib/maskEmail";
 import { createClient } from "@/utils/supabase/server";
+import { downloadUserData as download } from "@/schemas/downloadUserData";
 
 export async function downloadUserData() {
   const supabase = await createClient();
@@ -28,5 +29,15 @@ export async function downloadUserData() {
     throw new Error("An error occurred. Please try again later.");
   }
 
-  return JSON.stringify(data, null, 2);
+  if (!data || data.length === 0) {
+    throw new Error("User data not found.");
+  }
+
+  try {
+    const validatedUser = download.parse(data[0]);
+    validatedUser.email = maskEmail(validatedUser.email);
+    return JSON.stringify(validatedUser, null, 2);
+  } catch (validationError) {
+    throw new Error("Invalid user data format.");
+  }
 }
