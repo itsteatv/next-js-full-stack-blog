@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const downloadUserData = z.object({
   id: z.string().uuid(),
-  created_at: z.string().datetime(),
+  created_at: z.string().transform((date) => new Date(date).toISOString()),
   email: z.string().email(),
   username: z.string().min(1),
   first_name: z.string().nullable(),
