@@ -14,8 +14,8 @@ import DownloadDataSection from "./DownloadDataSection";
 import DeleteAccountSection from "./DeleteAccountSection";
 import UserProfileInputs from "./UserProfileInputs";
 import { User } from "@supabase/supabase-js";
-import { createClient } from "@/utils/supabase/client";
 import { Spinner } from "./Spinner";
+import { updateUserProfile } from "@/actions/updateUserProfile";
 
 interface UserProfileFormProps {
   user: User;
@@ -28,8 +28,6 @@ const UserProfileForm = ({
 }: // bio = "",
 // socialLinks = "",
 UserProfileFormProps) => {
-  const supabase = createClient();
-
   const t = useTranslations("dashboard");
   const [userData, setUserData] = useState({
     email: user.email || "",
@@ -38,7 +36,6 @@ UserProfileFormProps) => {
     last_name: user?.user_metadata?.last_name,
   });
   const [loading, setLoading] = useState(false);
-
 
   useEffect(() => {
     setUserData({
@@ -52,34 +49,14 @@ UserProfileFormProps) => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const { data, error: profileError } = await supabase
-        .from("user_profiles")
-        .upsert({
-          email: userData.email,
-          username: userData.username,
-          first_name: userData.first_name,
-          last_name: userData.last_name,
-        });
-
-      if (profileError) {
-        toast.error("Error updating profile: " + profileError.message);
-        return;
+      const result = await updateUserProfile(userData);
+      if (result?.error) {
+        toast.error(result.error);
+      } else {
+        toast.success(
+          "Confirmation email sent to {email}. Please check your inbox to complete the update."
+        );
       }
-
-      const { error: updateError } = await supabase.auth.updateUser({
-        data: {
-          username: userData.username,
-          first_name: userData.first_name,
-          last_name: userData.last_name,
-        },
-      });
-
-      if (updateError) {
-        toast.error("Error updating user metadata: " + updateError.message);
-        return;
-      }
-
-      toast.success("Profile updated successfully!");
     } catch (error) {
       toast.error("An error occurred. Please try again.");
     } finally {

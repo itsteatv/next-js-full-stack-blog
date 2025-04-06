@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { User } from "@supabase/supabase-js";
 
 interface UserProfileInputsProps {
   userData: {
@@ -76,12 +75,14 @@ const UserProfileInputs = ({
           </span>
           <input
             type="email"
-            className="input max-w-sm cursor-not-allowed"
+            className="input max-w-sm"
             id="email"
             name="email"
             value={userData.email}
             placeholder={t("inputs.email.placeholder")}
-            disabled
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
           />
         </div>
       </div>

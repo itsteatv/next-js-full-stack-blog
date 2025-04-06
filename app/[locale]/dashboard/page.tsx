@@ -26,6 +26,8 @@ const Dashboard = async () => {
     redirect(`/${locale}/signIn`);
   }
 
+  const user = data?.user;
+
   return (
     <div className="divide-y divide-white/5">
       <div className="flex mx-auto max-w-2xl gap-x-8 gap-y-10 py-16 px-4 sm:px-6 flex-col lg:px-8">
@@ -37,6 +39,12 @@ const Dashboard = async () => {
             {t("personalInfo.description")}
           </p>
         </div>
+
+        {user?.new_email && (
+          <div className="bg-yellow-100 text-yellow-800 p-4 rounded">
+            {`Please confirm your new email address: ${user?.new_email}. Check your inbox to complete the update.`}
+          </div>
+        )}
 
         <div className="md:col-span-2">
           <UserProfileForm user={data?.user} />
