@@ -1,18 +1,20 @@
 "use server";
 
+import { userProfileSchema } from "@/schemas/userProfileSchema";
 import { createClient } from "@/utils/supabase/server";
 
-export async function updateUserProfile({
-  email,
-  username,
-  first_name,
-  last_name,
-}: {
-  email: string;
-  username: string;
-  first_name: string;
-  last_name: string;
-}) {
+export async function updateUserProfile(data: unknown) {
+  const parsed = userProfileSchema.safeParse(data);
+
+  if (!parsed.success) {
+    return {
+      error: "Invalid user data.",
+      details: parsed.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email, username, first_name, last_name } = parsed.data;
+
   const supabase = await createClient();
 
   const {

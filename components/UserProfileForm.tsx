@@ -16,6 +16,10 @@ import UserProfileInputs from "./UserProfileInputs";
 import { User } from "@supabase/supabase-js";
 import { Spinner } from "./Spinner";
 import { updateUserProfile } from "@/actions/updateUserProfile";
+import {
+  TUserProfileSchema,
+  userProfileSchema,
+} from "@/schemas/userProfileSchema";
 
 interface UserProfileFormProps {
   user: User;
@@ -29,12 +33,17 @@ const UserProfileForm = ({
 // socialLinks = "",
 UserProfileFormProps) => {
   const t = useTranslations("dashboard");
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<TUserProfileSchema>({
     email: user.email || "",
     username: user?.user_metadata?.username || "",
-    first_name: user?.user_metadata?.first_name,
-    last_name: user?.user_metadata?.last_name,
+    first_name: user?.user_metadata?.first_name || "",
+    last_name: user?.user_metadata?.last_name || "",
   });
+
+  const [formErrors, setFormErrors] = useState<
+    Partial<Record<keyof TUserProfileSchema, string>>
+  >({});
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -47,14 +56,34 @@ UserProfileFormProps) => {
   }, [user]);
 
   const handleSubmit = async () => {
+    const parsed = userProfileSchema.safeParse(userData);
+
+    if (!parsed.success) {
+      const flattenedErrors = parsed.error.flatten().fieldErrors;
+      const formattedErrors: Partial<Record<keyof typeof userData, string>> =
+        {};
+      for (const key in flattenedErrors) {
+        const firstError = flattenedErrors[key as keyof typeof userData]?.[0];
+        if (firstError) {
+          formattedErrors[key as keyof typeof userData] = firstError;
+        }
+      }
+
+      setFormErrors(formattedErrors);
+      toast.error(Object.values(formattedErrors)[0] || "Invalid input.");
+      return;
+    }
+
+    setFormErrors({});
+
     setLoading(true);
     try {
-      const result = await updateUserProfile(userData);
+      const result = await updateUserProfile(parsed.data);
       if (result?.error) {
         toast.error(result.error);
       } else {
         toast.success(
-          "Confirmation email sent to {email}. Please check your inbox to complete the update."
+          `Confirmation email sent to ${parsed.data.email}. Please check your inbox.`
         );
       }
     } catch (error) {
@@ -76,7 +105,11 @@ UserProfileFormProps) => {
           title={t("avatar.title")}
           description={t("avatar.description")}
         />
-        <UserProfileInputs userData={userData} setUserData={setUserData} />
+        <UserProfileInputs
+          userData={userData}
+          setUserData={setUserData}
+          formErrors={formErrors}
+        />
       </div>
 
       <div className="mt-10 sm:px-6 lg:px-8 px-4 flex flex-col items-start gap-y-5">

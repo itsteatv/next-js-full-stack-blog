@@ -2,29 +2,18 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
+import { TUserProfileSchema } from "@/schemas/userProfileSchema";
 
 interface UserProfileInputsProps {
-  userData: {
-    email: string;
-    username: string;
-    first_name: string;
-    last_name: string;
-  };
-  setUserData: React.Dispatch<
-    React.SetStateAction<{
-      email: string;
-      username: string;
-      first_name: string;
-      last_name: string;
-    }>
-  >;
-  // bio?: string;
-  // socialLinks?: string;
+  userData: TUserProfileSchema;
+  setUserData: React.Dispatch<React.SetStateAction<TUserProfileSchema>>;
+  formErrors: Partial<Record<keyof TUserProfileSchema, string>>;
 }
 
 const UserProfileInputs = ({
   userData,
   setUserData,
+  formErrors,
 }: UserProfileInputsProps) => {
   const t = useTranslations("dashboard");
 
@@ -47,6 +36,9 @@ const UserProfileInputs = ({
             placeholder={t("inputs.firstName.placeholder")}
           />
         </div>
+        {formErrors.first_name && (
+          <p className="text-red-500 text-sm mt-1">{formErrors.first_name}</p>
+        )}
       </div>
 
       <div className="w-full">
@@ -66,6 +58,9 @@ const UserProfileInputs = ({
             }
           />
         </div>
+        {formErrors.last_name && (
+          <p className="text-red-500 text-sm mt-1">{formErrors.last_name}</p>
+        )}
       </div>
 
       <div className="w-full">
@@ -85,6 +80,9 @@ const UserProfileInputs = ({
             }
           />
         </div>
+        {formErrors.email && (
+          <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>
+        )}
       </div>
 
       <div className="w-full">
@@ -104,6 +102,9 @@ const UserProfileInputs = ({
             }
           />
         </div>
+        {formErrors.username && (
+          <p className="text-red-500 text-sm mt-1">{formErrors.username}</p>
+        )}
       </div>
 
       {/* <div className="w-full">
