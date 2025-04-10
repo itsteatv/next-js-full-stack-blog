@@ -159,11 +159,11 @@ Start the server
 
   ## Profile Management
 
-  - [ ] **Profile Editing**  
+  - [x] **Profile Editing**  
          Allow users to update their basic information, including:
 
     - [x] Display name
-    - [ ] Email address (with email verification upon change)
+    - [x] Email address (with email verification upon change)
     - [x] Bio and social links
 
   - [ ] **Profile Picture Upload**  
