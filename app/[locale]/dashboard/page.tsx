@@ -38,13 +38,13 @@ const Dashboard = async () => {
           <p className="mt-1 text-sm leading-6 dark:text-gray-400">
             {t("personalInfo.description")}
           </p>
-        </div>
 
-        {user?.new_email && (
-          <div className="bg-yellow-100 text-yellow-800 p-4 rounded">
-            {`Please confirm your new email address: ${user?.new_email}. Check your inbox to complete the update.`}
-          </div>
-        )}
+          {user?.new_email && (
+            <div className="bg-primary-content text-primary p-4 rounded mt-7">
+              {`Please confirm your new email address: ${user.new_email}. Check your inbox to complete the update.`}
+            </div>
+          )}
+        </div>
 
         <div className="md:col-span-2">
           <UserProfileForm user={data?.user} />
