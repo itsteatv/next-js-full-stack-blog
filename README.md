@@ -171,6 +171,9 @@ Start the server
 
     - [x] Default avatars if no picture is uploaded
 
+  - [x] **Public Profile Viewing**  
+      - [x] Allow public access to user profiles through a dedicated username-based route.
+
   - [ ] **Account Settings**  
          Provide options for managing account preferences, such as:
 
