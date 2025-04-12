@@ -128,6 +128,31 @@ UserProfileFormProps) => {
         />
       </div>
 
+      {userData.username && (
+        <div className="mt-4">
+          <p className="text-sm text-gray-400 mb-2">
+            Your public profile link:
+          </p>
+          <div className="flex items-center gap-2">
+            <code className="text-sm bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-gray-600 dark:text-gray-300">
+              {`localhost:3000/en/user/${userData.username}`}
+            </code>
+            <button
+              type="button"
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `localhost:3000/en/user/${userData.username}`
+                );
+                toast.success("Profile link copied to clipboard!");
+              }}
+              className="inline-flex items-center justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              Copy Link
+            </button>
+          </div>
+        </div>
+      )}
+
       <DownloadDataSection />
       <DeleteAccountSection userId={user.id} />
     </form>
