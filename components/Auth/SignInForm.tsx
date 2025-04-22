@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "@/actions/auth";
-import GithubLogin from "./GithubLogin";
+import SocialLoginButton from "./SocialLoginButton";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -98,7 +98,12 @@ const SignInForm = () => {
           </button>
         </form>
 
-        <GithubLogin />
+        <SocialLoginButton
+          provider="github"
+          label="Connect Github"
+          iconClass="icon-[tabler--brand-github]"
+          styles="border-[#2b3137] bg-[#2b3137] text-white shadow-[#2b3137]/30 hover:border-[#2b3137] hover:bg-[#2b3137]/90"
+        />
 
         <p className="mt-4 bg-gradient-to-r from-primary to-neutral bg-clip-text text-transparent font-bold w-fit">
           Don't have an account?{" "}

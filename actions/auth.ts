@@ -123,102 +123,26 @@ export async function signOut() {
   redirect("/en/signIn");
 }
 
-export async function signInWithGithub() {
+export async function signInWithOAuthProvider(
+  provider: "github" | "google" | "facebook" | "discord"
+) {
   const headersList = headers();
   const pathname = headersList.get("next-url") || "/en";
   const locale = pathname.split("/")[1] || "en";
-
-  const origin = await headers().get("origin");
+  const origin = headersList.get("origin");
 
   const redirectUrl = `${origin}/${locale}/auth/callback?next=${pathname}`;
 
   const supabase = await createClient();
 
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "github",
-    options: {
-      redirectTo: redirectUrl,
-    },
+  const { data, error } = await supabase.auth.linkIdentity({
+    provider,
+    options: { redirectTo: redirectUrl },
   });
 
   if (error) {
     redirect(`${locale}/error`);
-  } else if (data.url) {
-    return redirect(data.url);
-  }
-}
-
-export async function signInWithGoogle() {
-  const headersList = headers();
-  const pathname = headersList.get("next-url") || "/en";
-  const locale = pathname.split("/")[1] || "en";
-
-  const origin = await headers().get("origin");
-
-  const redirectUrl = `${origin}/${locale}/auth/callback?next=${pathname}`;
-
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "google",
-    options: {
-      redirectTo: redirectUrl,
-    },
-  });
-
-  if (error) {
-    redirect(`${locale}/error`);
-  } else if (data.url) {
-    return redirect(data.url);
-  }
-}
-
-export async function signInWithFacebook() {
-  const headersList = headers();
-  const pathname = headersList.get("next-url") || "/en";
-  const locale = pathname.split("/")[1] || "en";
-
-  const origin = await headers().get("origin");
-
-  const redirectUrl = `${origin}/${locale}/auth/callback?next=${pathname}`;
-
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "facebook",
-    options: {
-      redirectTo: redirectUrl,
-    },
-  });
-
-  if (error) {
-    redirect(`${locale}/error`);
-  } else if (data.url) {
-    return redirect(data.url);
-  }
-}
-
-export async function signInWithDiscord() {
-  const headersList = headers();
-  const pathname = headersList.get("next-url") || "/en";
-  const locale = pathname.split("/")[1] || "en";
-
-  const origin = await headers().get("origin");
-
-  const redirectUrl = `${origin}/${locale}/auth/callback?next=${pathname}`;
-
-  const supabase = await createClient();
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "discord",
-    options: {
-      redirectTo: redirectUrl,
-    },
-  });
-
-  if (error) {
-    redirect(`${locale}/error`);
-  } else if (data.url) {
+  } else if (data?.url) {
     return redirect(data.url);
   }
 }
