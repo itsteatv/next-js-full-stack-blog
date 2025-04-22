@@ -1,4 +1,4 @@
-type IdentityProvider = "google" | "facebook" | "discord" | string;
+type IdentityProvider = "google" | "facebook" | "discord" | "Github" | string;
 
 interface Identity {
   provider: IdentityProvider;
@@ -8,6 +8,7 @@ interface LinkedStatus {
   google: boolean;
   facebook: boolean;
   discord: boolean;
+  github: boolean;
 }
 
 export const getLinkedStatus = (
@@ -18,5 +19,6 @@ export const getLinkedStatus = (
     google: linked.includes("google"),
     facebook: linked.includes("facebook"),
     discord: linked.includes("discord"),
+    github: linked.includes("github"),
   };
 };
