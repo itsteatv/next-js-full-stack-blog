@@ -4,9 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import GoogleLogin from "@/components/Auth/GoogleLogin";
-import FacebookLogin from "@/components/Auth/FacebookLogin";
-import DiscordLogin from "@/components/Auth/DiscordLogin";
+import SocialLoginButton from "@/components/Auth/SocialLoginButton";
 import { getLinkedStatus } from "@/utils/getLinkedStatus";
 
 export const metadata: Metadata = {
@@ -36,6 +34,7 @@ const Dashboard = async () => {
     google: isGoogleLinked,
     facebook: isFacebookLinked,
     discord: isDiscordLinked,
+    github: isGithubLinked,
   } = getLinkedStatus(data.user.identities);
 
   return (
@@ -54,10 +53,39 @@ const Dashboard = async () => {
         </div>
 
         {(!isGoogleLinked || !isFacebookLinked || !isDiscordLinked) && (
-          <div className="mt-4 flex flex-col gap-2  px-4 sm:px-6 lg:px-8">
-            {!isGoogleLinked && <GoogleLogin />}
-            {!isFacebookLinked && <FacebookLogin />}
-            {!isDiscordLinked && <DiscordLogin />}
+          <div className="flex flex-col gap-2  px-4 sm:px-6 lg:px-8">
+            {!isGoogleLinked && (
+              <SocialLoginButton
+                provider="google"
+                label="Connect Google"
+                iconClass="icon-[tabler--brand-google]"
+                styles="border-[#DB4437] bg-[#DB4437] text-white shadow-[#DB4437]/30 hover:bg-[#DB4437]/90"
+              />
+            )}
+            {!isFacebookLinked && (
+              <SocialLoginButton
+                provider="facebook"
+                label="Connect Facebook"
+                iconClass="icon-[tabler--brand-facebook]"
+                styles="border-[#1877f2] bg-[#1877f2] text-white shadow-[#1877f2]/30 hover:bg-[#1877f2]/90"
+              />
+            )}
+            {!isDiscordLinked && (
+              <SocialLoginButton
+                provider="discord"
+                label="Connect Discord"
+                iconClass="icon-[tabler--brand-discord]"
+                styles="border-[#5865F2] bg-[#5865F2] text-white shadow-[#5865F2]/30 hover:bg-[#5865F2]/90"
+              />
+            )}
+            {!isGithubLinked && (
+              <SocialLoginButton
+                provider="github"
+                label="Connect Github"
+                iconClass="icon-[tabler--brand-github]"
+                styles="border-[#2b3137] bg-[#2b3137] text-white shadow-[#2b3137]/30 hover:border-[#2b3137] hover:bg-[#2b3137]/90"
+              />
+            )}
           </div>
         )}
 
